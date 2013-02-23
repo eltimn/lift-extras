@@ -1,6 +1,6 @@
 organization := "net.liftmodules"
 
-name := "lift-utils"
+name := "lift-extras"
 
 liftVersion <<= liftVersion ?? "2.5-RC1"
 
