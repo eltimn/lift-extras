@@ -1,4 +1,4 @@
-# Lift Utils Module
+# Lift Extras Module
 
 Some utils for developing Lift webapps.
 

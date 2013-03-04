@@ -1,0 +1,204 @@
+<div lift="surround?with=default;at=content">
+
+  <div class="row">
+    <div class="span12">
+      <div data-lift="Notices?showAll=false"></div>
+
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#standard" data-toggle="tab">Standard Form</a></li>
+        <li><a href="#msg-test-ajax" data-toggle="tab">Ajax Form</a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="standard" class="tab-pane active">
+          <form data-lift="MsgTest?form=post" class="form-horizontal">
+            <fieldset>
+              <legend>Standard Form</legend>
+              <div class="control-group">
+                <label class="control-label" for="error">Error</label>
+                <div class="controls">
+                  <input name="error" class="xlarge" /> &times;
+                  <input name="error_count" class="small" />
+                  <span class="help-inline">Inline style help</span>
+                  <span data-lift="Notices.id?id=err"></span>
+                  <span class="help-block">Block style help</span>
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label" for="warning">Warning</label>
+                <div class="controls">
+                  <input name="warning" class="xlarge" /> &times;
+                  <input name="warning_count" class="small" />
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label" for="info">Info</label>
+                <div class="controls">
+                  <input name="info" class="xlarge" /> &times;
+                  <input name="info_count" class="small" />
+                </div>
+              </div>
+            </fieldset>
+            <div class="form-actions">
+              <input type="submit" value="submit" class="btn btn-primary"></input>
+            </div>
+          </form>
+        </div>
+
+        <div id="msg-test-ajax" class="tab-pane">
+          <form data-lift="Form.ajax?class=form-horizontal">
+            <span data-lift="MsgTestAjax">
+              <fieldset>
+                <legend>Ajax Form</legend>
+                <div class="control-group">
+                  <label class="control-label" for="ajaxerr">Error</label>
+                  <div class="controls">
+                    <input name="error" class="xlarge" id="ajaxerr" /> &times;
+                    <input name="error_count" class="small" />
+                    <span class="help-inline">Inline style help</span>
+                    <div data-id-notice="ajaxerr" class="notice-block"></div>
+                    <span class="help-block">Block style help</span>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label" for="warning">Warning</label>
+                  <div class="controls">
+                    <input name="warning" class="xlarge" /> &times;
+                    <input name="warning_count" class="small" />
+                    <span data-id-notice="ajaxwarn" class="notice-block"></span>
+                    <span class="help-block">Block style help</span>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label" for="info">Info</label>
+                  <div class="controls">
+                    <input name="info" class="xlarge" /> &times;
+                    <input name="info_count" class="small" />
+                    <span data-id-notice="ajaxinfo" class="notice-block"></span>
+                  </div>
+                </div>
+              </fieldset>
+              <div class="form-actions">
+                <input type="submit" value="Submit" class="btn btn-primary"></input>
+                <input name="sub" />
+              </div>
+              <script id="msg-test-ajax-onload"></script>
+              <p data-bind="text: anObservable"></p>
+            </span>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br />
+
+  <!--
+  <ul>
+    <li class="add">Click here to see a notification that you have to remove</li>
+    <li class="add2">Click here to see a notification that does not stay</li>
+    <li class="add3">Error Notification</li>
+    <li class="add4">Warning Notification</li>
+    <li class="add5">Success Notification</li>
+    <li class="remove">Remove all active notifications</li>
+  </ul>
+
+  <script>
+  $(document).ready(function() {
+    jQuery.noticeAdd({
+      text: 'This is a simple notification using the jQuery notice plugin. Click the X above to remove this notice.',
+      stay: true
+    });
+
+    $('.add').click(function() {
+      jQuery.noticeAdd({
+        text: 'This is a notification that you have to remove',
+        stay: true
+      });
+    });
+
+    $('.add2').click(function() {
+      jQuery.noticeAdd({
+        text: 'This is a notification that will remove itself',
+        stay: false
+      });
+    });
+
+    $('.add3').click(function() {
+      jQuery.noticeAdd({
+        text: 'This is an error notification!',
+        stay: true,
+        type: 'error'
+      });
+    });
+
+    $('.add4').click(function() {
+      jQuery.noticeAdd({
+        text: 'This is a warning notification!',
+        stay: true,
+        type: 'warning'
+      });
+    });
+
+    $('.add5').click(function() {
+      jQuery.noticeAdd({
+        text: 'This is a success notification!',
+        stay: true,
+        type: 'success'
+      });
+    });
+
+    $('.remove').click(function() {
+      jQuery.noticeRemove($('.notice-item-wrapper'), 400);
+    });
+
+
+
+  });
+  </script>
+  -->
+
+  <!--
+  <div data-bind="template: 'alertsTemplate'"></div>
+  <script type="text/x-jquery-tmpl" id="alertsTemplate">
+    {{each alerts}}
+    <div class="alert alert-${type}" data-alert="">
+      <a class="close" href="#">&times;</a>
+      <p>
+      {{if (type == "error" && errorTitle.length)}}
+        <strong>${errorTitle}</strong>
+      {{else (type == "warning" && warningTitle.length)}}
+        <strong>${warningTitle}</strong>
+      {{else (type == "info" && infoTitle.length)}}
+        <strong>${infoTitle}</strong>
+      {{/if}} ${msg}</p>
+    </div>
+    {{/each}}
+  </script>
+  <script>
+  var alert = function(msg, type) {
+    this.msg = msg;
+    this.type = type;
+  }
+
+  var viewModel = {
+    errorTitle: "Holy cow!",
+    warningTitle: "Easy now!",
+    infoTitle: "Heads up!",
+    alerts: ko.observableArray([
+      new alert("This is an error", "error"),
+      new alert("This is a warning", "warning"),
+      new alert("This is a notice", "info"),
+      new alert("This is a success", "success")
+    ]),
+
+    addAlert: function(msg, type) {
+      this.alerts.push(new alert(msg, type));
+    }
+  }
+  $(document).ready(function() {
+    ko.applyBindings(viewModel);
+  });
+  </script>
+</div>
+-->
