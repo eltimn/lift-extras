@@ -12,6 +12,8 @@
         </encoder>
     </appender>
 
+    <logger name="code.snippet.BookScreen" level="trace" />
+
     <root level="DEBUG">
         <appender-ref ref="STDOUT" />
     </root>

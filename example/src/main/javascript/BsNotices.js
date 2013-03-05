@@ -4,7 +4,11 @@ var BsNotices = (function($, _) {
 
   // private vars
   var debug = true;
-  var showAll, elementId, titles;
+  var settings = {
+    showAll: false,
+    elementId: "bs-notices",
+    titles: {}
+  };
 
   // private funcs
   function log(it) {
@@ -15,7 +19,7 @@ var BsNotices = (function($, _) {
 
   function splitNotices(notices) {
     var _idns = [];
-    if (!showAll) {
+    if (!settings.showAll) {
       _idns = _.filter(notices, function(it) {
         return it.id;
       })
@@ -23,16 +27,16 @@ var BsNotices = (function($, _) {
 
     return {
       errs: _.filter(notices, function(it) {
-        return (it.priority === "error" && (showAll || !(it.id)));
+        return (it.priority === "error" && (settings.showAll || !(it.id)));
       }),
       warns: _.filter(notices, function(it) {
-        return (it.priority === "warning" && (showAll || !(it.id)));
+        return (it.priority === "warning" && (settings.showAll || !(it.id)));
       }),
       infos: _.filter(notices, function(it) {
-        return (it.priority === "notice" && (showAll || !(it.id)));
+        return (it.priority === "notice" && (settings.showAll || !(it.id)));
       }),
       succs: _.filter(notices, function(it) {
-        return (it.priority === "success" && (showAll || !(it.id)));
+        return (it.priority === "success" && (settings.showAll || !(it.id)));
       }),
       idns: _idns
     }
@@ -80,11 +84,12 @@ var BsNotices = (function($, _) {
   }
 
   function containerId(priority) {
-    return elementId+"_"+priority;
+    return settings.elementId+"_"+priority;
   }
 
   function buildNoticeContainer(msgs) {
     if (msgs.length > 0) {
+
       var priority = bsPriority(msgs[0].priority);
 
       var $dismissBtn = $('<button/>', {
@@ -103,7 +108,7 @@ var BsNotices = (function($, _) {
 
       $container.append($dismissBtn);
 
-      var title = titles[priority];
+      var title = settings.titles[priority];
 
       if (title && title.length > 0) {
         var $title = $("<strong/>").html(title);
@@ -127,7 +132,7 @@ var BsNotices = (function($, _) {
       }
       else {
         $container = buildNoticeContainer(msgs);
-        $("#"+elementId).append($container);
+        $("#"+settings.elementId).append($container);
       }
     }
   }
@@ -196,13 +201,12 @@ var BsNotices = (function($, _) {
 
   // public funcs
   inst.init = function(data) {
-    elementId = data.elementId || "bs-notices";
-    showAll = data.showAll || false;
-    titles = data.titles || {};
+    var data = data || {};
+    settings = $.extend({}, settings, data);
   };
 
   inst.clearNotices = function() {
-    $("#"+elementId).html("");
+    $("#"+settings.elementId).html("");
   }
 
   inst.clearIdNotice = function(id) {
@@ -239,7 +243,7 @@ var BsNotices = (function($, _) {
 
   inst.setNotices = function(data) {
     var notices = splitNotices([].concat(data));
-    var $element = $("#"+elementId);
+    var $element = $("#"+settings.elementId);
 
     // clear html
     $element.html("");
@@ -270,6 +274,14 @@ var BsNotices = (function($, _) {
     // handle the id notices
     renderIdNotices(notices.idns);
   };
+
+  inst.afterScreenLoad = function() {
+    $(".notice-block ul").each(function() {
+      var $container = $(this);
+      var $controlGroup = controlGroup($container);
+      $controlGroup.addClass("error");
+    });
+  }
 
   return inst;
 }(jQuery, _));

@@ -9,6 +9,7 @@ import http.js._
 import JsCmds._
 import JE._
 import json._
+import util.FieldError
 
 /**
   * Class for modeling a Lift notice.
@@ -54,8 +55,11 @@ object LiftNotice {
   def success(msg: NodeSeq, id: String): LiftNotice = LiftNotice(msg, Success, Some(id))
 
   def allNoticesAsJValue: JValue = JArray(S.getAllNotices
-    .map { case (priority, msg, id) => LiftNotice(msg, priority, id)}
-    .map(_.asJValue)
+    .map { case (priority, msg, id) => LiftNotice(msg, priority, id).asJValue }
+  )
+
+  def fieldErrorsAsJValue(errs: List[FieldError]): JValue = JArray(errs
+    .map { err => LiftNotice(err.msg, NoticeType.Error, err.field.uniqueFieldId).asJValue }
   )
 }
 

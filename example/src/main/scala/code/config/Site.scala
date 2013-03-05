@@ -1,6 +1,8 @@
 package code
 package config
 
+import code.model._
+
 import net.liftweb._
 import common._
 import http.S
@@ -27,6 +29,8 @@ object Site {
 
   private def menus = List(
     home.menu,
+    Menu.i("BookEdit") / "book-edit" >> TopBarGroup,
+    // Menu.i("Books") / "books" >> TopBarGroup,
     Menu.i("About") / "about" >> TopBarGroup,
     Menu.i("Contact") / "contact" >> TopBarGroup,
     Menu.i("Throw") / "throw" >> Hidden,

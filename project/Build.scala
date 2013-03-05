@@ -24,6 +24,7 @@ object LiftModuleBuild extends Build {
     .settings(exampleSettings: _*)
     .settings(libraryDependencies ++=
       Seq(
+        "net.liftweb" %% "lift-record" % liftVersion % "compile",
         "org.eclipse.jetty" % "jetty-webapp" % "8.1.8.v20121106" % "container",
         "ch.qos.logback" % "logback-classic" % "1.0.3",
         "org.scalatest" %% "scalatest" % "1.9.1" % "test"

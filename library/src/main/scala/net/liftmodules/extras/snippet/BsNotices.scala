@@ -1,7 +1,7 @@
 package net.liftmodules.extras
 package snippet
 
-import scala.xml.{NodeSeq, Null, Text}
+import scala.xml._
 
 import net.liftweb._
 import common._
@@ -24,7 +24,7 @@ object BsNotices extends Factory with BsNotices {
 
   def noticeAsJsCmd(notice: LiftNotice): JsCmd = Call("BsNotices.addNotices", notice.asJValue)
 
-  def noticesToJsCmd: JsCmd = Call("BsNotices.setNotices", LiftNotice.allNoticesAsJValue)
+  def noticesToJsCmd: JsCmd = Call("BsNotices.setNotices", LiftNotice.allNoticesAsJValue) // & JsRaw("throw new Error('stopping execution')")
 
   def init(): Unit = {
     LiftRules.noticesToJsCmd = noticesToJsCmd _
@@ -33,8 +33,6 @@ object BsNotices extends Factory with BsNotices {
       * LiftScreen overwrites the class on form labels and bootstrap
       * requires the control-label class. So, we disable LiftScreen's
       * overwriting of the class.
-      *
-      * TODO: Is this still needed? Bootstrap's styles have changed since this was written.
       */
     LiftScreenRules.messageStyles.default.set({ nt: NoticeType.Value => nt match {
       case NoticeType.Notice => Null

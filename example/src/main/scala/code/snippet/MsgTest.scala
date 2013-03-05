@@ -1,11 +1,14 @@
 package code
 package snippet
 
+import model._
+
 import net.liftweb._
 import common._
 import http.{S, SHtml, StatefulSnippet}
 import http.js.JsCmd
 import http.js.JsCmds._
+import http.js.JE._
 import json._
 import util.Helpers._
 
@@ -56,6 +59,8 @@ object MsgTestAjax extends KoSnippet {
   }
 
   def render = {
+    val book = Book.createRecord.title("test title")
+
     var error = "This is an error"
     var eCount = 0
     var warning = "This is a warning"
@@ -83,6 +88,11 @@ object MsgTestAjax extends KoSnippet {
 
       Thread.sleep(200) // so we can see the spinner
 
+      book.validate match {
+        case Nil =>
+        case errs => S.error(errs) //Call("BsNotices.addNotices", LiftNotice.fieldErrorsAsJValue(errs))
+      }
+
       /*LiftNotice.error("Created with case class").asJsCmd &
       LiftNotice.success(succ).asJsCmd &
       LiftNotice.success(succ+" (ajaxwarn)", "ajaxwarn").asJsCmd &
@@ -96,6 +106,8 @@ object MsgTestAjax extends KoSnippet {
     "name=warning_count" #> SHtml.selectElem[Int](0 to 10, Full(wCount))(wCount = _) &
     "name=info" #> SHtml.text(info, info = _) &
     "name=info_count" #> SHtml.selectElem[Int](0 to 10, Full(iCount))(iCount = _) &
+    "name=title" #> book.title.toForm &
+    "name=text" #> book.text.toForm &
     "name=sub" #> SHtml.hidden(process) &
     "#msg-test-ajax-onload" #> Script(OnLoad(onLoad))
   }

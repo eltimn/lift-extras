@@ -77,13 +77,26 @@
                     <span data-id-notice="ajaxinfo" class="notice-block"></span>
                   </div>
                 </div>
+                <div class="control-group">
+                  <label class="control-label" for="title">Title</label>
+                  <div class="controls">
+                    <input name="title" class="xlarge" />
+                    <span data-id-notice="title_id" class="notice-block"></span>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label" for="text">Text</label>
+                  <div class="controls">
+                    <input name="text" class="xlarge" />
+                    <span data-id-notice="text_id" class="notice-block"></span>
+                  </div>
+                </div>
               </fieldset>
               <div class="form-actions">
                 <input type="submit" value="Submit" class="btn btn-primary"></input>
                 <input name="sub" />
               </div>
               <script id="msg-test-ajax-onload"></script>
-              <p data-bind="text: anObservable"></p>
             </span>
           </form>
         </div>
