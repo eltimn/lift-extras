@@ -36,7 +36,7 @@ object JsExtras extends Factory {
     * to a callback function via Ajax and executes the return JsCmd on the client.
     */
   object JsonCallbackAnonFunc {
-    def appy(callback: JValue => JsCmd): AnonFunc = {
+    def apply(callback: JValue => JsCmd): AnonFunc = {
       val funcCmd = S.fmapFunc(S.SFuncHolder(s => LiftExtras.parseJsonFunc.vend(s, callback)))(name =>
         SHtml.makeAjaxCall(JsRaw("'" + name + "=' + encodeURIComponent(JSON.stringify(data))"))
       )

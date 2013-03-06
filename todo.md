@@ -1,14 +1,10 @@
 Required
 ========
 
-* move displayOnly from BaseScreen to ScreenExtras
+* move/rename stuff
 
-* Sidebar menu w/ kids
-* BsNotices works with LiftScreen
+* optionally include script tag to include view model for that snippet.
 
-* BsNotices Record.toForm
-
-* BsNotices works with REST
 
 * BsNotices works with comet
 
@@ -44,3 +40,6 @@ Possibly
 
 * tail for JsCmds
 * Write BsNotices as a jQuery plugin ???
+
+
+* Sidebar menu w/ kids - if needed

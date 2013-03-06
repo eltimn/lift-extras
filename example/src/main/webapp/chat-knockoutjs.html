@@ -1,0 +1,25 @@
+<html>
+  <head><title>Home</title></head>
+  <body class="lift:content_id=main">
+    <div id="main" class="lift:surround?with=default;at=content">
+      <!-- the behavior of the div -->
+      <div id="chat-messages">
+        Some chat messages
+        <ul data-bind="foreach: messages">
+          <li data-bind="text: message"></li>
+        </ul>
+
+        <form data-bind="submit: submitForm">
+          <input type="text" class="span5" data-bind="value: newMessage">
+          <button type="submit" class="btn btn-primary">Say Something</button>
+        </form>
+      </div>
+      <!--
+        Because we are only sending JavaScript events from the comet actor,
+        we don't need to enclose our working area with the comet,
+        the javascript runs on the whole page.
+      -->
+      <div data-lift="comet?type=ChatKnockOutJs"></div>
+    </div>
+  </body>
+</html>

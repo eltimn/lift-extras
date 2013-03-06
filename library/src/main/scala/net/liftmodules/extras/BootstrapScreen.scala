@@ -12,7 +12,7 @@ import util.CssSel
 import util.Helpers._
 
 /*
- * Base all LiftScreens off this. Currently configured to use bootstrap.
+ * I screen with some bootstrap settings.
  */
 trait BootstrapScreen extends LiftScreen {
   override val cancelButton = super.cancelButton % ("class" -> "btn") % ("tabindex" -> "1")

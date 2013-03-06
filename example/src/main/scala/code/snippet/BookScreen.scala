@@ -7,7 +7,6 @@ import common._
 import http._
 
 object BookScreen extends BaseScreen with Loggable {
-  override def defaultToAjax_? = true
 
   object bookVar extends ScreenVar(Book.createRecord)
 

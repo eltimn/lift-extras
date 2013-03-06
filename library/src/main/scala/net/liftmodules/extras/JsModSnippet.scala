@@ -18,6 +18,6 @@ trait JsModSnippet {
   /**
     * JsCmd to init a module
     */
-  def JsModInit(initData: JValue = JObject(Nil)): JsCmd =
-    Call("%s.init".format(moduleName), initData)
+  def JsModInit(params: JsExp*): JsCmd =
+    Call("%s.init".format(moduleName), params:_*)
 }

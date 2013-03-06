@@ -11,3 +11,5 @@ libs/liftAjax.js
 #app.js
 BsNotices.js
 MsgTestAjax.js
+ChatMessages.js
+KnockoutExample.js

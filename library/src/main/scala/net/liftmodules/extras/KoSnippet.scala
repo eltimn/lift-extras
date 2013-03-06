@@ -21,7 +21,7 @@ trait KoSnippet extends JsModSnippet {
   def KoBind: JsCmd =
     Call("ko.applyBindings", JsVar(moduleName), Call("document.getElementById", elementId))
 
-  def KoInitBind(initData: JValue = JObject(Nil)): JsCmd = {
-    JsModInit(initData) & KoBind
+  def KoInitBind(params: JsExp*): JsCmd = {
+    JsModInit(params:_*) & KoBind
   }
 }

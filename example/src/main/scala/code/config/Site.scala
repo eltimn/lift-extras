@@ -13,30 +13,24 @@ object MenuGroups {
   val TopBarGroup = LocGroup("topbar")
 }
 
-/*
- * Wrapper for Menu locations
- */
-case class MenuLoc(menu: Menu) {
-  lazy val url: String = S.contextPath+menu.loc.calcDefaultHref
-  lazy val fullUrl: String = S.hostAndPath+menu.loc.calcDefaultHref
-}
-
 object Site {
   import MenuGroups._
 
-  // locations (menu entries)
-  val home = MenuLoc(Menu.i("Home") / "index" >> TopBarGroup)
-
   private def menus = List(
-    home.menu,
-    Menu.i("BookEdit") / "book-edit" >> TopBarGroup,
-    // Menu.i("Books") / "books" >> TopBarGroup,
+    Menu.i("Home") / "index" >> TopBarGroup,
+    Menu.i("Notices") / "notices" >> TopBarGroup submenus(
+      Menu.i("Forms Test") / "msgtest",
+      Menu.i("Screen Test") / "book-edit"
+    ),
+    Menu.i("Knockout") / "knockout" >> TopBarGroup submenus(
+      Menu.i("Knockout  Example") / "knockout-example",
+      Menu.i("Knockout  Chat") / "chat-knockoutjs"
+    ),
     Menu.i("About") / "about" >> TopBarGroup,
     Menu.i("Contact") / "contact" >> TopBarGroup,
     Menu.i("Throw") / "throw" >> Hidden,
     Menu.i("Error") / "error" >> Hidden,
-    Menu.i("404") / "404" >> Hidden,
-    Menu.i("MsgTest") / "msgtest" >> TopBarGroup
+    Menu.i("404") / "404" >> Hidden
   )
 
   /*
