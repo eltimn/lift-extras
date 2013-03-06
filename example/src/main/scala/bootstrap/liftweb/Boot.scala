@@ -8,7 +8,7 @@ import http._
 import util._
 import Helpers._
 
-import net.liftmodules.extras.LiftExtras
+import net.liftmodules.extras.{Gravatar, LiftExtras}
 import net.liftmodules.extras.snippet.BsNotices
 
 // import net.liftmodules.JQueryModule
@@ -51,6 +51,8 @@ class Boot {
     BsNotices.warningTitle.default.set(Full("Warning!"))
     BsNotices.noticeTitle.default.set(Full("Info!"))
     BsNotices.successTitle.default.set(Full("Success!"))
+
+    Gravatar.defaultImage.default.set("wavatar")
 
     //Init the jQuery module, see http://liftweb.net/jquery for more information.
     /*LiftRules.jsArtifacts = JQueryArtifacts
