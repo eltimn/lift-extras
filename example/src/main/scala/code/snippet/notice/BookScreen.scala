@@ -1,4 +1,5 @@
 package code.snippet
+package notice
 
 import code.model._
 
@@ -11,6 +12,10 @@ object BookScreen extends BaseScreen with Loggable {
   object bookVar extends ScreenVar(Book.createRecord)
 
   addFields(() => bookVar.is)
+
+  override def localSetup {
+    Referer("/index")
+  }
 
   def finish() {
     S.error("test error")

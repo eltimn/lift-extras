@@ -1,5 +1,5 @@
-package code
-package snippet
+package code.snippet
+package notice
 
 import code.lib._
 
@@ -16,7 +16,7 @@ object ErrorDivTest extends SnippetExtras {
   def render =
     (for {
       x <- Failure("test failure", Empty, Empty)
-    } yield "* *" #> "Hola"
+    } yield "* *" #> "Etiam porta sem malesuada magna mollis euismod."
     ): CssSel
 }
 

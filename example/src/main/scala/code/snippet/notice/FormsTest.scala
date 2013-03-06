@@ -1,7 +1,7 @@
-package code
-package snippet
+package code.snippet
+package notice
 
-import model._
+import code.model._
 
 import net.liftweb._
 import common._
@@ -14,7 +14,7 @@ import util.Helpers._
 
 import net.liftmodules.extras._
 
-object MsgTest extends StatefulSnippet {
+object FormsTest extends StatefulSnippet {
   def dispatch = { case _ => render }
 
   private var error = "This is an error"
@@ -49,7 +49,7 @@ object MsgTest extends StatefulSnippet {
   }
 }
 
-object MsgTestAjax extends KoSnippet {
+object FormsTestAjax extends KoSnippet {
 
   val moduleName = "MsgTestAjax"
   val elementId = "msg-test-ajax"

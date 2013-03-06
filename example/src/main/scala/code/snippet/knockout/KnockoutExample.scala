@@ -1,4 +1,5 @@
 package code.snippet
+package knockout
 
 import net.liftweb._
 import common._

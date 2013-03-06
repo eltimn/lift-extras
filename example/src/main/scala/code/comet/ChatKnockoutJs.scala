@@ -2,6 +2,7 @@ package code
 package comet
 
 import net.liftweb._
+import common._
 import http._
 import js._
 import js.JE._
@@ -67,6 +68,12 @@ class ChatKnockOutJs extends CometActor with CometListener with SnippetExtras wi
    * Clear any elements that have the clearable class.
    */
   def render = Script(OnLoad(onload))
+
+  /*def render =
+    (for {
+      x <- Failure("test failure", Empty, Empty)
+    } yield new RenderOut(<p>This won't be seen</p>)
+    ): RenderOut*/
 }
 
 case class NewMessageKo(message: String) extends JsCmd {
