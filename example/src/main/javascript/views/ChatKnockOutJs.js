@@ -1,4 +1,4 @@
-var ChatMessages = (function(ko) {
+app.views.ChatKnockOutJs = (function(ko) {
   "use strict";
 
   // private stuff

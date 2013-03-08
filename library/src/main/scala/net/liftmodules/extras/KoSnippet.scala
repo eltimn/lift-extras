@@ -9,11 +9,13 @@ import JE._
 import json._
 import util.Helpers.tryo
 
-/**
-  * A snippet that uses a Knockout JavaScipt module. Provides functions to initialize module and bind to ko.
-  */
-trait KoSnippet extends JsModSnippet {
-  def elementId: String
+trait KoLike extends JsModLike {
+  /**
+    * Convert the snippet/comet class name to an id to be used on the html element that ko will be bound to.
+    */
+  lazy val elementId: String = {
+    splitCamelCase(getClass.getName.split("\\.").toList.last.replace("$", ""))
+  }
 
   /**
     * JsCmd to bind a knockout view model
@@ -24,4 +26,26 @@ trait KoSnippet extends JsModSnippet {
   def KoInitBind(params: JsExp*): JsCmd = {
     JsModInit(params:_*) & KoBind
   }
+
+  // http://stackoverflow.com/questions/2559759/how-do-i-convert-camelcase-into-human-readable-names-in-java
+  private def splitCamelCase(s: String): String = {
+    s.replaceAll(
+      String.format("%s|%s|%s",
+         "(?<=[A-Z])(?=[A-Z][a-z])",
+         "(?<=[^A-Z])(?=[A-Z])",
+         "(?<=[A-Za-z])(?=[^A-Za-z])"
+      ),
+      "-"
+    ).toLowerCase
+  }
 }
+
+/**
+  * A snippet that uses a Knockout JavaScipt module.
+  */
+trait KoSnippet extends KoLike with JsModSnippet
+
+/**
+  * A comet that uses a Knockout JavaScipt module.
+  */
+trait KoComet extends KoLike with JsModComet

@@ -8,8 +8,8 @@ libs/underscore-1.4.4.min.js
 libs/liftAjax.js
 
 # app
-#app.js
 BsNotices.js
-MsgTestAjax.js
-ChatMessages.js
-KnockoutExample.js
+
+views/knockout/ChatMessages.js
+views/knockout/KnockoutExample.js
+views/notice/MsgTestAjax.js

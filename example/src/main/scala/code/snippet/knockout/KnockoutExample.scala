@@ -1,6 +1,8 @@
 package code.snippet
 package knockout
 
+import scala.xml._
+
 import net.liftweb._
 import common._
 import http._
@@ -13,8 +15,6 @@ import util.Helpers._
 import net.liftmodules.extras._
 
 object KnockoutExample extends SnippetExtras with KoSnippet with Loggable {
-  val elementId = "knockout-example"
-  val moduleName = "KnockoutExample"
 
   implicit val formats = DefaultFormats
 
@@ -45,7 +45,5 @@ object KnockoutExample extends SnippetExtras with KoSnippet with Loggable {
     JsExtras.AjaxCallbackAnonFunc(sendSuccess)
   )
 
-  def render = {
-    "#onload" #> Script(OnLoad(onload))
-  }
+  def doRender(in: NodeSeq): NodeSeq = in ++ <tail>{Script(OnLoad(onload))}</tail>
 }

@@ -26,11 +26,15 @@ module.exports = function(grunt) {
           console: true,
           ko: true,
           '_': true,
+          app: true,
           BsNotices: true
         }
       },
       build: {
-        src: [ "<%= dirs.src %>/javascript/*.js" ]
+        src: [
+          "<%= dirs.src %>/javascript/*.js",
+          "<%= dirs.src %>/javascript/views/**/*.js",
+        ]
       }
     },
     concat: {
@@ -46,9 +50,8 @@ module.exports = function(grunt) {
           "<%= dirs.src %>/javascript/libs/underscore-1.4.4.min.js",
           "<%= dirs.src %>/javascript/libs/liftAjax.js",
           "<%= dirs.src %>/javascript/BsNotices.js",
-          "<%= dirs.src %>/javascript/MsgTestAjax.js",
-          "<%= dirs.src %>/javascript/ChatMessages.js",
-          "<%= dirs.src %>/javascript/KnockoutExample.js"
+          "<%= dirs.src %>/javascript/app.js",
+          "<%= dirs.src %>/javascript/views/**/*.js"
         ],
         dest: "<%= dirs.dest %>/assets/<%= artifactName %>.js"
       }

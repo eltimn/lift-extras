@@ -1,7 +1,7 @@
 // http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-In-Depth
 /**
-  * Problems with this approach: tough to bind IdNotices to ViewModel. Would need to be bound to VM created on the Form.
-  * Would require you to create a VM for a form.
+  * Problems with this approach: tough to bind IdNotices to ViewModel. Would need to be bound to
+  * VM created on the Form. Would require you to create a VM for a form.
    *
   * TODO:
   * Create a KoFormsModule. Extend it to create a custom form module.

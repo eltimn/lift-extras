@@ -21,6 +21,7 @@ object LiftExtras extends Factory {
   val noticeAsJValue = new FactoryMaker[LiftNotice => JValue](LiftNotice.noticeAsJValue _) {}
   val noticeAsJsCmd = new FactoryMaker[LiftNotice => JsCmd](BsNotices.noticeAsJsCmd _) {}
   val parseJsonFunc = new FactoryMaker[(String, JValue => JsCmd) => JsCmd](JsExtras.defaultParseJsonFunc _) {}
+  val moduleNamespace = new FactoryMaker[Seq[String]](Seq("app", "views")) {}
 
   def init(): Unit = {
     BsNotices.init()

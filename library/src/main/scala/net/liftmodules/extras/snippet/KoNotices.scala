@@ -39,8 +39,8 @@ object KoNotices extends KoNotices {
 
 trait KoNotices extends KoSnippet {
 
-  def elementId = "ko-notices"
-  def moduleName = "KoNotices"
+  override lazy val elementId = "ko-notices"
+  override lazy val moduleName = "KoNotices"
 
   /**
     * Use this is if your page only has id notices
@@ -51,16 +51,15 @@ trait KoNotices extends KoSnippet {
       KoNotices.noticesToJsCmd
     ))
 
-  def render = {
+  def doRender(in: NodeSeq): NodeSeq = {
     val showAll = Helpers.toBoolean(S.attr("showAll") or S.attr("showall"))
     val initData: JValue =
       ("showAll" -> showAll)
 
-    val onLoad = Script(OnLoad(
+    val onLoad =
       KoInitBind(initData) &
       KoNotices.noticesToJsCmd &
       Call("""$("#%s").show""".format(elementId))
-    ))
 
     <div id={elementId} style="display: none;">
       <div class="alert alert-error" data-bind="visible: errors().length > 0">
@@ -81,7 +80,7 @@ trait KoNotices extends KoSnippet {
           <li data-bind="text: message"></li>
         </ul>
       </div>
-    </div> ++ onLoad
+    </div> ++ Script(OnLoad(onLoad))
   }
 
   def id(html: NodeSeq): NodeSeq = {

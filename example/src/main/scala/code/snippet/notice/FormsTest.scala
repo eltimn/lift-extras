@@ -3,6 +3,8 @@ package notice
 
 import code.model._
 
+import scala.xml._
+
 import net.liftweb._
 import common._
 import http.{S, SHtml, StatefulSnippet}
@@ -51,14 +53,11 @@ object FormsTest extends StatefulSnippet {
 
 object FormsTestAjax extends KoSnippet {
 
-  val moduleName = "MsgTestAjax"
-  val elementId = "msg-test-ajax"
-
   val onLoad: JsCmd = {
     KoInitBind()
   }
 
-  def render = {
+  def doRender(in: NodeSeq): NodeSeq = {
     val book = Book.createRecord.title("test title")
 
     var error = "This is an error"
@@ -109,6 +108,6 @@ object FormsTestAjax extends KoSnippet {
     "name=title" #> book.title.toForm &
     "name=text" #> book.text.toForm &
     "name=sub" #> SHtml.hidden(process) &
-    "#msg-test-ajax-onload" #> Script(OnLoad(onLoad))
-  }
+    "#forms-test-ajax-onload" #> Script(OnLoad(onLoad))
+  } apply in
 }

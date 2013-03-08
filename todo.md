@@ -1,34 +1,12 @@
 Required
 ========
 
-* liftAjax
-  * generate with Lift then copy and include in scripts manifest
 
-* move JsModSnippet and KoSnippet defs to JsExtras and add arguments for elemenetId and modeulName
-
+* Create a base class for using with BsNotices and JqNotifierNotices
 * JqNotifierNotices
 * Rename BsNotices to JqBsNotices ???
 
-Handling javascript
-==================
-
-* less
-
-* use grunt to handle js and less processing
-* Or use sbt plugins, but only for packaging
-  * write snippet like bundles
-
-
-* ditch bower - it's not ready yet - and just manually download deps.
-  * keep bower and hardcode artefacts path in build script
-
-* write snippet to load assets
-  * would need a deps list (keep in the package.json file?)
-
-* Assets snippet and versioning (is this necessary if using nodejs for less?)
-  * sbt task that calls grunt dependsOn Package
-  * use project version number
-  * use buildInfo to generate a project.json file
+* put script tag at bottom of page
 
 * namepspace js modules
 
@@ -36,11 +14,12 @@ Handling javascript
 
 * how to run js tests
 
-* put script tag at bottom of page
-
 * sparky (check for organizing an app)
 
 * grunt sublime build file
+
+* move JsModSnippet and KoSnippet defs to JsExtras and add arguments for elementId and modelName ???
+* Or, add auto script tag inclusion
 
 Next
 ====
@@ -75,4 +54,7 @@ sbt-resource-management
 
 bower
   * downloads entire project (this is needed for bootstrap)
-  * not all projects have a 'main' declared, so artefacts are not in known location
+  * not all projects have a 'main' declared, so artifacts are not in known location
+
+liftAjax
+  * generate with Lift then copy and include in build

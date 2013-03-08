@@ -22,9 +22,9 @@ object BsNotices extends Factory with BsNotices {
   val noticeTitle = new FactoryMaker[Box[String]](Empty){}
   val successTitle = new FactoryMaker[Box[String]](Empty){}
 
-  def noticeAsJsCmd(notice: LiftNotice): JsCmd = Call("BsNotices.addNotices", notice.asJValue)
+  def noticeAsJsCmd(notice: LiftNotice): JsCmd = Call("%s.addNotices".format(moduleName), notice.asJValue)
 
-  def noticesToJsCmd: JsCmd = Call("BsNotices.setNotices", LiftNotice.allNoticesAsJValue) // & JsRaw("throw new Error('stopping execution')")
+  def noticesToJsCmd: JsCmd = Call("%s.setNotices".format(moduleName), LiftNotice.allNoticesAsJValue) // & JsRaw("throw new Error('stopping execution')")
 
   def init(): Unit = {
     LiftRules.noticesToJsCmd = noticesToJsCmd _
@@ -43,13 +43,13 @@ object BsNotices extends Factory with BsNotices {
 }
 
 trait BsNotices extends JsModSnippet {
-  def moduleName = "BsNotices"
-  def elementId = LiftRules.noticesContainerId
+  override lazy val moduleName = "BsNotices"
+  val elementId = LiftRules.noticesContainerId
 
   /**
     * Render notices
     */
-  def render(html: NodeSeq): NodeSeq = {
+  def doRender(html: NodeSeq): NodeSeq = {
     val showAll = Helpers.toBoolean(S.attr("showAll") or S.attr("showall"))
     val titles: JValue =
       ("error" -> BsNotices.errorTitle.vend.toOption) ~
@@ -66,7 +66,7 @@ trait BsNotices extends JsModSnippet {
       JsModInit(initData) &
       BsNotices.noticesToJsCmd
 
-    <div id={elementId}></div> ++ Script(OnLoad(onLoad))
+    <div id={elementId}></div> ++ <tail>{Script(OnLoad(onLoad))}</tail>
   }
 
   /**

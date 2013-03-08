@@ -1,4 +1,4 @@
-var MsgTestAjax = (function($, ko) {
+app.views.notice.FormsTestAjax = (function($, ko) {
   "use strict";
 
   var inst = {};

@@ -1,6 +1,8 @@
 package code
 package comet
 
+import scala.xml._
+
 import net.liftweb._
 import common._
 import http._
@@ -12,7 +14,7 @@ import json.JsonDSL._
 import util._
 import Helpers._
 
-import net.liftmodules.extras.{JsExtras, KoSnippet, SnippetExtras}
+import net.liftmodules.extras.{JsExtras, KoComet, SnippetExtras}
 
 
 /**
@@ -20,9 +22,17 @@ import net.liftmodules.extras.{JsExtras, KoSnippet, SnippetExtras}
  * by this component.  When the component changes on the server
  * the changes are automatically reflected in the browser.
  */
-class ChatKnockOutJs extends CometActor with CometListener with SnippetExtras with KoSnippet {
-  val elementId = "chat-messages"
-  val moduleName = "ChatMessages"
+class ChatKnockOutJs extends CometActor with CometListener with SnippetExtras with KoComet {
+  // val elementId = "chat-messages"
+  // val moduleName = "ChatMessages"
+
+  case class NewMessageKo(message: String) extends JsCmd {
+    implicit val formats = DefaultFormats.lossless
+    val json: JValue = ("message" -> message)
+    override val toJsCmd =
+      // JE.Call("$(document).trigger", JE.Str("new-ko-chat"), json).toJsCmd
+      JE.Call("%s.addMessage".format(moduleName), json).toJsCmd
+  }
 
   implicit def formats = DefaultFormats
 
@@ -55,7 +65,7 @@ class ChatKnockOutJs extends CometActor with CometListener with SnippetExtras wi
       msg <- tryo((json \ "message").extract[String])
     } yield {
       ChatServer ! msg
-      Call("ChatMessages.newMessage", Str("")): JsCmd
+      Call("%s.newMessage".format(moduleName), Str("")): JsCmd
     }
   }
 
@@ -65,21 +75,13 @@ class ChatKnockOutJs extends CometActor with CometListener with SnippetExtras wi
   val onload: JsCmd = KoInitBind(JsExtras.JsonCallbackAnonFunc(saveForm _))
 
   /**
-   * Clear any elements that have the clearable class.
-   */
-  def render = Script(OnLoad(onload))
+    * Provide the doRender function for KoComet
+    */
+  def doRender(in: NodeSeq): NodeSeq = <tail>{Script(OnLoad(onload))}</tail>
 
-  /*def render =
+  /*override def render =
     (for {
       x <- Failure("test failure", Empty, Empty)
     } yield new RenderOut(<p>This won't be seen</p>)
     ): RenderOut*/
-}
-
-case class NewMessageKo(message: String) extends JsCmd {
-  implicit val formats = DefaultFormats.lossless
-  val json: JValue = ("message" -> message)
-  override val toJsCmd =
-    // JE.Call("$(document).trigger", JE.Str("new-ko-chat"), json).toJsCmd
-    JE.Call("ChatMessages.addMessage", json).toJsCmd
 }
