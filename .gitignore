@@ -5,3 +5,5 @@ target/
 *.sublime-*
 
 console.devmode.log
+node_modules/
+example/package.json

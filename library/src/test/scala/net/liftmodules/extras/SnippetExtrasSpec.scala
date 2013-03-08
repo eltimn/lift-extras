@@ -10,8 +10,8 @@ import JE._
 import json._
 import JsonDSL._
 
-class NoticeExtrasSpec extends BaseSpec with NoticeExtras {
-  "NoticeExtras" should {
+class SnippetExtrasSpec extends BaseSpec with SnippetExtras {
+  "SnippetExtras" should {
     "create default notice html" in {
       val html = noticeHtml("This is a test")
       html should equal (<div class="alert alert-info">This is a test</div>)
@@ -45,7 +45,7 @@ class NoticeExtrasSpec extends BaseSpec with NoticeExtras {
     "convert Empty to warning html" in {
       val boxedHtml: Box[NodeSeq] = Empty
       val html: NodeSeq = boxedHtml
-      html should equal (<div class="alert alert-warning">Empty</div>)
+      html should equal (<div class="alert alert-warning">Unknown empty value</div>)
     }
     "convert Failure to error html" in {
       val boxedHtml: Box[NodeSeq] = Failure("Test failure")
@@ -56,8 +56,8 @@ class NoticeExtrasSpec extends BaseSpec with NoticeExtras {
       val boxedJValue: Box[JValue] = Empty
       val jvalue: JValue = boxedJValue
       val expected: JValue =
-        ("message" -> "Empty") ~
-        ("notice_type" -> "Warning") ~
+        ("message" -> "Unknown empty value") ~
+        ("priority" -> "warning") ~
         ("id" -> JNothing)
 
       jvalue should equal (expected)
@@ -67,7 +67,7 @@ class NoticeExtrasSpec extends BaseSpec with NoticeExtras {
       val jvalue: JValue = boxedJValue
       val expected: JValue =
         ("message" -> "Test failure") ~
-        ("notice_type" -> "Error") ~
+        ("priority" -> "error") ~
         ("id" -> JNothing)
 
       jvalue should equal (expected)
@@ -76,7 +76,7 @@ class NoticeExtrasSpec extends BaseSpec with NoticeExtras {
       val boxedJsCmd: Box[JsCmd] = Empty
       val jscmd: JsCmd = boxedJsCmd
       val expected: JsCmd =
-        Call("LiftExtras.onNotice", JsNotice.warning("Empty").asJValue)
+        Call("BsNotices.addNotices", LiftNotice.warning("Unknown empty value").asJValue)
 
       jscmd should equal (expected)
     }
@@ -84,14 +84,14 @@ class NoticeExtrasSpec extends BaseSpec with NoticeExtras {
       val boxedJsCmd: Box[JsCmd] = Failure("Test failure")
       val jscmd: JsCmd = boxedJsCmd
       val expected: JsCmd =
-        Call("LiftExtras.onNotice", JsNotice.error("Test failure").asJValue)
+        Call("BsNotices.addNotices", LiftNotice.error("Test failure").asJValue)
 
       jscmd should equal (expected)
     }
   }
 }
 
-object CustomNoticeHtmlHandler extends NoticeHtmlHandler {
+object CustomNoticeHtmlHandler extends HtmlHandler {
   def noticeHtml(msg: String): NodeSeq = <div class="notice">{msg}</div>
   def warningHtml(msg: String): NodeSeq = <div class="warning">{msg}</div>
   def errorHtml(msg: String): NodeSeq = <div class="error">{msg}</div>

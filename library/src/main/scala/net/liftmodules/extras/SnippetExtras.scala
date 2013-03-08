@@ -82,8 +82,8 @@ trait SnippetExtras {
     */
   implicit protected def boxJsCmdToJsCmd(in: Box[JsCmd]): JsCmd = in match {
     case Full(jscmd) => jscmd
-    case Failure(msg, _, _) => S.error(msg); Noop
-    case Empty => S.warning(emptyMsg); Noop
+    case Failure(msg, _, _) => LiftNotice.error(msg).asJsCmd
+    case Empty => LiftNotice.warning(emptyMsg).asJsCmd
   }
 
   /**

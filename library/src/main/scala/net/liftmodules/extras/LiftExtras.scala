@@ -16,7 +16,7 @@ import util.Helpers._
 
 object LiftExtras extends Factory {
 
-  val defaultEmptyMsg = new FactoryMaker[String]("Empty") {}
+  val defaultEmptyMsg = new FactoryMaker[String]("Unknown empty value") {}
   val noticeHtmlHandler = new FactoryMaker[HtmlHandler](BootstrapHtmlHandler) {}
   val noticeAsJValue = new FactoryMaker[LiftNotice => JValue](LiftNotice.noticeAsJValue _) {}
   val noticeAsJsCmd = new FactoryMaker[LiftNotice => JsCmd](BsNotices.noticeAsJsCmd _) {}

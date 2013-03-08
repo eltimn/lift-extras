@@ -1,4 +1,4 @@
-var KnockoutExample = (function($) {
+var KnockoutExample = (function(ko, BsNotices) {
   "use strict";
 
   // private stuff
@@ -10,7 +10,7 @@ var KnockoutExample = (function($) {
   inst.init = function(_saveFunc, _sendSuccess) {
     saveFunc = _saveFunc;
     inst.sendSuccess = _sendSuccess;
-  }
+  };
 
   inst.textInput = ko.observable("");
 
@@ -18,7 +18,7 @@ var KnockoutExample = (function($) {
     var ret = { textInput: inst.textInput() };
     // call the passed in save function with the form data as an argument.
     saveFunc(ret);
-  }
+  };
 
   inst.sendSuccess = function() {};
 
@@ -28,4 +28,4 @@ var KnockoutExample = (function($) {
   };
 
   return inst;
-}(jQuery));
+}(ko, BsNotices));

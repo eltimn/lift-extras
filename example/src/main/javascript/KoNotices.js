@@ -30,7 +30,7 @@ var KoNotices = (function($, ko) {
     if (!showAll) {
       _ids = ko.utils.arrayFilter(notices, function(it) {
         return it.id;
-      })
+      });
     }
 
     return {
@@ -44,7 +44,7 @@ var KoNotices = (function($, ko) {
         return (it.priority === "notice" && (showAll || !(it.id)));
       }),
       ids: _ids
-    }
+    };
   }
 
   var inst = {};
@@ -71,7 +71,7 @@ var KoNotices = (function($, ko) {
       inst["idnotice_"+fieldId] = ko.computed(function() {
         return ko.utils.arrayFilter(inst.idNotices(), function(it) {
           return it.id === fieldId;
-        })
+        });
       });
 
       // apply ko bindings to the element
@@ -122,7 +122,7 @@ var KoNotices = (function($, ko) {
   inst.clearIdNotice = function(id) {
     var filtered = ko.utils.arrayFilter(inst.idNotices(), function(it) {
       return it.id !== id;
-    })
+    });
 
     inst.idNotices(filtered);
   };
@@ -151,7 +151,7 @@ var KoNotices = (function($, ko) {
 /**
   * A knockout custom binding for notices with ids. They are registered and bound with the KoNotices module.
   */
-(function($) {
+(function($, ko) {
   function highestPriority(msgs) {
     var errCnt = ko.utils.arrayFilter(msgs, function(it) {
       return it.priority === "error";
@@ -188,18 +188,14 @@ var KoNotices = (function($, ko) {
   }
 
   ko.bindingHandlers.idnotice = {
-    init: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
-      // register
-
-    },
-    update: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
+    update: function(element, valueAccessor) {
       var $element = $(element);
       var $controlGroup = $element.closest("div.control-group");
       var notices = [].concat(ko.utils.unwrapObservable(valueAccessor()));
       var priority = highestPriority(notices);
 
       // clear element
-      $element.html("");
+      $element.html(""); //jslk
       $element.removeClass();
       $controlGroup.removeClass("info");
       $controlGroup.removeClass("warning");
@@ -224,4 +220,4 @@ var KoNotices = (function($, ko) {
       }
     }
   };
-})(jQuery);
+})(jQuery, ko);

@@ -22,7 +22,7 @@ var BsNotices = (function($, _) {
     if (!settings.showAll) {
       _idns = _.filter(notices, function(it) {
         return it.id;
-      })
+      });
     }
 
     return {
@@ -39,7 +39,7 @@ var BsNotices = (function($, _) {
         return (it.priority === "success" && (settings.showAll || !(it.id)));
       }),
       idns: _idns
-    }
+    };
   }
 
   function highestPriority(msgs) {
@@ -104,7 +104,7 @@ var BsNotices = (function($, _) {
       var $container = $("<div/>", {
         "id": containerId(priority),
         "class": "alert alert-"+priority
-      })
+      });
 
       $container.append($dismissBtn);
 
@@ -112,7 +112,7 @@ var BsNotices = (function($, _) {
 
       if (title && title.length > 0) {
         var $title = $("<strong/>").html(title);
-        $container.append($title)
+        $container.append($title);
       }
 
       return $container.append($ul);
@@ -128,7 +128,7 @@ var BsNotices = (function($, _) {
 
       if ($container.length > 0) {
         var $ul = $container.find("ul");
-        attachLIs($ul, msgs)
+        attachLIs($ul, msgs);
       }
       else {
         $container = buildNoticeContainer(msgs);
@@ -160,11 +160,11 @@ var BsNotices = (function($, _) {
       $container.html("");
       clearControlGroup($controlGroup);
 
-      function nonSuccessMsgs() {
+      var nonSuccessMsgs = function() {
         return _.filter(msgs, function(it) {
           return it.priority !== "success";
         });
-      }
+      };
 
       if (priority !== "success" || nonSuccessMsgs().length > 0) {
         var $ul = $("<ul/>");
@@ -200,14 +200,14 @@ var BsNotices = (function($, _) {
   // public vars
 
   // public funcs
-  inst.init = function(data) {
-    var data = data || {};
+  inst.init = function(_data) {
+    var data = _data || {};
     settings = $.extend({}, settings, data);
   };
 
   inst.clearNotices = function() {
     $("#"+settings.elementId).html("");
-  }
+  };
 
   inst.clearIdNotice = function(id) {
     $("[data-id-notice='"+id+"']").each(function() {
@@ -281,7 +281,7 @@ var BsNotices = (function($, _) {
       var $controlGroup = controlGroup($container);
       $controlGroup.addClass("error");
     });
-  }
+  };
 
   return inst;
 }(jQuery, _));
