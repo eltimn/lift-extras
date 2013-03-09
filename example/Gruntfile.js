@@ -26,16 +26,15 @@ module.exports = function(grunt) {
           console: true,
           ko: true,
           '_': true,
-          app: true,
+          App: true,
           BsNotices: true
         }
       },
-      build: {
-        src: [
-          "<%= dirs.src %>/javascript/*.js",
-          "<%= dirs.src %>/javascript/views/**/*.js",
-        ]
-      }
+      main: [
+        "<%= dirs.src %>/javascript/*.js",
+        "<%= dirs.src %>/javascript/views/**/*.js"
+      ],
+      test: []
     },
     concat: {
       options: {
@@ -50,7 +49,7 @@ module.exports = function(grunt) {
           "<%= dirs.src %>/javascript/libs/underscore-1.4.4.min.js",
           "<%= dirs.src %>/javascript/libs/liftAjax.js",
           "<%= dirs.src %>/javascript/BsNotices.js",
-          "<%= dirs.src %>/javascript/app.js",
+          "<%= dirs.src %>/javascript/App.js",
           "<%= dirs.src %>/javascript/views/**/*.js"
         ],
         dest: "<%= dirs.dest %>/assets/<%= artifactName %>.js"
@@ -79,6 +78,16 @@ module.exports = function(grunt) {
           "<%= dirs.dest %>/assets/<%= artifactName %>.min.css": "<%= dirs.src %>/less/styles.less"
         }
       }
+    },
+    watch: {
+      main: {
+        files: '<%= jshint.main %>',
+        tasks: ['javascript']
+      },
+      less: {
+        files: ["<%= dirs.src %>/less/**/*.less"],
+        tasks: "less:compile"
+      }
     }
   });
 
@@ -86,6 +95,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Default task(s).
   grunt.registerTask('default', ['jshint', 'concat', 'less:compile']);

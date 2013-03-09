@@ -1,4 +1,5 @@
-app.views.knockout.KnockoutExample = (function(ko, BsNotices) {
+App.extend("views.knockout");
+App.views.knockout.KnockoutExample = (function(ko, BsNotices) {
   "use strict";
 
   // private stuff

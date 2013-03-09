@@ -1,4 +1,4 @@
-app.views.ChatKnockOutJs = (function(ko) {
+App.views.ChatKnockOutJs = (function(ko) {
   "use strict";
 
   // private stuff
@@ -14,7 +14,7 @@ app.views.ChatKnockOutJs = (function(ko) {
   inst.newMessage = ko.observable("");
   inst.messages = ko.observableArray();
   inst.addMessage = function(newMessage) {
-    inst.messages.push(newMessage); //
+    inst.messages.push(newMessage);
   };
 
   inst.submitForm = function() {
