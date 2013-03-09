@@ -1,0 +1,21 @@
+{
+  "cmd": ["grunt", "javascript", "--no-color"],
+  "file_regex": "^(..[^:]*):([0-9]+):?([0-9]+)?:? (.*)$",
+  "working_dir": "${project_path:${folder}",
+  "selector": "source.js",
+  "windows":
+  {
+    "cmd": ["grunt", "javascript", "--no-color"]
+  },
+  "variants":
+  [
+    {
+      "name": "Gruntfile",
+      "cmd": ["grunt", "javascript", "--no-color"],
+      "windows":
+      {
+        "cmd": ["grunt", "javascript", "--no-color"]
+      }
+    }
+  ]
+}
