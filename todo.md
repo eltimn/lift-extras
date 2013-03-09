@@ -1,30 +1,32 @@
 Required
 ========
 
+* use watch with grunt to auto build js/less
+
+* how to run js tests
+  * use grunt-jasmine
 
 * Create a base class for using with BsNotices and JqNotifierNotices
 * JqNotifierNotices
 * Rename BsNotices to JqBsNotices ???
+* separate group from id notices ???
 
-* put script tag at bottom of page
+* Create top level global namespace to house all lift stuff. Add these as extensions to that.
 
-* namepspace js modules
+* move BsNotices.js to library
+  * create a package.json and publish to bower
 
-* load each snippet view model on each page instead of combining them
+Organizing JavaScript Code
+==========================
 
-* how to run js tests
-
-* sparky (check for organizing an app)
-
-* grunt sublime build file
-
-* move JsModSnippet and KoSnippet defs to JsExtras and add arguments for elementId and modelName ???
-* Or, add auto script tag inclusion
+* use a single global variable for all of our code
+* namespace using object literal notation with auto extend function
+* write page classes as modules
+  * wrap in
+* access other utils using local vars - Dependency declaration pattern
 
 Next
 ====
-
-* optionally include script tag to include view model for that snippet.
 
 * snippets
   * Menus.item - improve

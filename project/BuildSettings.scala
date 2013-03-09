@@ -26,7 +26,8 @@ object BuildSettings {
          |    "grunt-contrib-uglify": "~0.1.2",
          |    "grunt-contrib-concat": "~0.1.3",
          |    "grunt-contrib-jshint": "~0.2.0",
-         |    "grunt-contrib-less": "~0.5.0"
+         |    "grunt-contrib-less": "~0.5.0",
+         |    "grunt-contrib-watch": "~0.3.1"
          |  }
          |}
          |""".format(n, v, sv, bt).stripMargin
@@ -88,7 +89,6 @@ object BuildSettings {
 
       // add managed resources, where grunt publishes to, to the webapp
       (webappResources in Compile) <+= (resourceManaged in Compile)
-
     )
 
   lazy val noPublishing = seq(
