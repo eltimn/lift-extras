@@ -7,34 +7,40 @@ module.exports = function(grunt) {
       src: "src/main",
       dest: "target/scala-<%= pkg.scalaVersion %>/resource_managed/main"
     },
-    artifactName: "<%= pkg.name %>-<%= pkg.version %>-<%= pkg.buildTime %>",
+    meta: {
+      artifactName: "<%= pkg.name %>-<%= pkg.version %>-<%= pkg.buildTime %>",
+      concated: "<%= dirs.dest %>/assets/<%= meta.artifactName %>.js"
+    },
+    jasmine: {
+      src : '<%= meta.concated %>',
+      options : {
+        specs : 'src/test/javascript/**/*.js'
+      }
+    },
     jshint: {
       options: {
-        curly: true,
-        eqeqeq: true,
-        immed: true,
-        latedef: true,
-        newcap: true,
-        noarg: true,
-        sub: true,
-        undef: true,
-        eqnull: true,
-        browser: true,
-        globals: {
-          jQuery: true,
-          $: true,
-          console: true,
-          ko: true,
-          '_': true,
-          App: true,
-          BsNotices: true
-        }
+        jshintrc: '.jshintrc'
       },
       main: [
         "<%= dirs.src %>/javascript/*.js",
         "<%= dirs.src %>/javascript/views/**/*.js"
       ],
       test: []
+    },
+    less: {
+      compile: {
+        files: {
+          "<%= dirs.dest %>/assets/<%= meta.artifactName %>.css": "<%= dirs.src %>/less/styles.less"
+        }
+      },
+      compress: {
+        options: {
+          yuicompress: true
+        },
+        files: {
+          "<%= dirs.dest %>/assets/<%= meta.artifactName %>.min.css": "<%= dirs.src %>/less/styles.less"
+        }
+      }
     },
     concat: {
       options: {
@@ -50,9 +56,10 @@ module.exports = function(grunt) {
           "<%= dirs.src %>/javascript/libs/liftAjax.js",
           "<%= dirs.src %>/javascript/BsNotices.js",
           "<%= dirs.src %>/javascript/App.js",
+          "<%= dirs.src %>/javascript/utils/**/*.js",
           "<%= dirs.src %>/javascript/views/**/*.js"
         ],
-        dest: "<%= dirs.dest %>/assets/<%= artifactName %>.js"
+        dest: "<%= meta.concated %>"
       }
     },
     uglify: {
@@ -60,29 +67,18 @@ module.exports = function(grunt) {
         banner: '/*! <%= pkg.name %>-<%= pkg.version %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
       },
       build: {
-        src: "<%= dirs.dest %>/assets/<%= artifactName %>.js",
-        dest: "<%= dirs.dest %>/assets/<%= artifactName %>.min.js"
-      }
-    },
-    less: {
-      compile: {
-        files: {
-          "<%= dirs.dest %>/assets/<%= artifactName %>.css": "<%= dirs.src %>/less/styles.less"
-        }
-      },
-      compress: {
-        options: {
-          yuicompress: true
-        },
-        files: {
-          "<%= dirs.dest %>/assets/<%= artifactName %>.min.css": "<%= dirs.src %>/less/styles.less"
-        }
+        src: "<%= meta.concated %>",
+        dest: "<%= dirs.dest %>/assets/<%= meta.artifactName %>.min.js"
       }
     },
     watch: {
       main: {
         files: '<%= jshint.main %>',
-        tasks: ['javascript']
+        tasks: ['jshint', 'concat']
+      },
+      test: {
+        files: 'src/test/javascript/**/*.js',
+        tasks: ['test']
       },
       less: {
         files: ["<%= dirs.src %>/less/**/*.less"],
@@ -95,11 +91,15 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
-  // Default task(s).
-  grunt.registerTask('default', ['jshint', 'concat', 'less:compile']);
+  // Tasks
+  grunt.registerTask('compile', ['jshint', 'concat', 'less:compile']);
+  grunt.registerTask('test', ['jshint', 'concat', 'jasmine']);
   grunt.registerTask('compress', ['jshint', 'concat', 'uglify', 'less:compile', 'less:compress']);
-  grunt.registerTask('javascript', ['jshint', 'concat']);
+
+  // Default task
+  grunt.registerTask('default', ['test']);
 
 };

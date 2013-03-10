@@ -1,3 +1,4 @@
+App.namespace("views");
 App.views.ChatKnockOutJs = (function(ko) {
   "use strict";
 

@@ -1,4 +1,4 @@
-App.extend("views.knockout");
+App.namespace("views.knockout");
 App.views.knockout.KnockoutExample = (function(ko, BsNotices) {
   "use strict";
 

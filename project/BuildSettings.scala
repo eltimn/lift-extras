@@ -1,7 +1,7 @@
 import sbt._
 import sbt.Keys._
 
-import com.github.siasia.WebPlugin.webSettings
+import com.github.siasia.WebPlugin.{container, webSettings}
 import com.github.siasia.PluginKeys._
 import sbtbuildinfo.Plugin._
 
@@ -27,7 +27,8 @@ object BuildSettings {
          |    "grunt-contrib-concat": "~0.1.3",
          |    "grunt-contrib-jshint": "~0.2.0",
          |    "grunt-contrib-less": "~0.5.0",
-         |    "grunt-contrib-watch": "~0.3.1"
+         |    "grunt-contrib-watch": "~0.3.1",
+         |    "grunt-contrib-jasmine": "~0.3.3"
          |  }
          |}
          |""".format(n, v, sv, bt).stripMargin
@@ -41,10 +42,10 @@ object BuildSettings {
     Process(Seq("npm", "install"), dir) !
   }
 
-  // call grunt compile (default)
+  // call grunt compile
   val gruntCompile = TaskKey[Int]("grunt-compile", "Call the grunt compile command")
   def gruntCompileTask = (baseDirectory in Compile) map { dir =>
-    Process(Seq("grunt"), dir) !
+    Process(Seq("grunt", "compile"), dir) !
   }
 
   // call grunt compress
@@ -85,6 +86,7 @@ object BuildSettings {
 
       // dependencies
       compile <<= (compile in Compile) dependsOn (genPkg, gruntCompile),
+      (start in container.Configuration) <<= (start in container.Configuration) dependsOn (genPkg, gruntCompile),
       Keys.`package` <<= (Keys.`package` in Compile) dependsOn gruntCompress,
 
       // add managed resources, where grunt publishes to, to the webapp

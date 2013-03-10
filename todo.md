@@ -1,37 +1,31 @@
 Required
 ========
 
-* use watch with grunt to auto build js/less
-
 * how to run js tests
   * use grunt-jasmine
 
 * Create a base class for using with BsNotices and JqNotifierNotices
-* JqNotifierNotices
-* Rename BsNotices to JqBsNotices ???
-* separate group from id notices ???
+  * JqNotifierNotices
+  * Rename BsNotices to JqBsNotices ???
+  * separate group from id notices ???
+  * rewrite as jQuery plugins that subscribe to a certain event and
+  * LiftNotice defaults to sending events
 
 * Create top level global namespace to house all lift stuff. Add these as extensions to that.
 
 * move BsNotices.js to library
   * create a package.json and publish to bower
 
-Organizing JavaScript Code
-==========================
+* test RenderWithScript
 
-* use a single global variable for all of our code
-* namespace using object literal notation with auto extend function
-* write page classes as modules
-  * wrap in
-* access other utils using local vars - Dependency declaration pattern
+* Tests
+
+* snippets
+  * Menus.item - improve or remove for now
+
 
 Next
 ====
-
-* snippets
-  * Menus.item - improve
-
-* Tests
 
 * RestExtras
   * boxJValueToJValue
@@ -41,7 +35,6 @@ Possibly
 ========
 
 * tail for JsCmds
-* Write BsNotices as a jQuery plugin ???
 
 * Ko Helpers - not sure what more we need
   * possibly some custom bindings for use w/ Lift
@@ -60,3 +53,29 @@ bower
 
 liftAjax
   * generate with Lift then copy and include in build
+
+
+Organizing JavaScript Code
+==========================
+* Use mixin style
+  * http://javascriptweblog.wordpress.com/2011/05/31/a-fresh-look-at-javascript-mixins/
+  * http://jsfiddle.net/eltimn/khrF6/1/
+  * https://speakerdeck.com/anguscroll/how-we-learned-to-stop-worrying-and-love-javascript
+  * https://gist.github.com/angus-c/2864853
+
+
+the rest of this needs reviewed:
+
+* use a single global variable for all of our code
+* namespace using object literal notation with auto extend function - rename extend to namespace or something else. extend may become a reserved word
+* write page classes as modules
+  * wrap in
+* access other utils using local vars - Dependency declaration pattern
+
+
+
+writing knockout classes
+* Use mixin style described here:
+https://speakerdeck.com/anguscroll/how-we-learned-to-stop-worrying-and-love-javascript
+  * mixin on fiddle
+  * withAdvice

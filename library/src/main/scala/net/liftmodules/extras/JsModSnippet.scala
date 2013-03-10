@@ -64,3 +64,30 @@ trait JsModSnippet extends JsModLike {
 trait JsModComet extends JsModLike {
   def render: RenderOut = new RenderOut(doRender(NodeSeq.Empty))
 }
+
+trait RenderWithScript {
+  self: JsModLike =>
+
+  protected def assetsPath = "/assets/js/views"
+
+  protected def appendScript(in: NodeSeq): NodeSeq = {
+    in ++ <tail><script src={"%s/%s.js".format(assetsPath, moduleName.replaceAllLiterally(".", "/"))}></script></tail>
+  }
+
+  protected def doRenderWithScript(in: NodeSeq): NodeSeq =
+    appendScript(doRender(in))
+}
+
+/**
+  * A snippet that uses a JavaScipt module and includes a script tag that loads the js module.
+  */
+trait JsModSnippetWithScript extends JsModLike with RenderWithScript {
+  def render(in: NodeSeq): NodeSeq = doRenderWithScript(in)
+}
+
+/**
+  * A comet that uses a JavaScipt module and includes a script tag that loads the js module.
+  */
+trait JsModCometWithScript extends JsModLike with RenderWithScript {
+  def render: RenderOut = new RenderOut(doRenderWithScript(NodeSeq.Empty))
+}

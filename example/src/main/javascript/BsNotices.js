@@ -1,9 +1,10 @@
 // http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-In-Depth
+/*jshint unused:false */
 var BsNotices = (function($, _) {
   "use strict";
 
   // private vars
-  var debug = true;
+  // var debug = true;
   var settings = {
     showAll: false,
     elementId: "bs-notices",
@@ -11,11 +12,11 @@ var BsNotices = (function($, _) {
   };
 
   // private funcs
-  function log(it) {
+  /*function log(it) {
     if (debug) {
       console.log(it);
     }
-  }
+  }*/
 
   function splitNotices(notices) {
     var _idns = [];

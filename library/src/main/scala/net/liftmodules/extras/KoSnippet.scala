@@ -11,7 +11,10 @@ import util.Helpers.tryo
 
 trait KoLike extends JsModLike {
   /**
-    * Convert the snippet/comet class name to an id to be used on the html element that ko will be bound to.
+    * Convert the snippet/comet class name to an id to be used on the html
+    * element that ko will be bound to.
+    *
+    * Ex: code.snippet.BsNotices -> bs-notices
     */
   lazy val elementId: String = {
     splitCamelCase(getClass.getName.split("\\.").toList.last.replace("$", ""))
@@ -49,3 +52,13 @@ trait KoSnippet extends KoLike with JsModSnippet
   * A comet that uses a Knockout JavaScipt module.
   */
 trait KoComet extends KoLike with JsModComet
+
+/**
+  * A snippet that uses a Knockout JavaScipt module and includes a script tag that loads the js module.
+  */
+trait KoSnippetWithScript extends KoLike with JsModSnippet with RenderWithScript
+
+/**
+  * A comet that uses a Knockout JavaScipt module and includes a script tag that loads the js module.
+  */
+trait KoCometWithScript extends KoLike with JsModComet with RenderWithScript
