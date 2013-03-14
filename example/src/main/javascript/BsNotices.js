@@ -11,13 +11,6 @@ var BsNotices = (function($, _) {
     titles: {}
   };
 
-  // private funcs
-  /*function log(it) {
-    if (debug) {
-      console.log(it);
-    }
-  }*/
-
   function splitNotices(notices) {
     var idns = [];
     if (!settings.showAll) {

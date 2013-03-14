@@ -14,18 +14,13 @@ import util.Helpers._
 
 import net.liftmodules.extras._
 
-object KnockoutExampleCls extends KnockoutExampleCls {
-  def jsVarName = "window.koExample"
-}
-
-object KnockoutExampleCls2 extends KnockoutExampleCls {
-  def jsVarName = "window.koExample2"
-  override def jsClsName = "App.views.knockout.KnockoutExampleCls"
-}
-
-trait KnockoutExampleCls extends SnippetExtras with KoClsSnippet with Loggable {
+class KnockoutExampleCls extends SnippetExtras with KoClsSnippet with Loggable {
 
   implicit val formats = DefaultFormats
+
+  def jsVarName = S.attr("varName").openOr("window.koExample")
+
+  override def elementId = S.attr("eleId").openOr(super.elementId)
 
   def doRender(in: NodeSeq): NodeSeq = {
     /**
@@ -38,7 +33,7 @@ trait KnockoutExampleCls extends SnippetExtras with KoClsSnippet with Loggable {
         val logMsg = "textInput from client: "+msg
         logger.info(logMsg)
         S.notice(logMsg)
-        Call("%s.textInput".format(jsVarName), Str("")): JsCmd
+        CallJsVar("textInput", Str("")): JsCmd
       }
     }
 

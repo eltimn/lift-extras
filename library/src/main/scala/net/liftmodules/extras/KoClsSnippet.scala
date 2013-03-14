@@ -18,9 +18,11 @@ trait KoClsLike extends JsClsLike {
     *
     * Ex: code.snippet.BsNotices -> bs-notices
     */
-  lazy val elementId: String = {
+  lazy val defaultElementId: String = {
     splitCamelCase(getClass.getName.split("\\.").toList.last.replace("$", ""))
   }
+
+  def elementId: String = defaultElementId
 
   /**
     * JsCmd to bind a knockout view model

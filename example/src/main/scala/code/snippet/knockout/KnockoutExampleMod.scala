@@ -29,7 +29,7 @@ object KnockoutExampleMod extends SnippetExtras with KoModSnippet with Loggable 
         val logMsg = "textInput from client: "+msg
         logger.info(logMsg)
         S.notice(logMsg)
-        Call("%s.textInput".format(moduleName), Str("")): JsCmd
+        CallJsMod("textInput", Str("")): JsCmd
       }
     }
 

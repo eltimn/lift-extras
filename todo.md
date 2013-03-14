@@ -1,15 +1,11 @@
 Required
 ========
 
-* write view models as either module or twitter style classes
-  * Update JsModSnippet and KoSnippet
-
 * Create a base class for using with BsNotices and JqNotifierNotices
   * JqNotifierNotices
   * Rename BsNotices to JqBsNotices ???
   * separate group from id notices ???
-  * rewrite as jQuery plugins that subscribe to a certain event and
-  * LiftNotice defaults to sending events
+  * rewrite as jQuery plugins
 
 * Tests
 
@@ -18,6 +14,7 @@ Required
 
 * move BsNotices.js to library
   * create a package.json and publish to bower
+  * remove KoNotices
 
 Next
 ====

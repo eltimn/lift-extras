@@ -22,6 +22,12 @@ trait JsModLike extends JsName {
     */
   def JsModInit(params: JsExp*): JsCmd =
     Call("%s.init".format(moduleName), params:_*)
+
+  /**
+    * Call a function on the JavaScript model.
+    */
+  def CallJsMod(func: String, params: JsExp*): JsCmd =
+    Call("%s.%s".format(moduleName, func), params:_*)
 }
 
 

@@ -26,6 +26,13 @@ trait JsClsLike extends JsName {
       JsVar(jsVarName),
       JsExtras.CallNew(jsClsName, params:_*)
     )
+
+  /**
+    * Call a function on the JavaScript variable that is an instance
+    * of the JavaScript view model class.
+    */
+  def CallJsVar(func: String, params: JsExp*): JsCmd =
+    Call("%s.%s".format(jsVarName, func), params:_*)
 }
 
 
