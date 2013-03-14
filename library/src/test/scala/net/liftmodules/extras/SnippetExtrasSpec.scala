@@ -13,32 +13,32 @@ import JsonDSL._
 class SnippetExtrasSpec extends BaseSpec with SnippetExtras {
   "SnippetExtras" should {
     "create default notice html" in {
-      val html = noticeHtml("This is a test")
+      val html = noticeHtml(Text("This is a test"))
       html should equal (<div class="alert alert-info">This is a test</div>)
     }
     "create default warning html" in {
-      val html = warningHtml("This is a test")
+      val html = warningHtml(Text("This is a test"))
       html should equal (<div class="alert alert-warning">This is a test</div>)
     }
     "create default error html" in {
-      val html = errorHtml("This is a test")
+      val html = errorHtml(Text("This is a test"))
       html should equal (<div class="alert alert-error">This is a test</div>)
     }
     "create custom notice html" in {
       LiftExtras.noticeHtmlHandler.doWith(CustomNoticeHtmlHandler) {
-        val html = noticeHtml("This is a test")
+        val html = noticeHtml(Text("This is a test"))
         html should equal (<div class="notice">This is a test</div>)
       }
     }
     "create custom warning html" in {
       LiftExtras.noticeHtmlHandler.doWith(CustomNoticeHtmlHandler) {
-        val html = warningHtml("This is a test")
+        val html = warningHtml(Text("This is a test"))
         html should equal (<div class="warning">This is a test</div>)
       }
     }
     "create custom error html" in {
       LiftExtras.noticeHtmlHandler.doWith(CustomNoticeHtmlHandler) {
-        val html = errorHtml("This is a test")
+        val html = errorHtml(Text("This is a test"))
         html should equal (<div class="error">This is a test</div>)
       }
     }
@@ -76,7 +76,7 @@ class SnippetExtrasSpec extends BaseSpec with SnippetExtras {
       val boxedJsCmd: Box[JsCmd] = Empty
       val jscmd: JsCmd = boxedJsCmd
       val expected: JsCmd =
-        Call("BsNotices.addNotices", LiftNotice.warning("Unknown empty value").asJValue)
+        Call("$(document).trigger", Str("lift.notices.add"), LiftNotice.warning("Unknown empty value").asJValue)
 
       jscmd should equal (expected)
     }
@@ -84,7 +84,7 @@ class SnippetExtrasSpec extends BaseSpec with SnippetExtras {
       val boxedJsCmd: Box[JsCmd] = Failure("Test failure")
       val jscmd: JsCmd = boxedJsCmd
       val expected: JsCmd =
-        Call("BsNotices.addNotices", LiftNotice.error("Test failure").asJValue)
+        Call("$(document).trigger", Str("lift.notices.add"), LiftNotice.error("Test failure").asJValue)
 
       jscmd should equal (expected)
     }
@@ -92,7 +92,7 @@ class SnippetExtrasSpec extends BaseSpec with SnippetExtras {
 }
 
 object CustomNoticeHtmlHandler extends HtmlHandler {
-  def noticeHtml(msg: String): NodeSeq = <div class="notice">{msg}</div>
-  def warningHtml(msg: String): NodeSeq = <div class="warning">{msg}</div>
-  def errorHtml(msg: String): NodeSeq = <div class="error">{msg}</div>
+  def noticeHtml(msg: NodeSeq): NodeSeq = <div class="notice">{msg}</div>
+  def warningHtml(msg: NodeSeq): NodeSeq = <div class="warning">{msg}</div>
+  def errorHtml(msg: NodeSeq): NodeSeq = <div class="error">{msg}</div>
 }

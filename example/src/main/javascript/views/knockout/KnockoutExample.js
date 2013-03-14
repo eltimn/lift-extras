@@ -1,5 +1,5 @@
 App.namespace("views.knockout");
-App.views.knockout.KnockoutExample = (function(ko, BsNotices) {
+App.views.knockout.KnockoutExample = (function($, ko) {
   "use strict";
 
   // private stuff
@@ -25,8 +25,8 @@ App.views.knockout.KnockoutExample = (function(ko, BsNotices) {
 
   inst.showWarning = function() {
     // sends a notice to the client
-    BsNotices.addNotices({message: "This is a warning!", priority: "warning"});
+    $(document).trigger("lift.notices.add", {message: "This is a warning!", priority: "warning"});
   };
 
   return inst;
-}(ko, BsNotices));
+}(jQuery, ko));

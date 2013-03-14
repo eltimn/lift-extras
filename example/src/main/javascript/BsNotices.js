@@ -19,9 +19,9 @@ var BsNotices = (function($, _) {
   }*/
 
   function splitNotices(notices) {
-    var _idns = [];
+    var idns = [];
     if (!settings.showAll) {
-      _idns = _.filter(notices, function(it) {
+      idns = _.filter(notices, function(it) {
         return it.id;
       });
     }
@@ -39,7 +39,7 @@ var BsNotices = (function($, _) {
       succs: _.filter(notices, function(it) {
         return (it.priority === "success" && (settings.showAll || !(it.id)));
       }),
-      idns: _idns
+      idns: idns
     };
   }
 
@@ -204,6 +204,16 @@ var BsNotices = (function($, _) {
   inst.init = function(_data) {
     var data = _data || {};
     settings = $.extend({}, settings, data);
+
+    $(document).on("lift.notices.add", function(event, data) {
+      var notices = Array.prototype.slice.call(arguments, 1);
+      inst.addNotices(notices);
+    });
+
+    $(document).on("lift.notices.set", function(event, data) {
+      var notices = Array.prototype.slice.call(arguments, 1);
+      inst.setNotices(notices);
+    });
   };
 
   inst.clearNotices = function() {
@@ -274,14 +284,6 @@ var BsNotices = (function($, _) {
 
     // handle the id notices
     renderIdNotices(notices.idns);
-  };
-
-  inst.afterScreenLoad = function() {
-    $(".notice-block ul").each(function() {
-      var $container = $(this);
-      var $controlGroup = controlGroup($container);
-      $controlGroup.addClass("error");
-    });
   };
 
   return inst;

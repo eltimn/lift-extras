@@ -12,11 +12,16 @@ import util.CssSel
 import util.Helpers._
 
 /*
- * I screen with some bootstrap settings.
+ * A screen with some bootstrap settings.
  */
 trait BootstrapScreen extends LiftScreen {
   override val cancelButton = super.cancelButton % ("class" -> "btn") % ("tabindex" -> "1")
   override val finishButton = super.finishButton % ("class" -> "btn btn-primary") % ("tabindex" -> "1")
+
+  override protected def renderHtml(): NodeSeq = {
+    S.appendJs(afterScreenLoad)
+    super.renderHtml()
+  }
 
   def displayOnly(fieldName: => String, html: => NodeSeq) =
     new Field {
@@ -26,4 +31,11 @@ trait BootstrapScreen extends LiftScreen {
       override def default = ""
       override def toForm: Box[NodeSeq] = Full(html)
     }
+
+  protected def afterScreenLoad: JsCmd = JsRaw("""
+    |$(".notice-block ul").each(function() {
+    |  var $controlGroup = $(this).closest("div.control-group");
+    |  $controlGroup.addClass("error");
+    |});
+    """.stripMargin)
 }

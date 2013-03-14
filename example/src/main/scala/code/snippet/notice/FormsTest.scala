@@ -53,9 +53,9 @@ object FormsTest extends StatefulSnippet {
 
 object FormsTestAjax extends KoSnippet {
 
-  val onLoad: JsCmd = {
-    KoInitBind()
-  }
+  def noticesAsJsCmd(notices: Seq[LiftNotice]) = LiftExtras.noticeConverter.vend.noticesAsJsCmd(notices)
+
+  val onLoad: JsCmd = KoInitBind()
 
   def doRender(in: NodeSeq): NodeSeq = {
     val book = Book.createRecord.title("test title")
@@ -89,14 +89,17 @@ object FormsTestAjax extends KoSnippet {
 
       book.validate match {
         case Nil =>
-        case errs => S.error(errs) //Call("BsNotices.addNotices", LiftNotice.fieldErrorsAsJValue(errs))
+        case errs => S.error(errs)
       }
 
       /*LiftNotice.error("Created with case class").asJsCmd &
       LiftNotice.success(succ).asJsCmd &
       LiftNotice.success(succ+" (ajaxwarn)", "ajaxwarn").asJsCmd &
       LiftNotice.error(error+" (ajaxerr)", "ajaxerr").asJsCmd*/
-      LiftNotice.success(succ+" (ajaxinfo)").asJsCmd
+      noticesAsJsCmd(Seq(
+        LiftNotice.success(succ),
+        LiftNotice.info("Another notice")
+      ))
     }
 
     "name=error" #> SHtml.text(error, error = _) &

@@ -1,8 +1,12 @@
 Required
 ========
 
-* how to run js tests
-  * use grunt-jasmine
+* change defualt to trigering an event
+
+* default to including a separate script for each view model
+
+* write view models as either module or twitter style classes
+  * Update JsModSnippet and KoSnippet
 
 * Create a base class for using with BsNotices and JqNotifierNotices
   * JqNotifierNotices
@@ -11,11 +15,6 @@ Required
   * rewrite as jQuery plugins that subscribe to a certain event and
   * LiftNotice defaults to sending events
 
-* Create top level global namespace to house all lift stuff. Add these as extensions to that.
-
-* move BsNotices.js to library
-  * create a package.json and publish to bower
-
 * test RenderWithScript
 
 * Tests
@@ -23,6 +22,8 @@ Required
 * snippets
   * Menus.item - improve or remove for now
 
+* move BsNotices.js to library
+  * create a package.json and publish to bower
 
 Next
 ====
@@ -64,7 +65,7 @@ Organizing JavaScript Code
   * https://gist.github.com/angus-c/2864853
 
 
-the rest of this needs reviewed:
+the rest of this needs review:
 
 * use a single global variable for all of our code
 * namespace using object literal notation with auto extend function - rename extend to namespace or something else. extend may become a reserved word

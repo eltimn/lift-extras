@@ -22,13 +22,8 @@ object BsNotices extends Factory with BsNotices {
   val noticeTitle = new FactoryMaker[Box[String]](Empty){}
   val successTitle = new FactoryMaker[Box[String]](Empty){}
 
-  def noticeAsJsCmd(notice: LiftNotice): JsCmd = Call("%s.addNotices".format(moduleName), notice.asJValue)
-
-  def noticesToJsCmd: JsCmd = Call("%s.setNotices".format(moduleName), LiftNotice.allNoticesAsJValue) // & JsRaw("throw new Error('stopping execution')")
 
   def init(): Unit = {
-    LiftRules.noticesToJsCmd = noticesToJsCmd _
-
     /**
       * LiftScreen overwrites the class on form labels and bootstrap
       * requires the control-label class. So, we disable LiftScreen's
@@ -64,7 +59,7 @@ trait BsNotices extends JsModSnippet {
 
     val onLoad: JsCmd =
       JsModInit(initData) &
-      BsNotices.noticesToJsCmd
+      LiftExtras.noticeConverter.vend.noticesToJsCmd
 
     <div id={elementId}></div> ++ <tail>{Script(OnLoad(onLoad))}</tail>
   }

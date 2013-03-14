@@ -18,9 +18,9 @@ trait SnippetExtras {
 
   def emptyMsg = LiftExtras.defaultEmptyMsg.vend
 
-  def noticeHtml(msg: String): NodeSeq = LiftExtras.noticeHtmlHandler.vend.noticeHtml(msg)
-  def warningHtml(msg: String): NodeSeq = LiftExtras.noticeHtmlHandler.vend.warningHtml(msg)
-  def errorHtml(msg: String): NodeSeq = LiftExtras.noticeHtmlHandler.vend.errorHtml(msg)
+  def noticeHtml(msg: NodeSeq): NodeSeq = LiftExtras.noticeHtmlHandler.vend.noticeHtml(msg)
+  def warningHtml(msg: NodeSeq): NodeSeq = LiftExtras.noticeHtmlHandler.vend.warningHtml(msg)
+  def errorHtml(msg: NodeSeq): NodeSeq = LiftExtras.noticeHtmlHandler.vend.errorHtml(msg)
 
   /**
     * Allows for the following to be used when building snippets that return NodeSeq.
@@ -35,8 +35,8 @@ trait SnippetExtras {
     */
   implicit protected def boxNodeSeqToNodeSeq(in: Box[NodeSeq]): NodeSeq = in match {
     case Full(ns) => ns
-    case Failure(msg, _, _) => errorHtml(msg)
-    case Empty => warningHtml(emptyMsg)
+    case Failure(msg, _, _) => errorHtml(Text(msg))
+    case Empty => warningHtml(Text(emptyMsg))
   }
 
   /**
@@ -52,8 +52,8 @@ trait SnippetExtras {
     */
   implicit protected def boxCssSelToCssSel(in: Box[CssSel]): CssSel = in match {
     case Full(csssel) => csssel
-    case Failure(msg, _, _) => "*" #> errorHtml(msg)
-    case Empty => "*" #> warningHtml(emptyMsg)
+    case Failure(msg, _, _) => "*" #> errorHtml(Text(msg))
+    case Empty => "*" #> warningHtml(Text(emptyMsg))
   }
 
   /**
@@ -67,8 +67,8 @@ trait SnippetExtras {
     */
   implicit protected def boxRenderOutToRenderOut(in: Box[RenderOut]): RenderOut = in match {
     case Full(ro) => ro
-    case Failure(msg, _, _) => new RenderOut(errorHtml(msg))
-    case Empty => new RenderOut(warningHtml(emptyMsg))
+    case Failure(msg, _, _) => new RenderOut(errorHtml(Text(msg)))
+    case Empty => new RenderOut(warningHtml(Text(emptyMsg)))
   }
 
   /**
@@ -82,8 +82,8 @@ trait SnippetExtras {
     */
   implicit protected def boxJsCmdToJsCmd(in: Box[JsCmd]): JsCmd = in match {
     case Full(jscmd) => jscmd
-    case Failure(msg, _, _) => LiftNotice.error(msg).asJsCmd
-    case Empty => LiftNotice.warning(emptyMsg).asJsCmd
+    case Failure(msg, _, _) => LiftNotice.error(Text(msg)).asJsCmd
+    case Empty => LiftNotice.warning(Text(emptyMsg)).asJsCmd
   }
 
   /**
@@ -97,8 +97,8 @@ trait SnippetExtras {
     */
   implicit protected def boxJValueToJValue(in: Box[JValue]): JValue = in match {
     case Full(jv) => jv
-    case Failure(msg, _, _) => LiftNotice.error(msg).asJValue
-    case Empty => LiftNotice.warning(emptyMsg).asJValue
+    case Failure(msg, _, _) => LiftNotice.error(Text(msg)).asJValue
+    case Empty => LiftNotice.warning(Text(emptyMsg)).asJValue
   }
 
   /**

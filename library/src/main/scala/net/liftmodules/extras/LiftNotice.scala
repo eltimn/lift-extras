@@ -20,19 +20,14 @@ case class LiftNotice(message: NodeSeq, priority: String, id: Option[String] = E
 }
 
 object LiftNotice {
-  import JsonDSL._
 
   val Success = "success"
 
   private implicit def noticeTypeToString(notice: NoticeType.Value): String = notice.lowerCaseTitle
 
-  def asJValue(notice: LiftNotice): JValue = LiftExtras.noticeAsJValue.vend(notice)
-  def asJsCmd(notice: LiftNotice): JsCmd = LiftExtras.noticeAsJsCmd.vend(notice)
-
-  def noticeAsJValue(notice: LiftNotice): JValue =
-    ("message" -> notice.message.toString) ~
-    ("priority" -> notice.priority) ~
-    ("id" -> notice.id)
+  def asJValue(notice: LiftNotice): JValue = LiftExtras.noticeConverter.vend.noticeAsJValue(notice)
+  def asJsCmd(notice: LiftNotice): JsCmd = LiftExtras.noticeConverter.vend.noticeAsJsCmd(notice)
+  def asJsCmd(notices: Seq[LiftNotice]): JsCmd = LiftExtras.noticeConverter.vend.noticesAsJsCmd(notices)
 
   def info(msg: String): LiftNotice = LiftNotice(Text(msg), NoticeType.Notice, Empty)
   def error(msg: String): LiftNotice = LiftNotice(Text(msg), NoticeType.Error, Empty)
@@ -63,3 +58,21 @@ object LiftNotice {
   )
 }
 
+trait LiftNoticeConverter {
+  import JsonDSL._
+
+  def noticeAsJValue(notice: LiftNotice): JValue =
+    ("message" -> notice.message.toString) ~
+    ("priority" -> notice.priority) ~
+    ("id" -> notice.id)
+
+  def noticeAsJsCmd(notice: LiftNotice): JsCmd = Call("$(document).trigger", Str("lift.notices.add"), notice.asJValue)
+  def noticesAsJsCmd(notices: Seq[LiftNotice]): JsCmd = Call("$(document).trigger", Str("lift.notices.add"), JArray(notices.map(_.asJValue).toList))
+
+  /**
+    * Use this to set LiftRules.noticesToJsCmd
+    */
+  def noticesToJsCmd: JsCmd = Call("$(document).trigger", Str("lift.notices.set"), LiftNotice.allNoticesAsJValue)
+}
+
+object DefaultLiftNoticeConverter extends LiftNoticeConverter

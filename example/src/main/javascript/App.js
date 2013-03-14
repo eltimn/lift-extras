@@ -15,7 +15,7 @@
       * automatically generating nested namespaces.
       *
       * Example:
-      * App.extend('modules.module2');
+      * App.namespace('modules.module2');
       *
       */
     inst.namespace = function(ns_string) {

@@ -46,7 +46,7 @@ class Boot {
     // LiftExtras.init()
     LiftRules.addToPackages("net.liftmodules.extras")
     LiftRules.autoIncludeAjaxCalc.default.set(() => (session: LiftSession) => false);
-    BsNotices.init()
+    LiftExtras.init()
     BsNotices.errorTitle.default.set(Full("Error!"))
     BsNotices.warningTitle.default.set(Full("Warning!"))
     BsNotices.noticeTitle.default.set(Full("Info!"))

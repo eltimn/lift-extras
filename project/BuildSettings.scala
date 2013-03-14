@@ -85,7 +85,7 @@ object BuildSettings {
       gruntCompress <<= gruntCompressTask,
 
       // dependencies
-      compile <<= (compile in Compile) dependsOn (genPkg, gruntCompile),
+      // compile <<= (compile in Compile) dependsOn (genPkg, gruntCompile),
       (start in container.Configuration) <<= (start in container.Configuration) dependsOn (genPkg, gruntCompile),
       Keys.`package` <<= (Keys.`package` in Compile) dependsOn gruntCompress,
 
