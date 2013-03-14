@@ -14,7 +14,7 @@ import util.Helpers._
 
 import net.liftmodules.extras._
 
-object KnockoutExample extends SnippetExtras with KoSnippet with Loggable {
+object KnockoutExampleMod extends SnippetExtras with KoModSnippet with Loggable {
 
   implicit val formats = DefaultFormats
 
@@ -48,6 +48,6 @@ object KnockoutExample extends SnippetExtras with KoSnippet with Loggable {
 
     S.appendJs(onload)
 
-    NodeSeq.Empty
+    in
   }
 }

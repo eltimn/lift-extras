@@ -51,11 +51,11 @@ object FormsTest extends StatefulSnippet {
   }
 }
 
-object FormsTestAjax extends KoSnippet {
+object FormsTestAjax extends KoModSnippet {
 
   def noticesAsJsCmd(notices: Seq[LiftNotice]) = LiftExtras.noticeConverter.vend.noticesAsJsCmd(notices)
 
-  override def doRender(in: NodeSeq): NodeSeq = {
+  def doRender(in: NodeSeq): NodeSeq = {
     val book = Book.createRecord.title("test title")
 
     var error = "This is an error"

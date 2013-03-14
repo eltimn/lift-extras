@@ -1,12 +1,6 @@
 Required
 ========
 
-* tail for JsCmds - S.appendJs
-
-* User ClearClearable instead of calling clearNotices
-
-* default to including a separate script for each view model
-
 * write view models as either module or twitter style classes
   * Update JsModSnippet and KoSnippet
 
@@ -16,8 +10,6 @@ Required
   * separate group from id notices ???
   * rewrite as jQuery plugins that subscribe to a certain event and
   * LiftNotice defaults to sending events
-
-* test RenderWithScript
 
 * Tests
 
@@ -39,6 +31,8 @@ Possibly
 
 * Ko Helpers - not sure what more we need
   * possibly some custom bindings for use w/ Lift
+
+* User ClearClearable instead of calling clearNotices
 
 
 Notes

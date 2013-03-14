@@ -20,7 +20,7 @@ object LiftExtras extends Factory {
   val noticeHtmlHandler = new FactoryMaker[HtmlHandler](BootstrapHtmlHandler) {}
   val noticeConverter = new FactoryMaker[LiftNoticeConverter](DefaultLiftNoticeConverter) {}
   val parseJsonFunc = new FactoryMaker[(String, JValue => JsCmd) => JsCmd](JsExtras.defaultParseJsonFunc _) {}
-  val moduleNamespace = new FactoryMaker[Seq[String]](Seq("App", "views")) {}
+  val jsNamespace = new FactoryMaker[Seq[String]](Seq("App", "views")) {}
 
   def init(): Unit = {
     LiftRules.noticesToJsCmd = noticeConverter.vend.noticesToJsCmd _

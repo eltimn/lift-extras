@@ -1,5 +1,5 @@
 App.namespace("views.knockout");
-App.views.knockout.KnockoutExample = (function($, ko) {
+App.views.knockout.KnockoutExampleMod = (function($, ko) {
   "use strict";
 
   // private stuff

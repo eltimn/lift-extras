@@ -14,7 +14,7 @@ import json.JsonDSL._
 import util._
 import Helpers._
 
-import net.liftmodules.extras.{JsExtras, KoComet, SnippetExtras}
+import net.liftmodules.extras.{JsExtras, KoModComet, SnippetExtras}
 
 
 /**
@@ -22,7 +22,7 @@ import net.liftmodules.extras.{JsExtras, KoComet, SnippetExtras}
  * by this component.  When the component changes on the server
  * the changes are automatically reflected in the browser.
  */
-class ChatKnockOutJs extends CometActor with CometListener with SnippetExtras with KoComet {
+class ChatKnockOutJs extends CometActor with CometListener with SnippetExtras with KoModComet {
   // val elementId = "chat-messages"
   // val moduleName = "ChatMessages"
 

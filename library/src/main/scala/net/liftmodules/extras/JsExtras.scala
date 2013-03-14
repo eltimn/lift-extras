@@ -19,6 +19,13 @@ object JsExtras extends Factory {
   }
 
   /**
+    * Call a function preceded by the new operator.
+    */
+  case class CallNew(function: String, params: JsExp*) extends JsExp {
+    def toJsCmd = "new " + function + "(" + params.map(_.toJsCmd).mkString(",") + ")"
+  }
+
+  /**
     * An anonymous JavaScript function that calls the callback function via Ajax and
     * executes the return JsCmd on the client.
     */

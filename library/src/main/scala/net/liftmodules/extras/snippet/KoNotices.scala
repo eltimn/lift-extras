@@ -37,7 +37,7 @@ object KoNotices extends KoNotices {
   }
 }
 
-trait KoNotices extends KoSnippet {
+trait KoNotices extends KoModSnippet {
 
   override lazy val elementId = "ko-notices"
   override lazy val moduleName = "KoNotices"

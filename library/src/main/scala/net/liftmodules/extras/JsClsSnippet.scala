@@ -11,8 +11,9 @@ import JE._
 import json._
 import util.Helpers.tryo
 
-trait JsModLike extends JsName {
-  lazy val moduleName = classNameToJsName
+trait JsClsLike extends JsName {
+  def jsClsName = classNameToJsName
+  def jsVarName: String
 
   // User defined render
   protected def doRender(in: NodeSeq): NodeSeq
@@ -20,21 +21,24 @@ trait JsModLike extends JsName {
   /**
     * JsCmd to init a module
     */
-  def JsModInit(params: JsExp*): JsCmd =
-    Call("%s.init".format(moduleName), params:_*)
+  def JsClassInit(params: JsExp*): JsCmd =
+    SetExp(
+      JsVar(jsVarName),
+      JsExtras.CallNew(jsClsName, params:_*)
+    )
 }
 
 
 /**
-  * A snippet that uses a JavaScipt module.
+  * A snippet that uses a JavaScipt class.
   */
-trait JsModSnippet extends JsModLike {
+trait JsClsSnippet extends JsModLike {
   def render(in: NodeSeq): NodeSeq = doRender(in)
 }
 
 /**
-  * A comet that uses a JavaScipt module.
+  * A comet that uses a JavaScipt class.
   */
-trait JsModComet extends JsModLike {
+trait JsClsComet extends JsModLike {
   def render: RenderOut = new RenderOut(doRender(NodeSeq.Empty))
 }
