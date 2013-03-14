@@ -1,7 +1,9 @@
 Required
 ========
 
-* change defualt to trigering an event
+* tail for JsCmds - S.appendJs
+
+* User ClearClearable instead of calling clearNotices
 
 * default to including a separate script for each view model
 
@@ -34,8 +36,6 @@ Next
 
 Possibly
 ========
-
-* tail for JsCmds
 
 * Ko Helpers - not sure what more we need
   * possibly some custom bindings for use w/ Lift

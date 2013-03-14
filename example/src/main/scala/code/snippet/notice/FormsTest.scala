@@ -55,9 +55,7 @@ object FormsTestAjax extends KoSnippet {
 
   def noticesAsJsCmd(notices: Seq[LiftNotice]) = LiftExtras.noticeConverter.vend.noticesAsJsCmd(notices)
 
-  val onLoad: JsCmd = KoInitBind()
-
-  def doRender(in: NodeSeq): NodeSeq = {
+  override def doRender(in: NodeSeq): NodeSeq = {
     val book = Book.createRecord.title("test title")
 
     var error = "This is an error"
@@ -102,6 +100,8 @@ object FormsTestAjax extends KoSnippet {
       ))
     }
 
+    S.appendJs(KoInitBind())
+
     "name=error" #> SHtml.text(error, error = _) &
     "name=error_count" #> SHtml.selectElem[Int](0 to 10, Full(eCount))(eCount = _) &
     "name=warning" #> SHtml.text(warning, warning = _) &
@@ -110,7 +110,6 @@ object FormsTestAjax extends KoSnippet {
     "name=info_count" #> SHtml.selectElem[Int](0 to 10, Full(iCount))(iCount = _) &
     "name=title" #> book.title.toForm &
     "name=text" #> book.text.toForm &
-    "name=sub" #> SHtml.hidden(process) &
-    "#forms-test-ajax-onload" #> Script(OnLoad(onLoad))
+    "name=sub" #> SHtml.hidden(process)
   } apply in
 }

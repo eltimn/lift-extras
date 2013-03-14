@@ -1,5 +1,7 @@
 package net.liftmodules.extras
 
+import scala.xml._
+
 import net.liftweb._
 import common._
 import http.{NoticeType, JsonContext, SHtml, S}

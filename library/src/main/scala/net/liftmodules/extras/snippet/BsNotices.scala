@@ -61,7 +61,9 @@ trait BsNotices extends JsModSnippet {
       JsModInit(initData) &
       LiftExtras.noticeConverter.vend.noticesToJsCmd
 
-    <div id={elementId}></div> ++ <tail>{Script(OnLoad(onLoad))}</tail>
+    S.appendJs(onLoad)
+
+    <div id={elementId}></div>
   }
 
   /**

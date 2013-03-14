@@ -12,18 +12,9 @@ import util.Helpers._
 
 // <a data-lift="Menus.item?name=Register"><i class="icon-edit"></i> <span data-lift-name="link-display">Register</span></a>
 
-object Menus extends SnippetExtras {
-  // Is this necessary?
-  // TODO: Add a place to put the text
-  def item(html: NodeSeq): NodeSeq = {
-    (for {
-      name <- S.attr("name")
-      loc <- SiteMap.findAndTestLoc(name)
-      link <- loc.createDefaultLink
-    } yield {
-      "a [href]" #> link
-    }).map(_.apply(html))
-  }
+object BsMenu extends BsMenu
+
+trait BsMenu extends SnippetExtras {
 
   // For use with bootstrap
   def group = {

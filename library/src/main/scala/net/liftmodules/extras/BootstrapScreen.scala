@@ -34,8 +34,7 @@ trait BootstrapScreen extends LiftScreen {
 
   protected def afterScreenLoad: JsCmd = JsRaw("""
     |$(".notice-block ul").each(function() {
-    |  var $controlGroup = $(this).closest("div.control-group");
-    |  $controlGroup.addClass("error");
+    |  $(this).closest("div.control-group").addClass("error");
     |});
     """.stripMargin)
 }

@@ -18,32 +18,36 @@ object KnockoutExample extends SnippetExtras with KoSnippet with Loggable {
 
   implicit val formats = DefaultFormats
 
-  /**
-    * The function to call when submitting the form.
-    */
-  def saveForm(json: JValue): JsCmd = {
-    for {
-      msg <- tryo((json \ "textInput").extract[String])
-    } yield {
-      val logMsg = "textInput from client: "+msg
-      logger.info(logMsg)
-      S.notice(logMsg)
-      Call("%s.textInput".format(moduleName), Str("")): JsCmd
+  def doRender(in: NodeSeq): NodeSeq = {
+    /**
+      * The function to call when submitting the form.
+      */
+    def saveForm(json: JValue): JsCmd = {
+      for {
+        msg <- tryo((json \ "textInput").extract[String])
+      } yield {
+        val logMsg = "textInput from client: "+msg
+        logger.info(logMsg)
+        S.notice(logMsg)
+        Call("%s.textInput".format(moduleName), Str("")): JsCmd
+      }
     }
+
+    /**
+      * A test function that sends a success notice back to the client.
+      */
+    def sendSuccess(): JsCmd = LiftNotice.success("You have success").asJsCmd
+
+    /**
+      * Initialize the knockout view model, passing it the anonymous functions
+      */
+    val onload: JsCmd = KoInitBind(
+      JsExtras.JsonCallbackAnonFunc(saveForm),
+      JsExtras.AjaxCallbackAnonFunc(sendSuccess)
+    )
+
+    S.appendJs(onload)
+
+    NodeSeq.Empty
   }
-
-  /**
-    * A test function that sends a success notice back to the client.
-    */
-  def sendSuccess(): JsCmd = LiftNotice.success("You have success").asJsCmd
-
-  /**
-    * Initialize the knockout view model, passing it the anonymous functions
-    */
-  val onload: JsCmd = KoInitBind(
-    JsExtras.JsonCallbackAnonFunc(saveForm),
-    JsExtras.AjaxCallbackAnonFunc(sendSuccess)
-  )
-
-  def doRender(in: NodeSeq): NodeSeq = in ++ <tail>{Script(OnLoad(onload))}</tail>
 }

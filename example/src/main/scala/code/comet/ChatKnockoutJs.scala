@@ -74,10 +74,12 @@ class ChatKnockOutJs extends CometActor with CometListener with SnippetExtras wi
     */
   val onload: JsCmd = KoInitBind(JsExtras.JsonCallbackAnonFunc(saveForm _))
 
+  S.appendJs(onload)
+
   /**
     * Provide the doRender function for KoComet
     */
-  def doRender(in: NodeSeq): NodeSeq = <tail>{Script(OnLoad(onload))}</tail>
+  def doRender(in: NodeSeq): NodeSeq = NodeSeq.Empty
 
   /*override def render =
     (for {

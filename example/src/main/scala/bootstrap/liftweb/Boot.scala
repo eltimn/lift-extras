@@ -11,10 +11,6 @@ import Helpers._
 import net.liftmodules.extras.{Gravatar, LiftExtras}
 import net.liftmodules.extras.snippet.BsNotices
 
-// import net.liftmodules.JQueryModule
-// import net.liftweb.http.js.jquery._
-
-
 /**
  * A class that's instantiated early and run.  It allows the application
  * to modify lift's environment
@@ -43,21 +39,12 @@ class Boot {
       new Html5Properties(r.userAgent))
 
     // Init Extras
-    // LiftExtras.init()
-    LiftRules.addToPackages("net.liftmodules.extras")
-    LiftRules.autoIncludeAjaxCalc.default.set(() => (session: LiftSession) => false);
     LiftExtras.init()
+    LiftRules.autoIncludeAjaxCalc.default.set(() => (session: LiftSession) => false);
     BsNotices.errorTitle.default.set(Full("Error!"))
     BsNotices.warningTitle.default.set(Full("Warning!"))
     BsNotices.noticeTitle.default.set(Full("Info!"))
     BsNotices.successTitle.default.set(Full("Success!"))
-
     Gravatar.defaultImage.default.set("wavatar")
-
-    //Init the jQuery module, see http://liftweb.net/jquery for more information.
-    /*LiftRules.jsArtifacts = JQueryArtifacts
-    JQueryModule.InitParam.JQuery=JQueryModule.JQuery172
-    JQueryModule.init()*/
-
   }
 }

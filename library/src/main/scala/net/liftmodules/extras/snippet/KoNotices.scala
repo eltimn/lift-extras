@@ -51,7 +51,7 @@ trait KoNotices extends KoSnippet {
       KoNotices.noticesToJsCmd
     ))
 
-  def doRender(in: NodeSeq): NodeSeq = {
+  override def doRender(in: NodeSeq): NodeSeq = {
     val showAll = Helpers.toBoolean(S.attr("showAll") or S.attr("showall"))
     val initData: JValue =
       ("showAll" -> showAll)
@@ -60,6 +60,8 @@ trait KoNotices extends KoSnippet {
       KoInitBind(initData) &
       KoNotices.noticesToJsCmd &
       Call("""$("#%s").show""".format(elementId))
+
+    S.appendJs(onLoad)
 
     <div id={elementId} style="display: none;">
       <div class="alert alert-error" data-bind="visible: errors().length > 0">
@@ -80,7 +82,7 @@ trait KoNotices extends KoSnippet {
           <li data-bind="text: message"></li>
         </ul>
       </div>
-    </div> ++ Script(OnLoad(onLoad))
+    </div>
   }
 
   def id(html: NodeSeq): NodeSeq = {
