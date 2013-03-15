@@ -1,11 +1,14 @@
 Required
 ========
 
+* get noticeId from one attr
+
+* write separate id notices as jQuery plugin
+
 * Create a base class for using with BsNotices and JqNotifierNotices
-  * JqNotifierNotices
   * Rename BsNotices to JqBsNotices ???
-  * separate group from id notices ???
-  * rewrite as jQuery plugins
+
+* JqNotifierNotices
 
 * Tests
 

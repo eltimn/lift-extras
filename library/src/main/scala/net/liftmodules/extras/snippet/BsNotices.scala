@@ -45,7 +45,6 @@ trait BsNotices extends JsModSnippet {
     * Render notices
     */
   def doRender(html: NodeSeq): NodeSeq = {
-    val showAll = Helpers.toBoolean(S.attr("showAll") or S.attr("showall"))
     val titles: JValue =
       ("error" -> BsNotices.errorTitle.vend.toOption) ~
       ("warning" -> BsNotices.warningTitle.vend.toOption) ~
@@ -53,7 +52,6 @@ trait BsNotices extends JsModSnippet {
       ("success" -> BsNotices.successTitle.vend.toOption)
 
     val initData: JValue =
-      ("showAll" -> showAll) ~
       ("elementId" -> elementId) ~
       ("titles" -> titles)
 
@@ -64,16 +62,5 @@ trait BsNotices extends JsModSnippet {
     S.appendJs(onLoad)
 
     <div id={elementId}></div>
-  }
-
-  /**
-    * Render a single id's notices.
-    */
-  def id(html: NodeSeq): NodeSeq = {
-    S.attr("id") match {
-      case Full(id) =>
-        <div data-id-notice={id} class="notice-block"></div>
-      case _ => NodeSeq.Empty
-    }
   }
 }

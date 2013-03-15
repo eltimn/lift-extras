@@ -102,6 +102,18 @@ trait SnippetExtras {
   }
 
   /**
+    * Converts a Seq of LiftNotice to JsCmd
+    */
+  implicit protected def liftNoticesToJsCmd(in: Seq[LiftNotice]): JsCmd =
+    LiftExtras.noticeConverter.vend.noticesAsJsCmd(in)
+
+  /**
+    * Converts a single LiftNotice to JsCmd
+    */
+  implicit protected def liftNoticeToJsCmd(in: LiftNotice): JsCmd =
+    LiftExtras.noticeConverter.vend.noticesAsJsCmd(Seq(in))
+
+  /**
     * For adding checked, selected, and disabled attributes to Elem.
     */
   def checked(in: Boolean) = if (in) new UnprefixedAttribute("checked", "checked", Null) else Null

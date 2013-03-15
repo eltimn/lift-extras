@@ -14,13 +14,11 @@ import util.Helpers._
 
 import net.liftmodules.extras._
 
-class KnockoutExampleCls extends SnippetExtras with KoClsSnippet with Loggable {
+object KnockoutExampleCls extends SnippetExtras with KoClsSnippet with Loggable {
 
   implicit val formats = DefaultFormats
 
-  def jsVarName = S.attr("varName").openOr("window.koExample")
-
-  override def elementId = S.attr("eleId").openOr(super.elementId)
+  def jsVarName = "window.koExample"
 
   def doRender(in: NodeSeq): NodeSeq = {
     /**

@@ -20,7 +20,7 @@
                   <input name="error" class="xlarge" /> &times;
                   <input name="error_count" class="small" />
                   <span class="help-inline">Inline style help</span>
-                  <span data-lift="Notices.id?id=err"></span>
+                  <span data-noticeid="err" class="notice-block"></span>
                   <span class="help-block">Block style help</span>
                 </div>
               </div>
@@ -56,7 +56,7 @@
                     <input name="error" class="xlarge" id="ajaxerr" /> &times;
                     <input name="error_count" class="small" />
                     <span class="help-inline">Inline style help</span>
-                    <div data-id-notice="ajaxerr" class="notice-block"></div>
+                    <span data-noticeid="ajaxerr" class="notice-block"></span>
                     <span class="help-block">Block style help</span>
                   </div>
                 </div>
@@ -65,7 +65,7 @@
                   <div class="controls">
                     <input name="warning" class="xlarge" /> &times;
                     <input name="warning_count" class="small" />
-                    <span data-id-notice="ajaxwarn" class="notice-block"></span>
+                    <span data-noticeid="ajaxwarn" class="notice-block"></span>
                     <span class="help-block">Block style help</span>
                   </div>
                 </div>
@@ -74,21 +74,23 @@
                   <div class="controls">
                     <input name="info" class="xlarge" /> &times;
                     <input name="info_count" class="small" />
-                    <span data-id-notice="ajaxinfo" class="notice-block"></span>
+                    <span data-noticeid="ajaxinfo" class="notice-block"></span>
                   </div>
                 </div>
                 <div class="control-group">
                   <label class="control-label" for="title">Title</label>
                   <div class="controls">
                     <input name="title" class="xlarge" />
-                    <span data-id-notice="title_id" class="notice-block"></span>
+                    <span class="help-inline">This is created by calling toForm on a Record Field.</span>
+                    <span data-noticeid="title_id" class="notice-block"></span>
                   </div>
                 </div>
                 <div class="control-group">
                   <label class="control-label" for="text">Text</label>
                   <div class="controls">
                     <input name="text" class="xlarge" />
-                    <span data-id-notice="text_id" class="notice-block"></span>
+                    <span class="help-inline">This one has the help div initialized via JavaScript.</span>
+                    <span id="text_id_err" class="notice-block"></span>
                   </div>
                 </div>
               </fieldset>
@@ -99,118 +101,8 @@
             </span>
           </form>
         </div>
+
       </div>
     </div>
   </div>
-
-  <br />
-
-  <!--
-  <ul>
-    <li class="add">Click here to see a notification that you have to remove</li>
-    <li class="add2">Click here to see a notification that does not stay</li>
-    <li class="add3">Error Notification</li>
-    <li class="add4">Warning Notification</li>
-    <li class="add5">Success Notification</li>
-    <li class="remove">Remove all active notifications</li>
-  </ul>
-
-  <script>
-  $(document).ready(function() {
-    jQuery.noticeAdd({
-      text: 'This is a simple notification using the jQuery notice plugin. Click the X above to remove this notice.',
-      stay: true
-    });
-
-    $('.add').click(function() {
-      jQuery.noticeAdd({
-        text: 'This is a notification that you have to remove',
-        stay: true
-      });
-    });
-
-    $('.add2').click(function() {
-      jQuery.noticeAdd({
-        text: 'This is a notification that will remove itself',
-        stay: false
-      });
-    });
-
-    $('.add3').click(function() {
-      jQuery.noticeAdd({
-        text: 'This is an error notification!',
-        stay: true,
-        type: 'error'
-      });
-    });
-
-    $('.add4').click(function() {
-      jQuery.noticeAdd({
-        text: 'This is a warning notification!',
-        stay: true,
-        type: 'warning'
-      });
-    });
-
-    $('.add5').click(function() {
-      jQuery.noticeAdd({
-        text: 'This is a success notification!',
-        stay: true,
-        type: 'success'
-      });
-    });
-
-    $('.remove').click(function() {
-      jQuery.noticeRemove($('.notice-item-wrapper'), 400);
-    });
-
-
-
-  });
-  </script>
-  -->
-
-  <!--
-  <div data-bind="template: 'alertsTemplate'"></div>
-  <script type="text/x-jquery-tmpl" id="alertsTemplate">
-    {{each alerts}}
-    <div class="alert alert-${type}" data-alert="">
-      <a class="close" href="#">&times;</a>
-      <p>
-      {{if (type == "error" && errorTitle.length)}}
-        <strong>${errorTitle}</strong>
-      {{else (type == "warning" && warningTitle.length)}}
-        <strong>${warningTitle}</strong>
-      {{else (type == "info" && infoTitle.length)}}
-        <strong>${infoTitle}</strong>
-      {{/if}} ${msg}</p>
-    </div>
-    {{/each}}
-  </script>
-  <script>
-  var alert = function(msg, type) {
-    this.msg = msg;
-    this.type = type;
-  }
-
-  var viewModel = {
-    errorTitle: "Holy cow!",
-    warningTitle: "Easy now!",
-    infoTitle: "Heads up!",
-    alerts: ko.observableArray([
-      new alert("This is an error", "error"),
-      new alert("This is a warning", "warning"),
-      new alert("This is a notice", "info"),
-      new alert("This is a success", "success")
-    ]),
-
-    addAlert: function(msg, type) {
-      this.alerts.push(new alert(msg, type));
-    }
-  }
-  $(document).ready(function() {
-    ko.applyBindings(viewModel);
-  });
-  </script>
 </div>
--->

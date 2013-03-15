@@ -49,16 +49,14 @@ object LiftNotice {
   def warning(msg: NodeSeq, id: String): LiftNotice = LiftNotice(msg, NoticeType.Warning, Some(id))
   def success(msg: NodeSeq, id: String): LiftNotice = LiftNotice(msg, Success, Some(id))
 
-  def allNoticesAsJValue: JValue = JArray(S.getAllNotices
-    .map { case (priority, msg, id) => LiftNotice(msg, priority, id).asJValue }
-  )
+  def allNotices: Seq[LiftNotice] = S.getAllNotices
+    .map { case (priority, msg, id) => LiftNotice(msg, priority, id) }
 
-  def fieldErrorsAsJValue(errs: List[FieldError]): JValue = JArray(errs
-    .map { err => LiftNotice(err.msg, NoticeType.Error, err.field.uniqueFieldId).asJValue }
-  )
+  def fieldErrors(errs: List[FieldError]): Seq[LiftNotice] = errs
+    .map { err => LiftNotice(err.msg, NoticeType.Error, err.field.uniqueFieldId) }
 }
 
-trait LiftNoticeConverter {
+trait LiftNoticeConverter extends Loggable {
   import JsonDSL._
 
   def noticeAsJValue(notice: LiftNotice): JValue =
@@ -66,13 +64,47 @@ trait LiftNoticeConverter {
     ("priority" -> notice.priority) ~
     ("id" -> notice.id)
 
-  def noticeAsJsCmd(notice: LiftNotice): JsCmd = Call("$(document).trigger", Str("lift.notices.add"), notice.asJValue)
-  def noticesAsJsCmd(notices: Seq[LiftNotice]): JsCmd = Call("$(document).trigger", Str("lift.notices.add"), JArray(notices.map(_.asJValue).toList))
+  def CallIdNoticeCmd(id: String, json: JValue, event: String = "add"): JsCmd =
+    Call("$(document).trigger", Str("noticeid-%s.set".format(id)), json)
+
+  def CallNoticesCmd(json: JValue): JsCmd =
+    Call("$(document).trigger", Str("notices.add"), json)
+
+  def noticeAsJsCmd(notice: LiftNotice): JsCmd = notice.id.map { noticeId =>
+    CallIdNoticeCmd(noticeId, notice.asJValue)
+  } getOrElse {
+    CallNoticesCmd(notice.asJValue)
+  }
+
+  def noticesAsJsCmd(notices: Seq[LiftNotice]): JsCmd = {
+    val noIds = notices.filter(_.id.isEmpty)
+    val withIds = notices
+      .filterNot(_.id.isEmpty)
+      .groupBy[String]{ it => it.id.get }
+
+    val noIdsCall: JsCmd =
+      CallNoticesCmd(JArray(noIds.map(_.asJValue).toList))
+
+    val withIdCalls: Iterable[JsCmd] = for {
+      (noticeId, notices) <- withIds
+    } yield CallIdNoticeCmd(noticeId, JArray(notices.map(_.asJValue).toList))
+
+    withIdCalls.foldLeft(noIdsCall)(_ & _)
+  }
 
   /**
     * Use this to set LiftRules.noticesToJsCmd
     */
-  def noticesToJsCmd: JsCmd = Call("$(document).trigger", Str("lift.notices.set"), LiftNotice.allNoticesAsJValue)
+  def noticesToJsCmd: JsCmd = {
+    val notices = LiftNotice.allNotices
+    val callNotices =
+      if (notices.length > 0) noticesAsJsCmd(notices)
+      else Noop
+
+    Call("$(document).trigger", Str("notices.clear")) &
+    Call("$(document).trigger", Str("noticeid.clearall")) &
+    callNotices
+  }
 }
 
 object DefaultLiftNoticeConverter extends LiftNoticeConverter

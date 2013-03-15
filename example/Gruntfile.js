@@ -54,6 +54,7 @@ module.exports = function(grunt) {
           "<%= dirs.src %>/javascript/libs/knockout-2.2.1.js",
           "<%= dirs.src %>/javascript/libs/underscore-1.4.4.min.js",
           "<%= dirs.src %>/javascript/libs/liftAjax.js",
+          "<%= dirs.src %>/javascript/jquery.bsIdNotices.js",
           "<%= dirs.src %>/javascript/BsNotices.js",
           "<%= dirs.src %>/javascript/App.js",
           "<%= dirs.src %>/javascript/utils/**/*.js",

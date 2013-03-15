@@ -17,7 +17,7 @@ object KoNotices extends KoNotices {
 
   def noticeAsJsCmd(notice: LiftNotice): JsCmd = Call("KoNotices.addNotices", notice.asJValue)
 
-  def noticesToJsCmd: JsCmd = Call("KoNotices.setNotices", LiftNotice.allNoticesAsJValue)
+  def noticesToJsCmd: JsCmd = Noop //Call("KoNotices.setNotices", LiftNotice.allNoticesAsJValue)
 
   def init(): Unit = {
     LiftRules.noticesToJsCmd = noticesToJsCmd _
