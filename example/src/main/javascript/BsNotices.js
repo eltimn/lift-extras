@@ -1,5 +1,4 @@
-// http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-In-Depth
-/*jshint unused:false */
+/* jshint unused:false */
 var BsNotices = (function($, _) {
   "use strict";
 

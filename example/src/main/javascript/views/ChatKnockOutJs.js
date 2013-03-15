@@ -8,8 +8,11 @@ App.views.ChatKnockOutJs = (function(ko) {
   // the instance to return
   var inst = {};
 
-  inst.init = function(_saveFunc) {
+  inst.init = function(_saveFunc, msgs) {
     saveFunc = _saveFunc;
+    ko.utils.arrayForEach([].concat(msgs), function(it) {
+      inst.messages.push(it);
+    });
   };
 
   inst.newMessage = ko.observable("");

@@ -25,7 +25,7 @@ App.views.knockout.KnockoutExampleMod = (function($, ko) {
 
   inst.showWarning = function() {
     // sends a notice to the client
-    $(document).trigger("lift.notices.add", {message: "This is a warning!", priority: "warning"});
+    $(document).trigger("notices.add", {message: "This is a warning!", priority: "warning"});
   };
 
   return inst;

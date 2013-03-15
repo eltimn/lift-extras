@@ -58,28 +58,32 @@ class ChatKnockOutJs extends CometActor with CometListener with SnippetExtras wi
   }
 
   /**
-    * The function to call when submitting the form.
-    */
-  def saveForm(json: JValue): JsCmd = {
-    for {
-      msg <- tryo((json \ "message").extract[String])
-    } yield {
-      ChatServer ! msg
-      Call("%s.newMessage".format(moduleName), Str("")): JsCmd
-    }
-  }
-
-  /**
-    * Initialize the knockout view model, passing it an anonymous function that calls saveForm
-    */
-  val onload: JsCmd = KoInitBind(JsExtras.JsonCallbackAnonFunc(saveForm _))
-
-  S.appendJs(onload)
-
-  /**
     * Provide the doRender function for KoComet
     */
-  def doRender(in: NodeSeq): NodeSeq = NodeSeq.Empty
+  def doRender(in: NodeSeq): NodeSeq = {
+    /**
+      * The function to call when submitting the form.
+      */
+    def saveForm(json: JValue): JsCmd = {
+      for {
+        msg <- tryo((json \ "message").extract[String])
+      } yield {
+        ChatServer ! msg
+        Call("%s.newMessage".format(moduleName), Str("")): JsCmd
+      }
+    }
+
+    /**
+      * Initialize the knockout view model, passing it an anonymous function that
+      * calls saveForm and the current messages.
+      */
+    val onload: JsCmd = KoInitBind(
+      JsExtras.JsonCallbackAnonFunc(saveForm),
+      JArray(msgs.map(m => ("message" -> m): JValue).toList)
+    )
+
+    <tail>{Script(OnLoad(onload))}</tail>
+  }
 
   /*override def render =
     (for {

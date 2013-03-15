@@ -1,14 +1,18 @@
 Required
 ========
 
-* get noticeId from one attr
-
-* write separate id notices as jQuery plugin
-
-* Create a base class for using with BsNotices and JqNotifierNotices
-  * Rename BsNotices to JqBsNotices ???
-
 * JqNotifierNotices
+
+* standalone id notice demo
+
+* rewrite BsNotices.js as a jQuery plugin
+  * ??
+
+* jquery.bsIdNotices.js - display success notices text if it has length
+
+* Rename BsNotices to JqBsNotices ???
+
+* Publish jquery.bsIdNotices.js as a stand alone library.
 
 * Tests
 
@@ -17,7 +21,6 @@ Required
 
 * move BsNotices.js to library
   * create a package.json and publish to bower
-  * remove KoNotices
 
 Next
 ====

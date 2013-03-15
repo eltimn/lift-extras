@@ -40,11 +40,13 @@ class Boot {
 
     // Init Extras
     LiftExtras.init()
-    LiftRules.autoIncludeAjaxCalc.default.set(() => (session: LiftSession) => false);
-    BsNotices.errorTitle.default.set(Full("Error!"))
-    BsNotices.warningTitle.default.set(Full("Warning!"))
-    BsNotices.noticeTitle.default.set(Full("Info!"))
-    BsNotices.successTitle.default.set(Full("Success!"))
+    LiftExtras.errorTitle.default.set(Full("Error!"))
+    LiftExtras.warningTitle.default.set(Full("Warning!"))
+    LiftExtras.noticeTitle.default.set(Full("Info!"))
+    LiftExtras.successTitle.default.set(Full("Success!"))
     Gravatar.defaultImage.default.set("wavatar")
+
+    // don't include the liftAjax.js code. It's served statically.
+    LiftRules.autoIncludeAjaxCalc.default.set(() => (session: LiftSession) => false);
   }
 }
