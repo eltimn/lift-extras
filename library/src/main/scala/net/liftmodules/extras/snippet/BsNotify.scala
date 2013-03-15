@@ -1,7 +1,7 @@
 package net.liftmodules.extras
 package snippet
 
-import scala.xml._
+import scala.xml.{NodeSeq, Null, Text}
 
 import net.liftweb._
 import common._
@@ -12,22 +12,21 @@ import http.js.JE._
 import json._
 import json.JsonDSL._
 
-object BsNotices extends BsNotices
+trait BsNotify extends JsModSnippet {
+  override lazy val moduleName = "BsNotify"
 
-trait BsNotices extends JsModSnippet with LiftNoticeSnippet {
-  override lazy val moduleName = "BsNotices"
-  val elementId = "bs-notices"
+  override def doRender(in: NodeSeq): NodeSeq = {
+    val initData: JValue =
+      ("closable" -> true) ~
+      ("transition" -> "fade") ~
+      ("fadeOut" -> ("enabled" -> true) ~ ("delay" -> 5000))
 
-  /**
-    * Render notices
-    */
-  def doRender(html: NodeSeq): NodeSeq = {
     val onLoad: JsCmd =
       JsModInit(initData) &
       LiftExtras.noticeConverter.vend.noticesToJsCmd
 
     S.appendJs(onLoad)
 
-    <div id={elementId}></div>
+    in
   }
 }

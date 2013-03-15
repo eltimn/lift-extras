@@ -5,22 +5,21 @@ Required
 
 * standalone id notice demo
 
-* rewrite BsNotices.js as a jQuery plugin
-  * ??
+* BsNotices
+  * remove dep on underscore. use $.filter and .each
+  * rewrite as a jQuery plugin ???
+  * Rename to JqBsNotices ???
 
-* jquery.bsIdNotices.js - display success notices text if it has length
-
-* Rename BsNotices to JqBsNotices ???
-
-* Publish jquery.bsIdNotices.js as a stand alone library.
+* jquery.bsIdNotices.js
+  * review bootstrap plugin docs
+  * display success notices text if it has length
+  * publish as a stand alone library.
+  * create a package.json and publish to bower
 
 * Tests
 
 * snippets
   * Menus.item - improve or remove for now
-
-* move BsNotices.js to library
-  * create a package.json and publish to bower
 
 Next
 ====

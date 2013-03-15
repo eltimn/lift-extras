@@ -9,9 +9,8 @@ import http._
 import http.js._
 import http.js.JsCmds._
 import http.js.JE._
-import json._
-import json.JsonDSL._
-import util.{CssSel, Helpers}
+
+object KoNotices extends KoNotices
 
 trait KoNotices extends KoModSnippet with LiftNoticeSnippet {
   override lazy val moduleName = "KoNotices"

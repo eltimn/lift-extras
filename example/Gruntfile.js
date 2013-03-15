@@ -50,11 +50,13 @@ module.exports = function(grunt) {
         src: [
           "<%= dirs.src %>/javascript/libs/jquery-1.8.3.min.js",
           "<%= dirs.src %>/javascript/libs/bootstrap-2.2.1.min.js",
+          "<%= dirs.src %>/javascript/libs/bootstrap-notify.js",
           "<%= dirs.src %>/javascript/libs/knockout-2.2.1.js",
           "<%= dirs.src %>/javascript/libs/underscore-1.4.4.min.js",
           "<%= dirs.src %>/javascript/libs/liftAjax.js",
           "<%= dirs.src %>/javascript/jquery.bsIdNotices.js",
           "<%= dirs.src %>/javascript/BsNotices.js",
+          "<%= dirs.src %>/javascript/BsNotify.js",
           "<%= dirs.src %>/javascript/KoNotices.js",
           "<%= dirs.src %>/javascript/App.js",
           "<%= dirs.src %>/javascript/utils/**/*.js",
