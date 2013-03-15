@@ -1,12 +1,9 @@
 Required
 ========
 
-* JqNotifierNotices
-
 * standalone id notice demo
 
 * BsNotices
-  * remove dep on underscore. use $.filter and .each
   * rewrite as a jQuery plugin ???
   * Rename to JqBsNotices ???
 

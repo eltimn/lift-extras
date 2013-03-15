@@ -1,5 +1,5 @@
 /* jshint unused:false */
-var BsNotices = (function($, _) {
+var BsNotices = (function($) {
   "use strict";
 
   // private vars
@@ -10,16 +10,16 @@ var BsNotices = (function($, _) {
 
   function splitNotices(notices) {
     return {
-      errs: _.filter(notices, function(it) {
+      errs: $.grep(notices, function(it) {
         return it.priority === "error";
       }),
-      warns: _.filter(notices, function(it) {
+      warns: $.grep(notices, function(it) {
         return it.priority === "warning";
       }),
-      infos: _.filter(notices, function(it) {
+      infos: $.grep(notices, function(it) {
         return (it.priority === "notice" || it.priority === "info");
       }),
-      succs: _.filter(notices, function(it) {
+      succs: $.grep(notices, function(it) {
         return it.priority === "success";
       })
     };
@@ -33,7 +33,7 @@ var BsNotices = (function($, _) {
   }
 
   function attachLIs($ul, msgs) {
-    _.each(msgs, function(it) {
+    $.each(msgs, function(ix, it) {
       $ul.append($("<li/>").html(it.message));
     });
   }
@@ -121,4 +121,4 @@ var BsNotices = (function($, _) {
   };
 
   return inst;
-}(jQuery, _));
+}(jQuery));
