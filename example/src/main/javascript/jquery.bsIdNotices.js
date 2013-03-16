@@ -50,24 +50,18 @@
         clearControlGroup($controlGroup);
         $this.html("");
 
-        var nonSuccessMsgs = function() {
-          return _.filter(msgs, function(it) {
-            return it.priority !== "success";
-          });
-        };
+        var $ul = $("<ul/>");
 
-        if (priority !== "success" || nonSuccessMsgs().length > 0) {
-          var $ul = $("<ul/>");
-
-          _.each(msgs, function(it) {
+        $.each(msgs, function(ix, it) {
+          if (it.message.length > 0) {
             var $li = $("<li/>", {
               'class': bsPriority(it.priority)
             }).html(it.message);
             $ul.append($li);
-          });
+          }
+        });
 
-          $this.append($ul);
-        }
+        $this.append($ul);
 
         $controlGroup.addClass(bsPriority(priority));
       }
@@ -83,7 +77,7 @@
   }
 
   function highestPriority(msgs) {
-    var errCnt = _.filter(msgs, function(it) {
+    var errCnt = $.grep(msgs, function(it) {
       return it.priority === "error";
     }).length;
 
@@ -91,7 +85,7 @@
       return "error";
     }
 
-    var warnCnt = _.filter(msgs, function(it) {
+    var warnCnt = $.grep(msgs, function(it) {
       return it.priority === "warning";
     }).length;
 
@@ -99,7 +93,7 @@
       return "warning";
     }
 
-    var successCnt = _.filter(msgs, function(it) {
+    var successCnt = $.grep(msgs, function(it) {
       return it.priority === "success";
     }).length;
 
