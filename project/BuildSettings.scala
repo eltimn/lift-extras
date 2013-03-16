@@ -81,12 +81,12 @@ object BuildSettings {
       // grunt tasks
       genPkg <<= genPkgTask,
       gruntInit <<= gruntInitTask dependsOn genPkg,
-      gruntCompile <<= gruntCompileTask,
-      gruntCompress <<= gruntCompressTask,
+      gruntCompile <<= gruntCompileTask dependsOn genPkg,
+      gruntCompress <<= gruntCompressTask dependsOn genPkg,
 
       // dependencies
       // compile <<= (compile in Compile) dependsOn (genPkg, gruntCompile),
-      (start in container.Configuration) <<= (start in container.Configuration) dependsOn (genPkg, gruntCompile),
+      // (start in container.Configuration) <<= (start in container.Configuration) dependsOn (genPkg, gruntCompile),
       Keys.`package` <<= (Keys.`package` in Compile) dependsOn gruntCompress,
 
       // add managed resources, where grunt publishes to, to the webapp

@@ -24,6 +24,6 @@ trait BsNotices {
 
     val titlesJson: String = compact(JsonAST.render(LiftExtras.titlesAsJValue))
 
-    <div data-notices="alerts" data-titles={titlesJson}></div>
+    <div data-notices="alerts" data-titles={titlesJson} data-ids="alerts, alerts2"></div>
   }
 }

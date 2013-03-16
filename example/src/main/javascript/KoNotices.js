@@ -4,7 +4,8 @@ var KoNotices = (function($, ko) {
 
   // private vars
   var settings = {
-    titles: {}
+    titles: {},
+    ids: []
   };
 
   // private funcs
@@ -68,6 +69,13 @@ var KoNotices = (function($, ko) {
 
     $(document).on("clear-notices", function(event) {
       inst.clearNotices();
+    });
+
+    $.each(settings.ids, function(ix, noticeId) {
+      $(document).on("set-notice-id-"+noticeId, function() {
+        var msgs = Array.prototype.slice.call(arguments, 1);
+        inst.addNotices(msgs);
+      });
     });
   };
 

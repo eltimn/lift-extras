@@ -10,7 +10,8 @@ var BsNotify = (function($) {
     fadeOut: {
       enabled: true,
       delay: 5000
-    }
+    },
+    ids: []
   };
 
   function bsPriority(it) {
@@ -35,6 +36,15 @@ var BsNotify = (function($) {
 
     $(document).on("clear-notices", function(event) {
       $(settings.selector).html("");
+    });
+
+    $.each(settings.ids, function(ix, noticeId) {
+      $(document).on("set-notice-id-"+noticeId, function() {
+        var notices = Array.prototype.slice.call(arguments, 1);
+        $.each(notices, function(index, value) {
+          inst.notify(value);
+        });
+      });
     });
   };
 

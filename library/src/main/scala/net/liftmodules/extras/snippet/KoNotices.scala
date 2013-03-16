@@ -24,8 +24,13 @@ trait KoNotices extends KoModSnippet {
 
   override def doRender(in: NodeSeq): NodeSeq = {
 
+    val idsToListenFor: List[String] = S.attr("ids")
+      .map(_.split(",").map(_.trim).toList)
+      .openOr(Nil)
+
     def initData: JValue =
-      ("titles" -> LiftExtras.titlesAsJValue)
+      ("titles" -> LiftExtras.titlesAsJValue) ~
+      ("ids" -> idsToListenFor)
 
     val onLoad: JsCmd =
       KoInitBind(initData) &

@@ -1,8 +1,6 @@
 Required
 ========
 
-* ShowAll options will subscribe to id messages
-
 lift-tmpl.g8
 ============
 

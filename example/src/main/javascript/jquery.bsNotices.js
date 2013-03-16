@@ -20,6 +20,17 @@
     $(document).on("clear-notices", function() {
       self.clearNotices();
     });
+
+    $.each(this.options.ids.split(","), function(ix, noticeId) {
+      var id = noticeId.trim();
+      if (id.length > 0) {
+        var evtId = "set-notice-id-"+id;
+        $(document).on(evtId, function() {
+          var msgs = Array.prototype.slice.call(arguments, 1);
+          self.addNotices(msgs);
+        });
+      }
+    });
   };
 
   BsNotices.prototype = {
@@ -138,7 +149,8 @@
   $.fn.bsNotices.Constructor = BsNotices;
 
   $.fn.bsNotices.defaults = {
-    titles: {}
+    titles: {},
+    ids: ''
   };
 
   /* BsNotices no conflict

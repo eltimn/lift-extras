@@ -21,10 +21,15 @@ trait BsNotify extends JsModSnippet {
   override lazy val moduleName = "BsNotify"
 
   override def doRender(in: NodeSeq): NodeSeq = {
+    val idsToListenFor: List[String] = S.attr("ids")
+      .map(_.split(",").map(_.trim).toList)
+      .openOr(Nil)
+
     val initData: JValue =
       ("closable" -> true) ~
       ("transition" -> "fade") ~
-      ("fadeOut" -> ("enabled" -> true) ~ ("delay" -> 5000))
+      ("fadeOut" -> ("enabled" -> true) ~ ("delay" -> 5000)) ~
+      ("ids" -> idsToListenFor)
 
     val onLoad: JsCmd =
       JsModInit(initData) &
