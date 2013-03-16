@@ -10,6 +10,7 @@ import http.js._
 import http.js.JsCmds._
 import http.js.JE._
 import json._
+import util.Helpers.toBoolean
 
 object KoNotices extends KoNotices
 
@@ -21,11 +22,11 @@ trait KoNotices extends KoModSnippet {
 
   override lazy val moduleName = "KoNotices"
 
-  def initData: JValue =
-    ("elementId" -> elementId) ~
-    ("titles" -> LiftExtras.titlesAsJValue)
-
   override def doRender(in: NodeSeq): NodeSeq = {
+
+    def initData: JValue =
+      ("titles" -> LiftExtras.titlesAsJValue)
+
     val onLoad: JsCmd =
       KoInitBind(initData) &
       LiftExtras.noticeConverter.vend.noticesToJsCmd

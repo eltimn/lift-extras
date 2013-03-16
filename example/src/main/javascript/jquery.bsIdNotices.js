@@ -12,7 +12,7 @@
     this.element = element;
     this.options = $.extend({}, $.fn.bsIdNotices.defaults, options);
 
-    $(document).on("noticeid-"+this.options.noticeid+".set", function() {
+    $(document).on("set-notice-id-"+this.options.noticeid, function() {
       /**
         * Event data is passed in as multiple params, we
         * want them all as an array starting at the second one.
@@ -22,11 +22,7 @@
       self.renderNotices(msgs);
     });
 
-    $(document).on("noticeid-"+this.options.noticeid+".clear", function() {
-      self.clear();
-    });
-
-    $(document).on("noticeid.clearall", function() {
+    $(document).on("clear-notice-id."+this.options.noticeid, function() {
       self.clear();
     });
   };
@@ -53,7 +49,7 @@
         var $ul = $("<ul/>");
 
         $.each(msgs, function(ix, it) {
-          if (it.message.length > 0) {
+          if (it.message && it.message.length > 0) {
             var $li = $("<li/>", {
               'class': bsPriority(it.priority)
             }).html(it.message);

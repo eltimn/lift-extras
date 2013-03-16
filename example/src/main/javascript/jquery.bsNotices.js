@@ -12,12 +12,12 @@
     this.element = element;
     this.options = $.extend({}, $.fn.bsNotices.defaults, options);
 
-    $(document).on("notices.add", function() {
+    $(document).on("add-notices", function() {
       var notices = Array.prototype.slice.call(arguments, 1);
       self.addNotices(notices);
     });
 
-    $(document).on("notices.clear", function() {
+    $(document).on("clear-notices", function() {
       self.clearNotices();
     });
   };

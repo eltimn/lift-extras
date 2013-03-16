@@ -3,16 +3,23 @@ Required
 
 * ShowAll options will subscribe to id messages
 
+lift-tmpl.g8
+============
 
-* jquery.bsIdNotices.js
-  * review bootstrap plugin docs
-  * display success notices text if it has length
-  * publish as a stand alone library.
-  * create a package.json and publish to bower
-
+* top level tmpl is bare
+* includes .g8 scaffolding tmpls
+  * database - Mapper/Mongo
+  * user model or not
+  * javascript library
+  * bootstrap or foundation ??
 
 After Updating lift-tmpl.g8
 ===========================
+
+* jquery.bsIdNotices.js & jquery.bsNotices.js
+  * review bootstrap plugin docs
+  * publish as a stand alone library.
+    * create a package.json and publish to bower
 
 * AngularJS demo
 * Flight demo

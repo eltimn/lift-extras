@@ -26,14 +26,14 @@ var BsNotify = (function($) {
   inst.init = function(data) {
     settings = $.extend({}, settings, data);
 
-    $(document).on("notices.add", function(event, data) {
+    $(document).on("add-notices", function(event, data) {
       var notices = Array.prototype.slice.call(arguments, 1);
       $.each(notices, function(index, value) {
         inst.notify(value);
       });
     });
 
-    $(document).on("notices.clear", function(event) {
+    $(document).on("clear-notices", function(event) {
       $(settings.selector).html("");
     });
   };
