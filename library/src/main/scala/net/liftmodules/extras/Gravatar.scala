@@ -11,18 +11,18 @@ import http.Factory
 import util.Helpers
 
 object Gravatar extends Factory with Loggable {
-  /*
-   * config
-   */
+  /**
+    * config
+    */
   val defaultRating = new FactoryMaker[String]("G") {}
   val defaultSize = new FactoryMaker[Int](42) {}
   val defaultImage = new FactoryMaker[String]("") {}
 
   /**
-   * @param email The email address of the recipient
-   * @param size The square size of the output gravatar
-   * @param rating The rating of the Gravater, the default is G
-   * @param default The default image to return if none exists for the given email
+    * @param email The email address of the recipient
+    * @param size The square size of the output gravatar
+    * @param rating The rating of the Gravater, the default is G
+    * @param default The default image to return if none exists for the given email
    */
   def imageUrl(
     email: String,

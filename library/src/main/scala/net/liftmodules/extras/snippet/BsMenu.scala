@@ -10,13 +10,13 @@ import sitemap.{Loc, SiteMap}
 import util._
 import util.Helpers._
 
-// <a data-lift="Menus.item?name=Register"><i class="icon-edit"></i> <span data-lift-name="link-display">Register</span></a>
-
 object BsMenu extends BsMenu
 
 trait BsMenu extends SnippetExtras {
 
-  // For use with bootstrap
+  /**
+    * Produces a menu UL from a group, for use with Bootstrap.
+    */
   def group = {
     val menus: NodeSeq =
       for {

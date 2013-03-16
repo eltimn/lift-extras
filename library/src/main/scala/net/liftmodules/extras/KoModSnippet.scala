@@ -46,11 +46,11 @@ trait KoModLike extends JsModLike {
 }
 
 /**
-  * A snippet that uses a Knockout JavaScipt module.
+  * A snippet that uses a Knockout JavaScript module.
   */
 trait KoModSnippet extends KoModLike with JsModSnippet
 
 /**
-  * A comet that uses a Knockout JavaScipt module.
+  * A comet that uses a Knockout JavaScript module.
   */
 trait KoModComet extends KoModLike with JsModComet

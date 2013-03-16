@@ -14,20 +14,16 @@ import json.JsonDSL._
 
 object BsNotices extends BsNotices
 
-trait BsNotices extends JsModSnippet with LiftNoticeSnippet {
-  override lazy val moduleName = "BsNotices"
-  val elementId = "bs-notices"
+/**
+  * A snippet for displaying notices to be used with the jquery.bsNotices.js plugin.
+  */
+trait BsNotices {
+  def render(html: NodeSeq): NodeSeq = {
+    // Needed for displaying notices when the page is loaded.
+    S.appendJs(LiftExtras.noticeConverter.vend.noticesToJsCmd)
 
-  /**
-    * Render notices
-    */
-  def doRender(html: NodeSeq): NodeSeq = {
-    val onLoad: JsCmd =
-      JsModInit(initData) &
-      LiftExtras.noticeConverter.vend.noticesToJsCmd
+    val titlesJson: String = compact(JsonAST.render(LiftExtras.titlesAsJValue))
 
-    S.appendJs(onLoad)
-
-    <div id={elementId}></div>
+    <div data-notices="alerts" data-titles={titlesJson}></div>
   }
 }

@@ -15,6 +15,7 @@ import util.Helpers._
 import net.liftmodules.extras._
 
 object KnockoutExampleCls extends SnippetExtras with KoClsSnippet with Loggable {
+  import JsonDSL._
 
   implicit val formats = DefaultFormats
 
@@ -40,13 +41,16 @@ object KnockoutExampleCls extends SnippetExtras with KoClsSnippet with Loggable 
       */
     def sendSuccess(): JsCmd = LiftNotice.success("You have success").asJsCmd
 
+    val initData: JValue =
+      ("titles" -> LiftExtras.titlesAsJValue)
+
     /**
       * Initialize the knockout view model, passing it the anonymous functions
       */
     val onload: JsCmd = KoInitBind(
       JsExtras.JsonCallbackAnonFunc(saveForm),
       JsExtras.AjaxCallbackAnonFunc(sendSuccess)
-    )
+    ) & Call("""$("#notice-alerts").bsNotices""", initData)
 
     S.appendJs(onload)
 

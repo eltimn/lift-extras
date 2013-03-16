@@ -1,8 +1,12 @@
 <div lift="surround?with=default;at=content">
   <div class="row">
     <div class="span12">
-      <p>This version uses a JavaScript "class" instead of a module.</p>
-      <div data-lift="Notices"></div>
+      <p>This version uses a JavaScript "class". Also,
+        it uses jquery.bsNotices.js to display notices, which is bound
+        directly via JavaScript from the snippet.
+      </p>
+      <hr />
+      <div id="notice-alerts"></div>
     </div>
   </div>
   <div data-lift="knockout.KnockoutExampleCls.render" id="knockout-example-cls">
@@ -52,4 +56,9 @@
       </div>
     </div>
   </div>
+  <!-- <div class="row">
+    <div class="span12">
+      <div data-notices="alerts"></div>
+    </div>
+  </div> -->
 </div>

@@ -12,6 +12,11 @@ import http.js.JE._
 import json._
 import json.JsonDSL._
 
+object BsNotify extends BsNotify
+
+/**
+  * A snippet for displaying notices to be used with the BsNotify.js module.
+  */
 trait BsNotify extends JsModSnippet {
   override lazy val moduleName = "BsNotify"
 

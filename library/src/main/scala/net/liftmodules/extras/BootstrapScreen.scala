@@ -11,9 +11,9 @@ import http.js.JE._
 import util.CssSel
 import util.Helpers._
 
-/*
- * A screen with some bootstrap settings.
- */
+/**
+  * A screen with some bootstrap settings.
+  */
 trait BootstrapScreen extends LiftScreen {
   override val cancelButton = super.cancelButton % ("class" -> "btn") % ("tabindex" -> "1")
   override val finishButton = super.finishButton % ("class" -> "btn btn-primary") % ("tabindex" -> "1")

@@ -48,11 +48,11 @@ trait KoClsLike extends JsClsLike {
 }
 
 /**
-  * A snippet that uses a Knockout JavaScipt module.
+  * A snippet that uses a Knockout JavaScript class.
   */
 trait KoClsSnippet extends KoClsLike with JsClsSnippet
 
 /**
-  * A comet that uses a Knockout JavaScipt module.
+  * A comet that uses a Knockout JavaScript class.
   */
 trait KoClsComet extends KoClsLike with JsClsComet

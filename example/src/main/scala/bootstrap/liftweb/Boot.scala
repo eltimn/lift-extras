@@ -40,6 +40,7 @@ class Boot {
 
     // Init Extras
     LiftExtras.init()
+    LiftRules.addToPackages("net.liftmodules.extras")
     LiftExtras.errorTitle.default.set(Full("Error!"))
     LiftExtras.warningTitle.default.set(Full("Warning!"))
     LiftExtras.noticeTitle.default.set(Full("Info!"))

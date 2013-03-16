@@ -2,8 +2,9 @@
   * jQuery plugin for rendering id notices in a Lift webapp.
   */
 ;(function($, window, document, undefined) {
+  "use strict";
 
-  /* BSIDNOTICES CLASS DEFINITION
+  /* BsIdNotices class definition
    * ========================== */
   var BsIdNotices = function(element, options) {
     var self = this;
@@ -120,7 +121,7 @@
     $ele.removeClass("success");
   }
 
-  /* BSIDNOTICES PLUGIN DEFINITION
+  /* BsIdNotices plugin definition
    * ===================== */
 
   var old = $.fn.bsIdNotices;
@@ -147,7 +148,7 @@
   };
 
 
-  /* BSIDNOTICES NO CONFLICT
+  /* BsIdNotices no conflict
    * =============== */
 
   $.fn.bsIdNotices.noConflict = function () {
@@ -156,7 +157,7 @@
   };
 
 
-  /* BSIDNOTICES DATA-API
+  /* BsIdNotices data-api
    * ============ */
 
   $(document).ready(function () {

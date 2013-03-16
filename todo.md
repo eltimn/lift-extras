@@ -1,17 +1,27 @@
 Required
 ========
 
-* standalone id notice demo
+* ShowAll options will subsccribe to id messages
 
 * BsNotices
   * rewrite as a jQuery plugin ???
-  * Rename to JqBsNotices ???
+  * Rename to JqBsNotices ??? not necessary if written as plugin
+
+* standalone id notice demo
+* html message
 
 * jquery.bsIdNotices.js
   * review bootstrap plugin docs
   * display success notices text if it has length
   * publish as a stand alone library.
   * create a package.json and publish to bower
+
+
+After Updating lift-tmpl.g8
+===========================
+
+* AngularJS demo
+* Flight demo
 
 * Tests
 

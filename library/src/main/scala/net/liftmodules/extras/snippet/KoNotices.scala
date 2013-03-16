@@ -9,11 +9,21 @@ import http._
 import http.js._
 import http.js.JsCmds._
 import http.js.JE._
+import json._
 
 object KoNotices extends KoNotices
 
-trait KoNotices extends KoModSnippet with LiftNoticeSnippet {
+/**
+  * A snippet for displaying notices to be used with the KoNotices.js module.
+  */
+trait KoNotices extends KoModSnippet {
+  import JsonDSL._
+
   override lazy val moduleName = "KoNotices"
+
+  def initData: JValue =
+    ("elementId" -> elementId) ~
+    ("titles" -> LiftExtras.titlesAsJValue)
 
   override def doRender(in: NodeSeq): NodeSeq = {
     val onLoad: JsCmd =

@@ -15,6 +15,8 @@ import util.CssSel
 import util.Helpers._
 
 object LiftExtras extends Factory {
+  import JsonDSL._
+
   /**
     * Config
     */
@@ -43,4 +45,10 @@ object LiftExtras extends Factory {
       case NoticeType.Error => Null
     }})
   }
+
+  def titlesAsJValue: JValue =
+    ("error" -> LiftExtras.errorTitle.vend.toOption) ~
+    ("warning" -> LiftExtras.warningTitle.vend.toOption) ~
+    ("info" -> LiftExtras.noticeTitle.vend.toOption) ~
+    ("success" -> LiftExtras.successTitle.vend.toOption)
 }
