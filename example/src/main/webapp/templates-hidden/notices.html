@@ -1,30 +1,30 @@
 <div id="ko-notices" style="display: none;" data-bind="visible: isVisible" data-lift="KoNotices">
   <div class="alert alert-error" data-bind="visible: errors().length > 0">
     <a href="javascript://" class="close" data-bind="click: clearErrors">&times;</a>
-    <strong data-bind="text: errorTitle"></strong>
+    <strong data-bind="html: errorTitle"></strong>
     <ul data-bind="foreach: errors">
-      <li data-bind="text: message"></li>
+      <li data-bind="html: message"></li>
     </ul>
   </div>
   <div class="alert alert-warning" data-bind="visible: warnings().length > 0">
     <a href="javascript://" class="close" data-bind="click: clearWarnings">&times;</a>
-    <strong data-bind="text: warningTitle"></strong>
+    <strong data-bind="html: warningTitle"></strong>
     <ul data-bind="foreach: warnings">
-      <li data-bind="text: message"></li>
+      <li data-bind="html: message"></li>
     </ul>
   </div>
   <div class="alert alert-info" data-bind="visible: infos().length > 0">
     <a href="javascript://" class="close" data-bind="click: clearInfos">&times;</a>
-    <strong data-bind="text: infoTitle"></strong>
+    <strong data-bind="html: infoTitle"></strong>
     <ul data-bind="foreach: infos">
-      <li data-bind="text: message"></li>
+      <li data-bind="html: message"></li>
     </ul>
   </div>
   <div class="alert alert-success" data-bind="visible: succs().length > 0">
     <a href="javascript://" class="close" data-bind="click: clearSuccs">&times;</a>
-    <strong data-bind="text: successTitle"></strong>
+    <strong data-bind="html: successTitle"></strong>
     <ul data-bind="foreach: succs">
-      <li data-bind="text: message"></li>
+      <li data-bind="html: message"></li>
     </ul>
   </div>
 </div>

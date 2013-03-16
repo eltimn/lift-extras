@@ -39,7 +39,7 @@ object KnockoutExampleCls extends SnippetExtras with KoClsSnippet with Loggable 
     /**
       * A test function that sends a success notice back to the client.
       */
-    def sendSuccess(): JsCmd = LiftNotice.success("You have success").asJsCmd
+    def sendSuccess(): JsCmd = LiftNotice.success(<em>You have success</em>).asJsCmd
 
     val initData: JValue =
       ("titles" -> LiftExtras.titlesAsJValue)

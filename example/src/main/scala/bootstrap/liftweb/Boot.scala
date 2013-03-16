@@ -2,6 +2,8 @@ package bootstrap.liftweb
 
 import code.config.Site
 
+import scala.xml._
+
 import net.liftweb._
 import common._
 import http._
@@ -41,10 +43,10 @@ class Boot {
     // Init Extras
     LiftExtras.init()
     LiftRules.addToPackages("net.liftmodules.extras")
-    LiftExtras.errorTitle.default.set(Full("Error!"))
-    LiftExtras.warningTitle.default.set(Full("Warning!"))
-    LiftExtras.noticeTitle.default.set(Full("Info!"))
-    LiftExtras.successTitle.default.set(Full("Success!"))
+    LiftExtras.errorTitle.default.set(Full(<em>Error!</em>))
+    LiftExtras.warningTitle.default.set(Full(Text("Warning!")))
+    LiftExtras.noticeTitle.default.set(Full(Text("Info!")))
+    LiftExtras.successTitle.default.set(Full(Text("Success!")))
     Gravatar.defaultImage.default.set("wavatar")
 
     // don't include the liftAjax.js code. It's served statically.

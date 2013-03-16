@@ -40,7 +40,9 @@ var BsNotify = (function($) {
 
   inst.notify = function(msg) {
     $(settings.selector).notify({
-      message: { text: msg.message },
+      message: {
+        html: msg.message
+      },
       type: bsPriority(msg.priority),
       closable: settings.closable,
       transition: settings.transition,

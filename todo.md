@@ -1,14 +1,8 @@
 Required
 ========
 
-* ShowAll options will subsccribe to id messages
+* ShowAll options will subscribe to id messages
 
-* BsNotices
-  * rewrite as a jQuery plugin ???
-  * Rename to JqBsNotices ??? not necessary if written as plugin
-
-* standalone id notice demo
-* html message
 
 * jquery.bsIdNotices.js
   * review bootstrap plugin docs

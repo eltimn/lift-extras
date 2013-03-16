@@ -26,10 +26,10 @@ object LiftExtras extends Factory {
   val parseJsonFunc = new FactoryMaker[(String, JValue => JsCmd) => JsCmd](JsExtras.defaultParseJsonFunc _) {}
   val jsNamespace = new FactoryMaker[Seq[String]](Seq("App", "views")) {}
 
-  val errorTitle = new FactoryMaker[Box[String]](Empty){}
-  val warningTitle = new FactoryMaker[Box[String]](Empty){}
-  val noticeTitle = new FactoryMaker[Box[String]](Empty){}
-  val successTitle = new FactoryMaker[Box[String]](Empty){}
+  val errorTitle = new FactoryMaker[Box[NodeSeq]](Empty){}
+  val warningTitle = new FactoryMaker[Box[NodeSeq]](Empty){}
+  val noticeTitle = new FactoryMaker[Box[NodeSeq]](Empty){}
+  val successTitle = new FactoryMaker[Box[NodeSeq]](Empty){}
 
   def init(): Unit = {
     LiftRules.noticesToJsCmd = noticeConverter.vend.noticesToJsCmd _
@@ -47,8 +47,8 @@ object LiftExtras extends Factory {
   }
 
   def titlesAsJValue: JValue =
-    ("error" -> LiftExtras.errorTitle.vend.toOption) ~
-    ("warning" -> LiftExtras.warningTitle.vend.toOption) ~
-    ("info" -> LiftExtras.noticeTitle.vend.toOption) ~
-    ("success" -> LiftExtras.successTitle.vend.toOption)
+    ("error" -> LiftExtras.errorTitle.vend.toOption.map(_.toString)) ~
+    ("warning" -> LiftExtras.warningTitle.vend.toOption.map(_.toString)) ~
+    ("info" -> LiftExtras.noticeTitle.vend.toOption.map(_.toString)) ~
+    ("success" -> LiftExtras.successTitle.vend.toOption.map(_.toString))
 }

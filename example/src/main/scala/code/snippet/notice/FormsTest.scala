@@ -98,7 +98,7 @@ object FormsTestAjax extends KoModSnippet with SnippetExtras {
       // Gets converted to JsCmd via implicit in SnippetExtras
       Seq(
         LiftNotice.success(succ),
-        LiftNotice.info("Another notice")
+        LiftNotice.info(<strong>Another notice</strong>)
       )
     }
 

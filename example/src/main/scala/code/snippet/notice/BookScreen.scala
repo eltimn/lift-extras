@@ -18,7 +18,7 @@ object BookScreen extends BaseScreen with Loggable {
   }
 
   def finish() {
-    S.error("test error")
+    S.error(<em>test error</em>)
     S.notice("BookSaved: "+bookVar.is.toString)
   }
 }
