@@ -76,7 +76,7 @@ class SnippetExtrasSpec extends BaseSpec with SnippetExtras {
       val boxedJsCmd: Box[JsCmd] = Empty
       val jscmd: JsCmd = boxedJsCmd
       val expected: JsCmd =
-        Call("$(document).trigger", Str("lift.notices.add"), LiftNotice.warning("Unknown empty value").asJValue)
+        Call("$(document).trigger", Str("add-notices"), LiftNotice.warning("Unknown empty value").asJValue)
 
       jscmd should equal (expected)
     }
@@ -84,7 +84,7 @@ class SnippetExtrasSpec extends BaseSpec with SnippetExtras {
       val boxedJsCmd: Box[JsCmd] = Failure("Test failure")
       val jscmd: JsCmd = boxedJsCmd
       val expected: JsCmd =
-        Call("$(document).trigger", Str("lift.notices.add"), LiftNotice.error("Test failure").asJValue)
+        Call("$(document).trigger", Str("add-notices"), LiftNotice.error("Test failure").asJValue)
 
       jscmd should equal (expected)
     }

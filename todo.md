@@ -14,6 +14,8 @@ lift-tmpl.g8
 After Updating lift-tmpl.g8
 ===========================
 
+* use requirejs by default (see if ruby is needed)
+
 * jquery.bsIdNotices.js & jquery.bsNotices.js
   * review bootstrap plugin docs
   * publish as a stand alone library.
