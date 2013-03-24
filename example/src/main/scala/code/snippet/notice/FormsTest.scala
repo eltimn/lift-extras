@@ -102,8 +102,8 @@ object FormsTestAjax extends KoModSnippet with SnippetExtras {
       )
     }
 
-    val opts: JValue = ("noticeid" -> "text_id")
-    val bindNoticeId = Call("$('#text_id_err').bsIdNotices", opts)
+    val opts: JValue = ("alertid" -> "text_id")
+    val bindNoticeId = Call("$('#text_id_err').bsFormAlerts", opts)
 
     S.appendJs(KoInitBind() & bindNoticeId)
 

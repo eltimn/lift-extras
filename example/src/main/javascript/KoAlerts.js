@@ -1,5 +1,5 @@
 /* jshint unused:false */
-var KoNotices = (function($, ko) {
+var KoAlerts = (function($, ko) {
   "use strict";
 
   // private vars
@@ -9,18 +9,18 @@ var KoNotices = (function($, ko) {
   };
 
   // private funcs
-  function splitNotices(notices) {
+  function splitAlerts(alerts) {
     return {
-      errs: ko.utils.arrayFilter(notices, function(it) {
-        return it.priority === "error";
+      errs: ko.utils.arrayFilter(alerts, function(it) {
+        return (it.priority === "error" || it.priority === "danger");
       }),
-      warns: ko.utils.arrayFilter(notices, function(it) {
+      warns: ko.utils.arrayFilter(alerts, function(it) {
         return it.priority === "warning";
       }),
-      infos: ko.utils.arrayFilter(notices, function(it) {
+      infos: ko.utils.arrayFilter(alerts, function(it) {
         return (it.priority === "notice" || it.priority === "info");
       }),
-      succs: ko.utils.arrayFilter(notices, function(it) {
+      succs: ko.utils.arrayFilter(alerts, function(it) {
         return it.priority === "success";
       })
     };
@@ -62,43 +62,43 @@ var KoNotices = (function($, ko) {
       inst.successTitle(settings.titles.success);
     }
 
-    $(document).on("add-notices", function(event, data) {
-      var notices = Array.prototype.slice.call(arguments, 1);
-      inst.addNotices(notices);
+    $(document).on("add-alerts", function(event, data) {
+      var alerts = Array.prototype.slice.call(arguments, 1);
+      inst.addAlerts(alerts);
     });
 
-    $(document).on("clear-notices", function(event) {
-      inst.clearNotices();
+    $(document).on("clear-alerts", function(event) {
+      inst.clearAlerts();
     });
 
-    $.each(settings.ids, function(ix, noticeId) {
-      $(document).on("set-notice-id-"+noticeId, function() {
+    $.each(settings.ids, function(ix, alert_id) {
+      $(document).on("set-alert-id-"+alert_id, function() {
         var msgs = Array.prototype.slice.call(arguments, 1);
-        inst.addNotices(msgs);
+        inst.addAlerts(msgs);
       });
     });
   };
 
-  inst.clearNotices = function() {
+  inst.clearAlerts = function() {
     inst.errors([]);
     inst.warnings([]);
     inst.infos([]);
     inst.succs([]);
   };
 
-  inst.addNotices = function(data) {
-    var notices = splitNotices([].concat(data));
+  inst.addAlerts = function(data) {
+    var alerts = splitAlerts([].concat(data));
 
-    ko.utils.arrayForEach(notices.errs, function(it) {
+    ko.utils.arrayForEach(alerts.errs, function(it) {
       inst.errors.push(it);
     });
-    ko.utils.arrayForEach(notices.warns, function(it) {
+    ko.utils.arrayForEach(alerts.warns, function(it) {
       inst.warnings.push(it);
     });
-    ko.utils.arrayForEach(notices.infos, function(it) {
+    ko.utils.arrayForEach(alerts.infos, function(it) {
       inst.infos.push(it);
     });
-    ko.utils.arrayForEach(notices.succs, function(it) {
+    ko.utils.arrayForEach(alerts.succs, function(it) {
       inst.succs.push(it);
     });
   };

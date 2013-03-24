@@ -16,6 +16,6 @@ App.views.knockout.KnockoutExampleCls = function(saveFunc, sendSuccess) {
 
   self.showWarning = function() {
     // sends a notice to the client
-    $(document).trigger("add-notices", {message: "<em>This is a warning!</em>", priority: "warning"});
+    $(document).trigger("add-alerts", {message: "<em>This is a warning!</em>", priority: "warning"});
   };
 };

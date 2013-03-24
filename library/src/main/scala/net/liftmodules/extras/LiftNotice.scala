@@ -65,10 +65,10 @@ trait LiftNoticeConverter extends Loggable {
     ("id" -> notice.id)
 
   def CallIdNoticeCmd(id: String, json: JValue): JsCmd =
-    Call("$(document).trigger", Str("set-notice-id-%s".format(id)), json)
+    Call("$(document).trigger", Str("set-alert-id-%s".format(id)), json)
 
   def CallNoticesCmd(json: JValue): JsCmd =
-    Call("$(document).trigger", Str("add-notices"), json)
+    Call("$(document).trigger", Str("add-alerts"), json)
 
   def noticeAsJsCmd(notice: LiftNotice): JsCmd = notice.id.map { noticeId =>
     CallIdNoticeCmd(noticeId, notice.asJValue)
@@ -101,8 +101,8 @@ trait LiftNoticeConverter extends Loggable {
       if (notices.length > 0) noticesAsJsCmd(notices)
       else Noop
 
-    Call("$(document).trigger", Str("clear-notices")) &
-    Call("$(document).trigger", Str("clear-notice-id")) &
+    Call("$(document).trigger", Str("clear-alerts")) &
+    Call("$(document).trigger", Str("clear-alert-id")) &
     callNotices
   }
 }

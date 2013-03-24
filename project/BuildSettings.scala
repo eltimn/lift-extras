@@ -31,7 +31,7 @@ object BuildSettings {
          |    "grunt-contrib-jasmine": "~0.3.3"
          |  }
          |}
-         |""".format(n, v, sv, bt).stripMargin
+         |""".format(n, v.replaceAllLiterally("-SNAPSHOT", ""), sv, bt).stripMargin
       IO.write(file, contents)
       ()
   }
@@ -55,7 +55,7 @@ object BuildSettings {
   }
 
   val basicSettings = Defaults.defaultSettings ++ Seq(
-    version := "0.1.0",
+    version := "0.1.0-SNAPSHOT",
     organization := "net.liftmodules",
     scalaVersion := "2.9.2",
     crossScalaVersions := Seq("2.9.2", "2.10.0"),

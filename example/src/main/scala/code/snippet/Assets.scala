@@ -17,7 +17,7 @@ object Assets {
     if (Props.mode == Development) ""
     else ".min"
 
-  lazy val artifactName = "%s-%s-%s%s".format(BuildInfo.name, BuildInfo.version, BuildInfo.buildTime, minified)
+  lazy val artifactName = "%s-%s-%s%s".format(BuildInfo.name, BuildInfo.version.replace("-SNAPSHOT", ""), BuildInfo.buildTime, minified)
 
   // prevents browser caching in dev
   def tail: String =

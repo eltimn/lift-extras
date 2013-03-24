@@ -18,6 +18,9 @@ var BsNotify = (function($) {
     if (it === "notice") {
       return "info";
     }
+    else if (it === "danger") {
+      return "error";
+    }
     return it;
   }
 
@@ -27,21 +30,21 @@ var BsNotify = (function($) {
   inst.init = function(data) {
     settings = $.extend({}, settings, data);
 
-    $(document).on("add-notices", function(event, data) {
-      var notices = Array.prototype.slice.call(arguments, 1);
-      $.each(notices, function(index, value) {
+    $(document).on("add-alerts", function(event, data) {
+      var alerts = Array.prototype.slice.call(arguments, 1);
+      $.each(alerts, function(index, value) {
         inst.notify(value);
       });
     });
 
-    $(document).on("clear-notices", function(event) {
+    $(document).on("clear-alerts", function(event) {
       $(settings.selector).html("");
     });
 
-    $.each(settings.ids, function(ix, noticeId) {
-      $(document).on("set-notice-id-"+noticeId, function() {
-        var notices = Array.prototype.slice.call(arguments, 1);
-        $.each(notices, function(index, value) {
+    $.each(settings.ids, function(ix, alert_id) {
+      $(document).on("set-alert-id-"+alert_id, function() {
+        var alerts = Array.prototype.slice.call(arguments, 1);
+        $.each(alerts, function(index, value) {
           inst.notify(value);
         });
       });

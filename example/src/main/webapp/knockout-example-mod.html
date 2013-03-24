@@ -2,11 +2,11 @@
   <div class="row">
     <div class="span12">
       <p>This version uses a JavaScript module. Also,
-        it uses jquery.bsNotices.js to display notices, which is bound
+        it uses jquery.bsAlerts.js to display notices, which is bound
         via a snippet.
       </p>
       <hr />
-      <div data-lift="BsNotices"></div>
+      <div data-lift="BsAlerts"></div>
     </div>
   </div>
   <div data-lift="knockout.KnockoutExampleMod.render" id="knockout-example-mod">
@@ -47,7 +47,7 @@
     <div class="row">
       <div class="span8">
         <p>
-          This demonstrates triggering the "lift.notices.add" event to send a warning directly to the client.
+          This demonstrates triggering the "add-alerts" event to send a warning directly to the client.
           No server calls are made.
         </p>
         <button data-bind="click: showWarning" class="btn">Show a warning</button>

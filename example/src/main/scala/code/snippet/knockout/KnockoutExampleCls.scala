@@ -50,7 +50,7 @@ object KnockoutExampleCls extends SnippetExtras with KoClsSnippet with Loggable 
     val onload: JsCmd = KoInitBind(
       JsExtras.JsonCallbackAnonFunc(saveForm),
       JsExtras.AjaxCallbackAnonFunc(sendSuccess)
-    ) & Call("""$("#notice-alerts").bsNotices""", initData)
+    ) & Call("""$("#notice-alerts").bsAlerts""", initData)
 
     S.appendJs(onload)
 

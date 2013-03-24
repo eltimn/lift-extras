@@ -12,18 +12,18 @@ import http.js.JE._
 import json._
 import json.JsonDSL._
 
-object BsNotices extends BsNotices
+object BsAlerts extends BsAlerts
 
 /**
   * A snippet for displaying notices to be used with the jquery.bsNotices.js plugin.
   */
-trait BsNotices {
+trait BsAlerts {
   def render(html: NodeSeq): NodeSeq = {
     // Needed for displaying notices when the page is loaded.
     S.appendJs(LiftExtras.noticeConverter.vend.noticesToJsCmd)
+    val ids = S.attr("ids").openOr("")
+    val titles: String = compact(JsonAST.render(LiftExtras.titlesAsJValue))
 
-    val titlesJson: String = compact(JsonAST.render(LiftExtras.titlesAsJValue))
-
-    <div data-notices="alerts" data-titles={titlesJson} data-ids="alerts, alerts2"></div>
+    <div data-alerts="alerts" data-titles={titles} data-ids={ids}></div>
   }
 }

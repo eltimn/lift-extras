@@ -37,24 +37,6 @@ html, body {
   }
 }
 
-/**
-  * For coloring id notices
-  */
-.notice-block {
-  .warning {
-    color: @warningText;
-  }
-  .error {
-    color: @errorText;
-  }
-  .success {
-    color: @successText;
-  }
-  .info {
-    color: @infoText;
-  }
-}
-
 // Warning
 .control-group.warning {
   .customFormFieldState(@warningText);
@@ -72,19 +54,23 @@ html, body {
   .customFormFieldState(@infoText);
 }
 
-// for LiftScreen errors
-/*.id-notice-error {
-  color: @errorText;
+/**
+  * For coloring form alerts
+  */
+.alert-block {
+  .warning {
+    color: @warningText;
+  }
+  .error {
+    color: @errorText;
+  }
+  .success {
+    color: @successText;
+  }
+  .info {
+    color: @infoText;
+  }
 }
-.id-notice-warning {
-  color: @warningText;
-}
-.id-notice-success {
-  color: @successText;
-}
-.id-notice-info {
-  color: @infoText;
-}*/
 
 #user img {
   display: inline-block;

@@ -1,33 +1,34 @@
-Required
-========
+* update example to use bsFormAlerts.js & bsAlerts.js
+* rename BsNotices to BsAlerts
+* refactor JsModSnippet into a class that has methods
 
-lift-tmpl.g8
-============
+Launch
+=======
 
-* top level tmpl is bare
-* includes .g8 scaffolding tmpls
-  * database - Mapper/Mongo
-  * user model or not
-  * javascript library
-  * bootstrap or foundation ??
+* publish jquery plugins as separate repos
+  * publish to bower
+  * publish to jquery plugin repo
 
-After Updating lift-tmpl.g8
-===========================
-
-* use requirejs by default (see if ruby is needed)
+* write readme for lift-extras
+* write blog posts
+* push lift-tmpl.g8
 
 * jquery.bsIdNotices.js & jquery.bsNotices.js
   * review bootstrap plugin docs
   * publish as a stand alone library.
     * create a package.json and publish to bower
 
+* Tests
+
+
+Open
+====
+
+* use requirejs by default (see if ruby is needed)
+
 * AngularJS demo
 * Flight demo
 
-* Tests
-
-* snippets
-  * Menus.item - improve or remove for now
 
 Next
 ====

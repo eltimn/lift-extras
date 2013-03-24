@@ -3,11 +3,11 @@
   <div class="row">
     <div class="span12">
       <p>
-        This page uses KoNotices to display the group notices and jquery.bsIdNotices.js to
+        This page uses KoAlerts to display the group notices and jquery.bsFormAlerts.js to
         display the notices with ids.
       </p>
       <hr />
-      <div data-lift="embed?what=/templates-hidden/notices"></div>
+      <div data-lift="embed?what=/templates-hidden/alerts"></div>
 
       <ul class="nav nav-tabs">
         <li class="active"><a href="#standard" data-toggle="tab">Standard Form</a></li>
@@ -25,7 +25,7 @@
                   <input name="error" class="xlarge" /> &times;
                   <input name="error_count" class="small" />
                   <span class="help-inline">Inline style help</span>
-                  <span data-noticeid="err" class="notice-block"></span>
+                  <span data-alertid="err" class="alert-block"></span>
                   <span class="help-block">Block style help</span>
                 </div>
               </div>
@@ -61,7 +61,7 @@
                     <input name="error" class="xlarge" id="ajaxerr" /> &times;
                     <input name="error_count" class="small" />
                     <span class="help-inline">Inline style help</span>
-                    <span data-noticeid="ajaxerr" class="notice-block"></span>
+                    <span data-alertid="ajaxerr" class="alert-block"></span>
                     <span class="help-block">Block style help</span>
                   </div>
                 </div>
@@ -70,7 +70,7 @@
                   <div class="controls">
                     <input name="warning" class="xlarge" /> &times;
                     <input name="warning_count" class="small" />
-                    <span data-noticeid="ajaxwarn" class="notice-block"></span>
+                    <span data-alertid="ajaxwarn" class="alert-block"></span>
                     <span class="help-block">Block style help</span>
                   </div>
                 </div>
@@ -79,7 +79,7 @@
                   <div class="controls">
                     <input name="info" class="xlarge" /> &times;
                     <input name="info_count" class="small" />
-                    <span data-noticeid="ajaxinfo" class="notice-block"></span>
+                    <span data-alertid="ajaxinfo" class="alert-block"></span>
                   </div>
                 </div>
                 <div class="control-group">
@@ -87,7 +87,7 @@
                   <div class="controls">
                     <input name="title" class="xlarge" />
                     <span class="help-inline">This is created by calling toForm on a Record Field.</span>
-                    <span data-noticeid="title_id" class="notice-block"></span>
+                    <span data-alertid="title_id" class="alert-block"></span>
                   </div>
                 </div>
                 <div class="control-group">
@@ -95,7 +95,7 @@
                   <div class="controls">
                     <input name="text" class="xlarge" />
                     <span class="help-inline">This one has the help div initialized via JavaScript.</span>
-                    <span id="text_id_err" class="notice-block"></span>
+                    <span id="text_id_err" class="alert-block"></span>
                   </div>
                 </div>
               </fieldset>

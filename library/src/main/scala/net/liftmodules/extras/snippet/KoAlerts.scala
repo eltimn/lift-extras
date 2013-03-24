@@ -12,15 +12,15 @@ import http.js.JE._
 import json._
 import util.Helpers.toBoolean
 
-object KoNotices extends KoNotices
+object KoAlerts extends KoAlerts
 
 /**
-  * A snippet for displaying notices to be used with the KoNotices.js module.
+  * A snippet for displaying notices to be used with the KoAlerts.js module.
   */
-trait KoNotices extends KoModSnippet {
+trait KoAlerts extends KoModSnippet {
   import JsonDSL._
 
-  override lazy val moduleName = "KoNotices"
+  override lazy val moduleName = "KoAlerts"
 
   override def doRender(in: NodeSeq): NodeSeq = {
 
