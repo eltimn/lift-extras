@@ -17,12 +17,12 @@ object KoAlerts extends KoAlerts
 /**
   * A snippet for displaying notices to be used with the KoAlerts.js module.
   */
-trait KoAlerts extends KoModSnippet {
+trait KoAlerts {
   import JsonDSL._
 
-  override lazy val moduleName = "KoAlerts"
+  lazy val koModule = KoModule("KoAlerts", "ko-alerts")
 
-  override def doRender(in: NodeSeq): NodeSeq = {
+  def render(in: NodeSeq): NodeSeq = {
 
     val idsToListenFor: List[String] = S.attr("ids")
       .map(_.split(",").map(_.trim).toList)
@@ -33,7 +33,7 @@ trait KoAlerts extends KoModSnippet {
       ("ids" -> idsToListenFor)
 
     val onLoad: JsCmd =
-      KoInitBind(initData) &
+      koModule.init(initData) &
       LiftExtras.noticeConverter.vend.noticesToJsCmd
 
     S.appendJs(onLoad)

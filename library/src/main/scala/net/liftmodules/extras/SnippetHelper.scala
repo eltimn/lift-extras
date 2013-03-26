@@ -12,9 +12,9 @@ import json._
 import util.CssSel
 import util.Helpers._
 
-object SnippetExtras extends SnippetExtras
+object SnippetHelper extends SnippetHelper
 
-trait SnippetExtras {
+trait SnippetHelper {
 
   def emptyMsg = LiftExtras.defaultEmptyMsg.vend
 

@@ -1,28 +1,40 @@
-* update example to use bsFormAlerts.js & bsAlerts.js
-* rename BsNotices to BsAlerts
-* refactor JsModSnippet into a class that has methods
+Required
+========
 
-Launch
-=======
-
-* publish jquery plugins as separate repos
-  * publish to bower
-  * publish to jquery plugin repo
+* move KoAlerts and BsNotify into library.
 
 * write readme for lift-extras
+  * link to blog post about SnippetExtras
+  * download links for JavaScript and html for KoAlerts and BsNotify
+
 * write blog posts
+  * Writing JavaScript apps with Lift
+    * Intro
+      * best practices
+        * limit number of scripts loaded
+        * limit inline javascript
+        * combine into one file (js and css)
+        * cache in production with a far future expires (only every download once)
+        * requires renaming your file every time you deploy. query string is not enough.
+    * Organization
+      * a single global object
+      * namespaced classes and modules
+      * one snippet one js class
+      *
+      * module vs class
+    * Callback functions
+    * Grunt
+
+
 * push lift-tmpl.g8
 
 * jquery.bsIdNotices.js & jquery.bsNotices.js
-  * review bootstrap plugin docs
-  * publish as a stand alone library.
-    * create a package.json and publish to bower
-
-* Tests
-
+  * publish to bower
 
 Open
 ====
+
+* Tests
 
 * use requirejs by default (see if ruby is needed)
 

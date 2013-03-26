@@ -14,7 +14,7 @@ import json.JsonDSL._
 import util._
 import Helpers._
 
-import net.liftmodules.extras.{JsExtras, KoModComet, SnippetExtras}
+import net.liftmodules.extras.{JsExtras, KoModule, SnippetHelper}
 
 
 /**
@@ -22,16 +22,15 @@ import net.liftmodules.extras.{JsExtras, KoModComet, SnippetExtras}
  * by this component.  When the component changes on the server
  * the changes are automatically reflected in the browser.
  */
-class ChatKnockOutJs extends CometActor with CometListener with SnippetExtras with KoModComet {
-  // val elementId = "chat-messages"
-  // val moduleName = "ChatMessages"
+class ChatKnockOutJs extends CometActor with CometListener with SnippetHelper {
+  val koModule = KoModule("App.views.ChatKnockOutJs", "chat-messages")
 
   case class NewMessageKo(message: String) extends JsCmd {
     implicit val formats = DefaultFormats.lossless
     val json: JValue = ("message" -> message)
     override val toJsCmd =
       // JE.Call("$(document).trigger", JE.Str("new-ko-chat"), json).toJsCmd
-      JE.Call("%s.addMessage".format(moduleName), json).toJsCmd
+      koModule.call("addMessage", json).toJsCmd
   }
 
   implicit def formats = DefaultFormats
@@ -60,7 +59,7 @@ class ChatKnockOutJs extends CometActor with CometListener with SnippetExtras wi
   /**
     * Provide the doRender function for KoComet
     */
-  def doRender(in: NodeSeq): NodeSeq = {
+  def render = {
     /**
       * The function to call when submitting the form.
       */
@@ -69,7 +68,7 @@ class ChatKnockOutJs extends CometActor with CometListener with SnippetExtras wi
         msg <- tryo((json \ "message").extract[String])
       } yield {
         ChatServer ! msg
-        Call("%s.newMessage".format(moduleName), Str("")): JsCmd
+        koModule.call("newMessage", Str("")): JsCmd
       }
     }
 
@@ -77,12 +76,12 @@ class ChatKnockOutJs extends CometActor with CometListener with SnippetExtras wi
       * Initialize the knockout view model, passing it an anonymous function that
       * calls saveForm and the current messages.
       */
-    val onload: JsCmd = KoInitBind(
+    val onload: JsCmd = koModule.init(
       JsExtras.JsonCallbackAnonFunc(saveForm),
       JArray(msgs.map(m => ("message" -> m): JValue).toList)
     )
 
-    <tail>{Script(OnLoad(onload))}</tail>
+    new RenderOut(<tail>{Script(OnLoad(onload))}</tail>)
   }
 
   /*override def render =

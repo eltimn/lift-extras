@@ -14,14 +14,14 @@ import util.Helpers._
 
 import net.liftmodules.extras._
 
-object KnockoutExampleCls extends SnippetExtras with KoClsSnippet with Loggable {
+object KnockoutExampleCls extends SnippetHelper with Loggable {
   import JsonDSL._
 
   implicit val formats = DefaultFormats
 
-  def jsVarName = "window.koExample"
+  val koClass = KoClass("App.views.knockout.KnockoutExampleCls", "window.koExample", "knockout-example-cls")
 
-  def doRender(in: NodeSeq): NodeSeq = {
+  def render(in: NodeSeq): NodeSeq = {
     /**
       * The function to call when submitting the form.
       */
@@ -32,7 +32,7 @@ object KnockoutExampleCls extends SnippetExtras with KoClsSnippet with Loggable 
         val logMsg = "textInput from client: "+msg
         logger.info(logMsg)
         S.notice(logMsg)
-        CallJsVar("textInput", Str("")): JsCmd
+        koClass.call("textInput", Str("")): JsCmd
       }
     }
 
@@ -47,7 +47,7 @@ object KnockoutExampleCls extends SnippetExtras with KoClsSnippet with Loggable 
     /**
       * Initialize the knockout view model, passing it the anonymous functions
       */
-    val onload: JsCmd = KoInitBind(
+    val onload: JsCmd = koClass.init(
       JsExtras.JsonCallbackAnonFunc(saveForm),
       JsExtras.AjaxCallbackAnonFunc(sendSuccess)
     ) & Call("""$("#notice-alerts").bsAlerts""", initData)

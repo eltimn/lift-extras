@@ -14,11 +14,13 @@ import util.Helpers._
 
 import net.liftmodules.extras._
 
-object KnockoutExampleMod extends SnippetExtras with KoModSnippet with Loggable {
+object KnockoutExampleMod extends SnippetHelper with Loggable {
 
   implicit val formats = DefaultFormats
 
-  def doRender(in: NodeSeq): NodeSeq = {
+  val koModule = KoModule("App.views.knockout.KnockoutExampleMod", "knockout-example-mod")
+
+  def render(in: NodeSeq): NodeSeq = {
     /**
       * The function to call when submitting the form.
       */
@@ -29,7 +31,7 @@ object KnockoutExampleMod extends SnippetExtras with KoModSnippet with Loggable 
         val logMsg = "textInput from client: "+msg
         logger.info(logMsg)
         S.notice(logMsg)
-        CallJsMod("textInput", Str("")): JsCmd
+        koModule.call("textInput", Str("")): JsCmd
       }
     }
 
@@ -41,7 +43,7 @@ object KnockoutExampleMod extends SnippetExtras with KoModSnippet with Loggable 
     /**
       * Initialize the knockout view model, passing it the anonymous functions
       */
-    val onload: JsCmd = KoInitBind(
+    val onload: JsCmd = koModule.init(
       JsExtras.JsonCallbackAnonFunc(saveForm),
       JsExtras.AjaxCallbackAnonFunc(sendSuccess)
     )

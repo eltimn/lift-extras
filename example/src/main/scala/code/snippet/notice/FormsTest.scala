@@ -51,11 +51,13 @@ object FormsTest extends StatefulSnippet {
   }
 }
 
-object FormsTestAjax extends KoModSnippet with SnippetExtras {
+object FormsTestAjax extends SnippetHelper {
 
   import JsonDSL._
 
-  def doRender(in: NodeSeq): NodeSeq = {
+  val koModule = KoModule("App.views.notice.FormsTestAjax", "forms-test-ajax")
+
+  def render(in: NodeSeq): NodeSeq = {
     val book = Book.createRecord.title("test title")
 
     var error = "This is an error"
@@ -95,7 +97,7 @@ object FormsTestAjax extends KoModSnippet with SnippetExtras {
       LiftNotice.success(succ+" (ajaxwarn)", "ajaxwarn").asJsCmd &
       LiftNotice.error(error+" (ajaxerr)", "ajaxerr").asJsCmd*/
 
-      // Gets converted to JsCmd via implicit in SnippetExtras
+      // Gets converted to JsCmd via implicit in SnippetHelper
       Seq(
         LiftNotice.success(succ),
         LiftNotice.info(<em>Another notice</em>)
@@ -105,7 +107,7 @@ object FormsTestAjax extends KoModSnippet with SnippetExtras {
     val opts: JValue = ("alertid" -> "text_id")
     val bindNoticeId = Call("$('#text_id_err').bsFormAlerts", opts)
 
-    S.appendJs(KoInitBind() & bindNoticeId)
+    S.appendJs(koModule.init() & bindNoticeId)
 
     "name=error" #> SHtml.text(error, error = _) &
     "name=error_count" #> SHtml.selectElem[Int](0 to 10, Full(eCount))(eCount = _) &

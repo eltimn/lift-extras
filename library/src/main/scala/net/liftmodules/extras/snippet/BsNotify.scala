@@ -17,10 +17,10 @@ object BsNotify extends BsNotify
 /**
   * A snippet for displaying notices to be used with the BsNotify.js module.
   */
-trait BsNotify extends JsModSnippet {
-  override lazy val moduleName = "BsNotify"
+trait BsNotify {
+  lazy val jsMod = JsModule("BsNotify")
 
-  override def doRender(in: NodeSeq): NodeSeq = {
+  def render(in: NodeSeq): NodeSeq = {
     val idsToListenFor: List[String] = S.attr("ids")
       .map(_.split(",").map(_.trim).toList)
       .openOr(Nil)
@@ -32,7 +32,7 @@ trait BsNotify extends JsModSnippet {
       ("ids" -> idsToListenFor)
 
     val onLoad: JsCmd =
-      JsModInit(initData) &
+      jsMod.init(initData) &
       LiftExtras.noticeConverter.vend.noticesToJsCmd
 
     S.appendJs(onLoad)

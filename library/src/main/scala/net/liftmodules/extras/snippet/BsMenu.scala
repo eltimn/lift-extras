@@ -12,7 +12,7 @@ import util.Helpers._
 
 object BsMenu extends BsMenu
 
-trait BsMenu extends SnippetExtras {
+trait BsMenu extends SnippetHelper {
 
   /**
     * Produces a menu UL from a group, for use with Bootstrap.

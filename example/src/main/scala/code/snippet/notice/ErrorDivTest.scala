@@ -10,9 +10,9 @@ import net.liftweb.common._
 import net.liftweb.util._
 import Helpers._
 
-import net.liftmodules.extras.SnippetExtras
+import net.liftmodules.extras.SnippetHelper
 
-object ErrorDivTest extends SnippetExtras {
+object ErrorDivTest extends SnippetHelper {
   def render =
     (for {
       x <- Failure("test failure", Empty, Empty)
