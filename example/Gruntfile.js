@@ -1,16 +1,24 @@
 module.exports = function(grunt) {
   "use strict";
 
+  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-contrib-jasmine');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-clean');
+
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     dirs: {
       src: "src/main",
-      dest: "target/scala-<%= pkg.scalaVersion %>/resource_managed/main/assets"
+      target: "target/scala-<%= pkg.scalaVersion %>/resource_managed/main/assets"
     },
     meta: {
       artifactName: "<%= pkg.name %>-<%= pkg.version %>-<%= pkg.buildTime %>",
-      concated: "<%= dirs.dest %>/<%= meta.artifactName %>.js"
+      concated: "<%= dirs.target %>/<%= meta.artifactName %>.js"
     },
     jasmine: {
       src : '<%= meta.concated %>',
@@ -19,19 +27,32 @@ module.exports = function(grunt) {
       }
     },
     jshint: {
-      options: {
-        jshintrc: '.jshintrc'
+      gruntfile: {
+        options: {
+          jshintrc: '.jshintrc'
+        },
+        src: 'Gruntfile.js'
       },
-      main: [
-        "<%= dirs.src %>/javascript/*.js",
-        "<%= dirs.src %>/javascript/views/**/*.js"
-      ],
-      test: []
+      main: {
+        options: {
+          jshintrc: '<%= dirs.src %>/javascript/.jshintrc'
+        },
+        src: [
+          "<%= dirs.src %>/javascript/*.js",
+          "<%= dirs.src %>/javascript/views/**/*.js"
+        ]
+      },
+      test: {
+        options: {
+          jshintrc: '<%= dirs.test %>/javascript/.jshintrc'
+        },
+        src: ['<%= dirs.test %>/javascript/**/*.js']
+      }
     },
     less: {
       compile: {
         files: {
-          "<%= dirs.dest %>/<%= meta.artifactName %>.css": "<%= dirs.src %>/less/styles.less"
+          "<%= dirs.target %>/<%= meta.artifactName %>.css": "<%= dirs.src %>/less/styles.less"
         }
       },
       compress: {
@@ -39,7 +60,7 @@ module.exports = function(grunt) {
           yuicompress: true
         },
         files: {
-          "<%= dirs.dest %>/<%= meta.artifactName %>.min.css": "<%= dirs.src %>/less/styles.less"
+          "<%= dirs.target %>/<%= meta.artifactName %>.min.css": "<%= dirs.src %>/less/styles.less"
         }
       }
     },
@@ -72,40 +93,36 @@ module.exports = function(grunt) {
       },
       build: {
         src: "<%= meta.concated %>",
-        dest: "<%= dirs.dest %>/<%= meta.artifactName %>.min.js"
+        dest: "<%= dirs.target %>/<%= meta.artifactName %>.min.js"
       }
     },
     watch: {
       main: {
-        files: '<%= jshint.main %>',
-        tasks: ['jshint', 'concat']
+        files: '<%= jshint.main.src %>',
+        tasks: ['clean', 'jshint', 'concat']
       },
       test: {
-        files: 'src/test/javascript/**/*.js',
+        files: '<%= jshint.test.src %>',
         tasks: ['test']
       },
       less: {
         files: ["<%= dirs.src %>/less/**/*.less"],
-        tasks: "less:compile"
+        tasks: ['clean', "less:compile"]
+      },
+      pkg: {
+        files: 'package.json',
+        tasks: ['compile']
       }
     },
     clean: {
-      build: ["<%= dirs.dest %>"]
+      build: ["<%= dirs.target %>"]
     }
   });
 
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-less');
-  grunt.loadNpmTasks('grunt-contrib-jasmine');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-clean');
-
   // Tasks
-  grunt.registerTask('compile', ['clean:build', 'jshint', 'concat', 'less:compile']);
-  grunt.registerTask('test', ['clean:build', 'jshint', 'concat', 'jasmine']);
-  grunt.registerTask('compress', ['clean:build', 'jshint', 'concat', 'uglify', 'less:compile', 'less:compress']);
+  grunt.registerTask('compile', ['clean', 'jshint', 'concat', 'less:compile']);
+  grunt.registerTask('test', ['clean', 'jshint', 'concat', 'jasmine']);
+  grunt.registerTask('compress', ['clean', 'jshint', 'concat', 'uglify', 'less:compile', 'less:compress']);
 
   // Default task
   grunt.registerTask('default', ['compile']);

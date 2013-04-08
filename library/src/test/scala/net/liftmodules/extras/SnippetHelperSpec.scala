@@ -10,7 +10,7 @@ import JE._
 import json._
 import JsonDSL._
 
-class SnippetExtrasSpec extends BaseSpec with SnippetExtras {
+class SnippetHelperSpec extends BaseSpec with SnippetHelper {
   "SnippetExtras" should {
     "create default notice html" in {
       val html = noticeHtml(Text("This is a test"))
@@ -76,7 +76,7 @@ class SnippetExtrasSpec extends BaseSpec with SnippetExtras {
       val boxedJsCmd: Box[JsCmd] = Empty
       val jscmd: JsCmd = boxedJsCmd
       val expected: JsCmd =
-        Call("$(document).trigger", Str("add-notices"), LiftNotice.warning("Unknown empty value").asJValue)
+        Call("$(document).trigger", Str("add-alerts"), LiftNotice.warning("Unknown empty value").asJValue)
 
       jscmd should equal (expected)
     }
@@ -84,7 +84,7 @@ class SnippetExtrasSpec extends BaseSpec with SnippetExtras {
       val boxedJsCmd: Box[JsCmd] = Failure("Test failure")
       val jscmd: JsCmd = boxedJsCmd
       val expected: JsCmd =
-        Call("$(document).trigger", Str("add-notices"), LiftNotice.error("Test failure").asJValue)
+        Call("$(document).trigger", Str("add-alerts"), LiftNotice.error("Test failure").asJValue)
 
       jscmd should equal (expected)
     }

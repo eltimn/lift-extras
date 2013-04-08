@@ -4,7 +4,7 @@ Required
 * move KoAlerts and BsNotify into library.
 
 * write readme for lift-extras
-  * link to blog post about SnippetExtras
+  * link to blog post about SnippetHelper
   * download links for JavaScript and html for KoAlerts and BsNotify
 
 * write blog posts

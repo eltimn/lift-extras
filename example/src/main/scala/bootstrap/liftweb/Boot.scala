@@ -11,7 +11,6 @@ import util._
 import Helpers._
 
 import net.liftmodules.extras.{Gravatar, LiftExtras}
-import net.liftmodules.extras.snippet.BsNotices
 
 /**
  * A class that's instantiated early and run.  It allows the application

@@ -61,7 +61,7 @@ Creates an anonymous JavaScript function that calls a server side function, then
 
 Creates an anonymous JavaScript function that takes JSON as a parameter and calls a server side function, then runs the server-side functions return JsCmd on the client.
 
-## SnippetExtras
+## SnippetHelper
 
 A trait with a series of implicit functions that convert a Box(ed) value (NodeSeq, JsCmd, CssSel) to it's inner value if Full and will display an error otherwise. Uses LiftNotice.
 
