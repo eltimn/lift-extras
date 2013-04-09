@@ -8,7 +8,7 @@ App.views.knockout.KnockoutExampleMod = (function($, ko) {
   // the instance to return
   var inst = {};
 
-  inst.init = function(_saveFunc, _sendSuccess) {
+  inst.init = function(_sendSuccess, _saveFunc) {
     saveFunc = _saveFunc;
     inst.sendSuccess = _sendSuccess;
   };

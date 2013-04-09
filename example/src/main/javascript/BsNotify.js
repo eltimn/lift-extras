@@ -1,4 +1,9 @@
-/* jshint unused:false */
+/*! BsNotify version: 0.1.0
+*  2013-04-10
+*  Author: Tim Nelson
+*  Website: https://github.com/eltimn/lift-extras
+*  MIT License http://www.opensource.org/licenses/mit-license.php
+*/
 var BsNotify = (function($) {
   "use strict";
 

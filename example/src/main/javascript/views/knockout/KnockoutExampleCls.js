@@ -1,5 +1,5 @@
 App.namespace("views.knockout");
-App.views.knockout.KnockoutExampleCls = function(saveFunc, sendSuccess) {
+App.views.knockout.KnockoutExampleCls = function(sendSuccess, saveFunc) {
   "use strict";
 
   var self = this;

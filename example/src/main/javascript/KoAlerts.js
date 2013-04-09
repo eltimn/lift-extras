@@ -1,4 +1,9 @@
-/* jshint unused:false */
+/*! KoAlerts version: 0.1.0
+*  2013-04-10
+*  Author: Tim Nelson
+*  Website: https://github.com/eltimn/lift-extras
+*  MIT License http://www.opensource.org/licenses/mit-license.php
+*/
 var KoAlerts = (function($, ko) {
   "use strict";
 

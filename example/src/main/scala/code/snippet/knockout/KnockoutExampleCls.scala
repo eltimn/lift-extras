@@ -23,6 +23,11 @@ object KnockoutExampleCls extends SnippetHelper with Loggable {
 
   def render(in: NodeSeq): NodeSeq = {
     /**
+      * A test function that sends a success notice back to the client.
+      */
+    def sendSuccess(): JsCmd = LiftNotice.success(<em>You have success</em>).asJsCmd
+
+    /**
       * The function to call when submitting the form.
       */
     def saveForm(json: JValue): JsCmd = {
@@ -36,11 +41,6 @@ object KnockoutExampleCls extends SnippetHelper with Loggable {
       }
     }
 
-    /**
-      * A test function that sends a success notice back to the client.
-      */
-    def sendSuccess(): JsCmd = LiftNotice.success(<em>You have success</em>).asJsCmd
-
     val initData: JValue =
       ("titles" -> LiftExtras.titlesAsJValue)
 
@@ -48,8 +48,8 @@ object KnockoutExampleCls extends SnippetHelper with Loggable {
       * Initialize the knockout view model, passing it the anonymous functions
       */
     val onload: JsCmd = koClass.init(
-      JsExtras.JsonCallbackAnonFunc(saveForm),
-      JsExtras.AjaxCallbackAnonFunc(sendSuccess)
+      JsExtras.AjaxCallbackAnonFunc(sendSuccess),
+      JsExtras.JsonCallbackAnonFunc(saveForm)
     ) & Call("""$("#notice-alerts").bsAlerts""", initData)
 
     S.appendJs(onload)

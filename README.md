@@ -28,22 +28,23 @@ A jQuery plugin for displaying Bootstrap form alerts via jQuery events.
 
 ### KoAlerts
 
-A snippet that uses a Knockout.js `View Model` to display notices. Does not rely on Bootstrap. Allows for any html that complies with the `View Model`. See KoAlerts.scala and alerts.html for details.
+A snippet that uses a Knockout.js `View Model` to display notices. Does not rely on Bootstrap. Allows for any html that complies with the `View Model`. See [KoAlerts.scala](https://github.com/eltimn/lift-extras/blob/master/library/src/main/scala/net/liftmodules/extras/snippet/KoAlerts.scala) and [alerts.html](https://github.com/eltimn/lift-extras/blob/master/example/src/main/webapp/templates-hidden/alerts.html) for details.
+
+[Download JavaScript](https://raw.github.com/eltimn/lift-extras/master/example/src/main/javascript/KoAlerts.js)
 
 ### BsNotify
 
-This is a JavaScript module that is a wrapper around [bootstrap-notify](http://nijikokun.github.com/bootstrap-notify/ "bootstrap-notify") that provides an interface to the events mentioned above.
+This is a JavaScript module that is a wrapper around [bootstrap-notify](http://nijikokun.github.com/bootstrap-notify/ "bootstrap-notify") that provides an interface to the events mentioned above. Requires added a div tag to your pages. See [base-wrap.html](https://github.com/eltimn/lift-extras/blob/master/example/src/main/webapp/templates-hidden/base-wrap.html#L41) for an example.
 
-## Snippets
+[Download JavaScript](https://raw.github.com/eltimn/lift-extras/master/example/src/main/javascript/BsNotify.js)
 
-### BsMenu
+## BsMenu
 
 A snippet for rendering a Bootstrap menu using Groups.
 
-
 ## BootstrapScreen
 
-A base LiftScreen trait that works with Bootstrap.
+A base LiftScreen trait that works with Bootstrap. Requires accompanying wizard-all.html file.
 
 ## Gravatar
 
@@ -51,7 +52,7 @@ An object for displaying Gravatar images.
 
 ## JsExtras
 
-A few classes for passing callback functions to client-side JavaScript.
+A few classes for passing callback functions to client-side JavaScript. See [JavaScript Apps With Lift: Callback Functions](http://www.eltimn.com/blog/005-javascript-apps-with-lift-callback-jsextras) for more information.
 
 ### AjaxCallbackAnonFunc
 
@@ -72,6 +73,8 @@ It allows you to write your snippet functions using a for comprehension to gathe
     } yield ({
     ...
     }): NodeSeq
+
+See [Dealing with Boxed values in Lift snippets](http://www.eltimn.com/blog/001-dealing-with-boxed-values-in-snippets) for more details.
 
 # License
 

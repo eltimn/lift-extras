@@ -14,6 +14,7 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     dirs: {
       src: "src/main",
+      test: "src/test",
       target: "target/scala-<%= pkg.scalaVersion %>/resource_managed/main/assets"
     },
     meta: {
@@ -23,7 +24,7 @@ module.exports = function(grunt) {
     jasmine: {
       src : '<%= meta.concated %>',
       options : {
-        specs : 'src/test/javascript/**/*.js'
+        specs : '<%= dirs.test %>/javascript/**/*.js'
       }
     },
     jshint: {

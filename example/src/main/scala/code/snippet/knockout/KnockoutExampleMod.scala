@@ -21,6 +21,12 @@ object KnockoutExampleMod extends SnippetHelper with Loggable {
   val koModule = KoModule("App.views.knockout.KnockoutExampleMod", "knockout-example-mod")
 
   def render(in: NodeSeq): NodeSeq = {
+
+    /**
+      * A test function that sends a success notice back to the client.
+      */
+    def sendSuccess(): JsCmd = LiftNotice.success("You have success").asJsCmd
+
     /**
       * The function to call when submitting the form.
       */
@@ -36,16 +42,11 @@ object KnockoutExampleMod extends SnippetHelper with Loggable {
     }
 
     /**
-      * A test function that sends a success notice back to the client.
-      */
-    def sendSuccess(): JsCmd = LiftNotice.success("You have success").asJsCmd
-
-    /**
       * Initialize the knockout view model, passing it the anonymous functions
       */
     val onload: JsCmd = koModule.init(
-      JsExtras.JsonCallbackAnonFunc(saveForm),
-      JsExtras.AjaxCallbackAnonFunc(sendSuccess)
+      JsExtras.AjaxCallbackAnonFunc(sendSuccess),
+      JsExtras.JsonCallbackAnonFunc(saveForm)
     )
 
     S.appendJs(onload)

@@ -18,6 +18,10 @@ object BuildSettings {
   def genPkgTask = (baseDirectory in Compile, name, version, scalaVersion, buildTime) map {
     (dir, n, v, sv, bt) =>
       val file = dir / "package.json"
+      val scalaEdition =
+        if (sv.startsWith("2.10")) "2.10"
+        else sv
+
       val contents =
       """|{
          |  "name": "%s",
@@ -34,7 +38,7 @@ object BuildSettings {
          |    "grunt-contrib-jasmine": "~0.3.3"
          |  }
          |}
-         |""".format(n, v.replaceAllLiterally("-SNAPSHOT", ""), sv, bt).stripMargin
+         |""".format(n, v.replaceAllLiterally("-SNAPSHOT", ""), scalaEdition, bt).stripMargin
       IO.write(file, contents)
       ()
   }

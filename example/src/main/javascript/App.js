@@ -12,7 +12,7 @@
 
     /**
       * A convenience function for parsing string namespaces and
-      * automatically generating nested namespaces.
+      * automatically generating nested namespace objects.
       *
       * Example:
       * App.namespace('modules.module2');
