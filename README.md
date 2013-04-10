@@ -2,6 +2,14 @@
 
 Some utils for developing Lift webapps.
 
+# Installation
+
+This module is available from the Sonatype repo. It uses the Lift "edition" in the name. For example, of you use any of 2.5-SNAPSHOT, 2.5-RC4, or 2.5 the Lift edition is 2.5.
+
+SBT:
+
+    "net.liftmodules" %% "extras_2.5" % "0.1" % "compile"
+
 # Documentation
 
 ## LiftNotice
