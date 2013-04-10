@@ -4,6 +4,7 @@ import sbt.Keys._
 import com.github.siasia.WebPlugin.{container, webSettings}
 import com.github.siasia.PluginKeys._
 import sbtbuildinfo.Plugin._
+import cloudbees.Plugin._
 
 object BuildSettings {
 
@@ -68,7 +69,7 @@ object BuildSettings {
     liftVersion <<= liftVersion ?? "2.5-RC4",
     liftEdition <<= liftVersion apply { _.substring(0,3) },
     name <<= (name, liftEdition) { (n, e) =>  n + "_" + e },
-    scalaVersion := "2.10.0",
+    scalaVersion := "2.9.2",
     crossScalaVersions := Seq("2.9.2", "2.9.1-1", "2.9.1", "2.10.0"),
     scalacOptions <<= scalaVersion map { sv: String =>
       if (sv.startsWith("2.10."))
@@ -121,9 +122,11 @@ object BuildSettings {
     webSettings ++
     buildInfoSettings ++
     noPublishing ++
+    cloudBeesSettings ++
     seq(
       name := "extras-example",
       buildTime := System.currentTimeMillis.toString,
+      CloudBees.applicationId := Some("lift-extras-example"),
 
       // build-info
       buildInfoKeys ++= Seq[BuildInfoKey](buildTime),
