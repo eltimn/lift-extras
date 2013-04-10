@@ -15,7 +15,7 @@ object LiftModuleBuild extends Build {
     .settings(publishSettings:_*)
     .settings(libraryDependencies <++= (liftVersion) { liftVersion =>
       Seq(
-        "net.liftweb" %% "lift-webkit" % liftVersion % "compile",
+        "net.liftweb" %% "lift-webkit" % liftVersion % "provided",
         "org.scalatest" %% "scalatest" % "1.9.1" % "test"
       )
     })

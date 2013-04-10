@@ -65,7 +65,7 @@ object BuildSettings {
     name := "extras",
     organization := "net.liftmodules",
     version := "0.1",
-    liftVersion <<= liftVersion ?? "2.5-RC2",
+    liftVersion <<= liftVersion ?? "2.5-RC4",
     liftEdition <<= liftVersion apply { _.substring(0,3) },
     name <<= (name, liftEdition) { (n, e) =>  n + "_" + e },
     scalaVersion := "2.10.0",
@@ -94,7 +94,7 @@ object BuildSettings {
     publishArtifact in Test := false,
     pomIncludeRepository := { _ => false },
     pomExtra := (
-      <url>https://github.com/eltimn/lift-mongoauth</url>
+      <url>https://github.com/eltimn/lift-extras</url>
       <licenses>
         <license>
             <name>Apache 2.0 License</name>
@@ -103,8 +103,8 @@ object BuildSettings {
           </license>
        </licenses>
        <scm>
-          <url>git@github.com:eltimn/lift-mongoauth.git</url>
-          <connection>scm:git:git@github.com:eltimn/lift-mongoauth.git</connection>
+          <url>git@github.com:eltimn/lift-extras.git</url>
+          <connection>scm:git:git@github.com:eltimn/lift-extras.git</connection>
        </scm>
        <developers>
           <developer>
