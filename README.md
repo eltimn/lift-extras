@@ -60,7 +60,7 @@ An object for displaying Gravatar images.
 
 ## JsExtras
 
-A few classes for passing callback functions to client-side JavaScript. See [JavaScript Apps With Lift: Callback Functions](http://www.eltimn.com/blog/005-javascript-apps-with-lift-callback-jsextras) for more information.
+A few classes for passing callback functions to client-side JavaScript. See [JavaScript Apps With Lift: Callback Functions](http://www.eltimn.com/blog/004-javascript-apps-with-lift-callback-functions) for more information.
 
 ### AjaxCallbackAnonFunc
 
