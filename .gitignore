@@ -6,4 +6,4 @@ target/
 
 console.devmode.log
 node_modules/
-example/package.json
+grunt-build/

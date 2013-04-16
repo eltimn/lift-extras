@@ -12,38 +12,6 @@ object BuildSettings {
 
   val liftEdition = SettingKey[String]("liftEdition", "Lift Edition (short version number to append to artifact name)")
 
-  val buildTime = SettingKey[String]("build-time")
-
-  // generate a package.json file for grunt
-  val genPkg = TaskKey[Unit]("gen-pkg", "Generate a package.json file")
-  def genPkgTask = (baseDirectory in Compile, name, version, scalaVersion, buildTime) map {
-    (dir, n, v, sv, bt) =>
-      val file = dir / "package.json"
-      val scalaEdition =
-        if (sv.startsWith("2.10")) "2.10"
-        else sv
-
-      val contents =
-      """|{
-         |  "name": "%s",
-         |  "version": "%s",
-         |  "scalaVersion": "%s",
-         |  "buildTime": "%s",
-         |  "devDependencies": {
-         |    "grunt": "~0.4.1",
-         |    "grunt-contrib-uglify": "~0.1.2",
-         |    "grunt-contrib-concat": "~0.1.3",
-         |    "grunt-contrib-jshint": "~0.2.0",
-         |    "grunt-contrib-less": "~0.5.0",
-         |    "grunt-contrib-watch": "~0.3.1",
-         |    "grunt-contrib-jasmine": "~0.3.3"
-         |  }
-         |}
-         |""".format(n, v.replaceAllLiterally("-SNAPSHOT", ""), scalaEdition, bt).stripMargin
-      IO.write(file, contents)
-      ()
-  }
-
   // call grunt init - requires npm be installed
   val gruntInit = TaskKey[Int]("grunt-init", "Initialize project for grunt")
   def gruntInitTask = (baseDirectory in Compile) map { dir =>
@@ -125,27 +93,26 @@ object BuildSettings {
     cloudBeesSettings ++
     seq(
       name := "extras-example",
-      buildTime := System.currentTimeMillis.toString,
       CloudBees.applicationId := Some("lift-extras-example"),
 
       // build-info
-      buildInfoKeys ++= Seq[BuildInfoKey](buildTime),
       buildInfoPackage := "code",
       sourceGenerators in Compile <+= buildInfo,
 
       // grunt tasks
-      genPkg <<= genPkgTask,
-      gruntInit <<= gruntInitTask dependsOn genPkg,
-      gruntCompile <<= gruntCompileTask dependsOn genPkg,
-      gruntCompress <<= gruntCompressTask dependsOn genPkg,
+      gruntInit <<= gruntInitTask,
+      gruntCompile <<= gruntCompileTask,
+      gruntCompress <<= gruntCompressTask,
 
       // dependencies
-      // compile <<= (compile in Compile) dependsOn (genPkg, gruntCompile),
-      // (start in container.Configuration) <<= (start in container.Configuration) dependsOn (genPkg, gruntCompile),
+      compile <<= (compile in Compile) dependsOn gruntCompile,
+      // (start in container.Configuration) <<= (start in container.Configuration) dependsOn gruntCompile,
       Keys.`package` <<= (Keys.`package` in Compile) dependsOn gruntCompress,
 
-      // add managed resources, where grunt publishes to, to the webapp
-      (webappResources in Compile) <+= (resourceManaged in Compile)
+      // add directory where grunt publishes to, to the webapp
+      (webappResources in Compile) <+= (baseDirectory) { _ / "grunt-build" / "out" },
+      // add assets.json to classpath
+      (unmanagedResourceDirectories in Compile) <+= (baseDirectory) { _ / "grunt-build" / "hash" }
     )
 
   lazy val noPublishing = seq(

@@ -8,18 +8,21 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-hash');
 
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     dirs: {
-      src: "src/main",
+      main: "src/main",
       test: "src/test",
-      target: "target/scala-<%= pkg.scalaVersion %>/resource_managed/main/assets"
+      build: "grunt-build",
+      target: "<%= dirs.build %>/out",
+      temp: "<%= dirs.build %>/temp"
     },
     meta: {
-      artifactName: "<%= pkg.name %>-<%= pkg.version %>-<%= pkg.buildTime %>",
-      concated: "<%= dirs.target %>/<%= meta.artifactName %>.js"
+      artifact: "<%= pkg.name %>-<%= pkg.version %>",
+      concated: "<%= dirs.target %>/assets/<%= meta.artifact %>.js"
     },
     jasmine: {
       src : '<%= meta.concated %>',
@@ -36,11 +39,12 @@ module.exports = function(grunt) {
       },
       main: {
         options: {
-          jshintrc: '<%= dirs.src %>/javascript/.jshintrc'
+          jshintrc: '<%= dirs.main %>/javascript/.jshintrc'
         },
         src: [
-          "<%= dirs.src %>/javascript/*.js",
-          "<%= dirs.src %>/javascript/views/**/*.js"
+          "<%= dirs.main %>/javascript/*.js",
+          "<%= dirs.main %>/javascript/utils/**/*.js",
+          "<%= dirs.main %>/javascript/views/**/*.js"
         ]
       },
       test: {
@@ -53,7 +57,7 @@ module.exports = function(grunt) {
     less: {
       compile: {
         files: {
-          "<%= dirs.target %>/<%= meta.artifactName %>.css": "<%= dirs.src %>/less/styles.less"
+          "<%= dirs.target %>/assets/<%= meta.artifact %>.css": "<%= dirs.main %>/less/styles.less"
         }
       },
       compress: {
@@ -61,7 +65,7 @@ module.exports = function(grunt) {
           yuicompress: true
         },
         files: {
-          "<%= dirs.target %>/<%= meta.artifactName %>.min.css": "<%= dirs.src %>/less/styles.less"
+          "<%= dirs.temp %>/<%= meta.artifact %>.min.css": "<%= dirs.main %>/less/styles.less"
         }
       }
     },
@@ -71,19 +75,19 @@ module.exports = function(grunt) {
       },
       scripts: {
         src: [
-          "<%= dirs.src %>/javascript/libs/jquery-1.8.3.min.js",
-          "<%= dirs.src %>/javascript/libs/bootstrap-2.2.1.min.js",
-          "<%= dirs.src %>/javascript/libs/bootstrap-notify.js",
-          "<%= dirs.src %>/javascript/libs/knockout-2.2.1.js",
-          "<%= dirs.src %>/javascript/libs/underscore-1.4.4.min.js",
-          "<%= dirs.src %>/javascript/libs/liftAjax.js",
-          "<%= dirs.src %>/javascript/libs/jquery.bsAlerts.min.js",
-          "<%= dirs.src %>/javascript/libs/jquery.bsFormAlerts.min.js",
-          "<%= dirs.src %>/javascript/BsNotify.js",
-          "<%= dirs.src %>/javascript/KoAlerts.js",
-          "<%= dirs.src %>/javascript/App.js",
-          "<%= dirs.src %>/javascript/utils/**/*.js",
-          "<%= dirs.src %>/javascript/views/**/*.js"
+          "<%= dirs.main %>/javascript/libs/jquery-1.8.3.min.js",
+          "<%= dirs.main %>/javascript/libs/bootstrap-2.2.1.min.js",
+          "<%= dirs.main %>/javascript/libs/bootstrap-notify.js",
+          "<%= dirs.main %>/javascript/libs/knockout-2.2.1.js",
+          "<%= dirs.main %>/javascript/libs/underscore-1.4.4.min.js",
+          "<%= dirs.main %>/javascript/libs/liftAjax.js",
+          "<%= dirs.main %>/javascript/libs/jquery.bsAlerts.min.js",
+          "<%= dirs.main %>/javascript/libs/jquery.bsFormAlerts.min.js",
+          "<%= dirs.main %>/javascript/BsNotify.js",
+          "<%= dirs.main %>/javascript/KoAlerts.js",
+          "<%= dirs.main %>/javascript/App.js",
+          "<%= dirs.main %>/javascript/utils/**/*.js",
+          "<%= dirs.main %>/javascript/views/**/*.js"
         ],
         dest: "<%= meta.concated %>"
       }
@@ -94,21 +98,29 @@ module.exports = function(grunt) {
       },
       build: {
         src: "<%= meta.concated %>",
-        dest: "<%= dirs.target %>/<%= meta.artifactName %>.min.js"
+        dest: "<%= dirs.temp %>/<%= meta.artifact %>.min.js"
       }
+    },
+    hash: {
+      src: [
+        "<%= dirs.temp %>/<%= meta.artifact %>.min.js",
+        "<%= dirs.temp %>/<%= meta.artifact %>.min.css"
+      ],
+      mapping: '<%= dirs.build %>/hash/assets.json',
+      dest: '<%= dirs.target %>/assets'
     },
     watch: {
       main: {
         files: '<%= jshint.main.src %>',
-        tasks: ['clean', 'jshint', 'concat']
+        tasks: ['jshint', 'concat']
       },
       test: {
         files: '<%= jshint.test.src %>',
         tasks: ['test']
       },
       less: {
-        files: ["<%= dirs.src %>/less/**/*.less"],
-        tasks: ['clean', "less:compile"]
+        files: ["<%= dirs.main %>/less/**/*.less"],
+        tasks: ["less:compile"]
       },
       pkg: {
         files: 'package.json',
@@ -116,14 +128,14 @@ module.exports = function(grunt) {
       }
     },
     clean: {
-      build: ["<%= dirs.target %>"]
+      build: ["<%= dirs.build %>"]
     }
   });
 
   // Tasks
-  grunt.registerTask('compile', ['clean', 'jshint', 'concat', 'less:compile']);
-  grunt.registerTask('test', ['clean', 'jshint', 'concat', 'jasmine']);
-  grunt.registerTask('compress', ['clean', 'jshint', 'concat', 'uglify', 'less:compile', 'less:compress']);
+  grunt.registerTask('compile', ['jshint', 'concat', 'less:compile']);
+  grunt.registerTask('test', ['jshint', 'concat', 'jasmine']);
+  grunt.registerTask('compress', ['jshint', 'concat', 'uglify', 'less:compile', 'less:compress', 'hash']);
 
   // Default task
   grunt.registerTask('default', ['compile']);

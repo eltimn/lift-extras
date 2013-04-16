@@ -24,12 +24,16 @@ object LiftExtras extends Factory {
   val noticeHtmlHandler = new FactoryMaker[HtmlHandler](BootstrapHtmlHandler) {}
   val noticeConverter = new FactoryMaker[LiftNoticeConverter](DefaultLiftNoticeConverter) {}
   val parseJsonFunc = new FactoryMaker[(String, JValue => JsCmd) => JsCmd](JsExtras.defaultParseJsonFunc _) {}
-  val jsNamespace = new FactoryMaker[Seq[String]](Seq("App", "views")) {}
 
   val errorTitle = new FactoryMaker[Box[NodeSeq]](Empty){}
   val warningTitle = new FactoryMaker[Box[NodeSeq]](Empty){}
   val noticeTitle = new FactoryMaker[Box[NodeSeq]](Empty){}
   val successTitle = new FactoryMaker[Box[NodeSeq]](Empty){}
+
+  // HashedAssets
+  val artifactName = new FactoryMaker[String]("lift-app-0.1.0") {}
+  val artifactPath = new FactoryMaker[Seq[String]](Seq("assets")) {}
+  val mappingsUri = new FactoryMaker[String]("/assets.json") {}
 
   def init(): Unit = {
     LiftRules.noticesToJsCmd = noticeConverter.vend.noticesToJsCmd _
