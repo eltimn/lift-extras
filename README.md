@@ -10,6 +10,11 @@ SBT:
 
     "net.liftmodules" %% "extras_2.5" % "0.1" % "compile"
 
+# Live Demo
+
+The example app that's part of the project is running at:
+[http://lift-extras-example.eltimn.cloudbees.net/](http://lift-extras-example.eltimn.cloudbees.net/)
+
 # Documentation
 
 ## LiftNotice
