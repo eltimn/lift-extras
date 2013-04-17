@@ -18,7 +18,10 @@ import util.Helpers._
 trait HashedAssets {
   import Props.RunModes._
 
-  private val assetsMap: Map[String, String] = {
+  /**
+    * Load the assets map produced by grunt-hash
+    */
+  protected lazy val assetsMap: Map[String, String] = {
     (tryo{ new InputStreamReader(getClass.getResourceAsStream(LiftExtras.mappingsUri.vend)) }
       .filter(_ ne null)
       .flatMap { s => tryo(JsonParser.parse(s)) }) match
@@ -28,12 +31,7 @@ trait HashedAssets {
     }
   }
 
-  // prevents browser caching in dev
-  private def tail: String =
-    if (Props.mode == Development) "?"+System.currentTimeMillis.toString
-    else ""
-
-  private def artifactPath(ext: String): String = {
+  protected def artifactPath(ext: String): String = {
     val artifact =
       if (Props.mode == Development) "%s.%s".format(LiftExtras.artifactName.vend, ext)
       else {
@@ -44,11 +42,11 @@ trait HashedAssets {
     "/%s".format((LiftExtras.artifactPath.vend :+ artifact).mkString("/"))
   }
 
-  private val jsPath: String = artifactPath("js")
-  private val cssPath: String = artifactPath("css")
+  protected lazy val cssPath: String = artifactPath("css")
+  protected lazy val jsPath: String = artifactPath("js")
 
-  def css = "* [href]" #> "%s%s".format(cssPath, tail)
-  def js = "* [src]" #> "%s%s".format(jsPath, tail)
+  def css = "* [href]" #> cssPath
+  def js = "* [src]" #> jsPath
 }
 
 object HashedAssets extends HashedAssets

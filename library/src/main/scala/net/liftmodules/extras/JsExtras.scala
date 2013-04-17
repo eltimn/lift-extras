@@ -50,5 +50,9 @@ object JsExtras extends Factory {
       AnonFunc("data", funcCmd)
     }
   }
+
+  case class IIFE(cmd: JsCmd) extends JsCmd {
+    def toJsCmd = "(function() {" + cmd.toJsCmd + "})();"
+  }
 }
 

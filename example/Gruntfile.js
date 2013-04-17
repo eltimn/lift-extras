@@ -44,6 +44,7 @@ module.exports = function(grunt) {
         src: [
           "<%= dirs.main %>/javascript/*.js",
           "<%= dirs.main %>/javascript/utils/**/*.js",
+          "<%= dirs.main %>/javascript/apps/**/*.js",
           "<%= dirs.main %>/javascript/views/**/*.js"
         ]
       },
@@ -80,6 +81,7 @@ module.exports = function(grunt) {
           "<%= dirs.main %>/javascript/libs/bootstrap-notify.js",
           "<%= dirs.main %>/javascript/libs/knockout-2.2.1.js",
           "<%= dirs.main %>/javascript/libs/underscore-1.4.4.min.js",
+          "<%= dirs.main %>/javascript/libs/angular.min.js",
           "<%= dirs.main %>/javascript/libs/liftAjax.js",
           "<%= dirs.main %>/javascript/libs/jquery.bsAlerts.min.js",
           "<%= dirs.main %>/javascript/libs/jquery.bsFormAlerts.min.js",
@@ -87,6 +89,7 @@ module.exports = function(grunt) {
           "<%= dirs.main %>/javascript/KoAlerts.js",
           "<%= dirs.main %>/javascript/App.js",
           "<%= dirs.main %>/javascript/utils/**/*.js",
+          "<%= dirs.main %>/javascript/apps/**/*.js",
           "<%= dirs.main %>/javascript/views/**/*.js"
         ],
         dest: "<%= meta.concated %>"

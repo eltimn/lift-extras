@@ -29,6 +29,12 @@ object BuildSettings {
     Process(Seq("grunt", "compress"), dir) !
   }
 
+  // call grunt test
+  val gruntTest = TaskKey[Int]("grunt-test", "Call the grunt test command")
+  def gruntTestTask = (baseDirectory in Compile) map { dir =>
+    Process(Seq("grunt", "test"), dir) !
+  }
+
   val basicSettings = Defaults.defaultSettings ++ Seq(
     name := "extras",
     organization := "net.liftmodules",
@@ -36,7 +42,7 @@ object BuildSettings {
     liftVersion <<= liftVersion ?? "2.5",
     liftEdition <<= liftVersion apply { _.substring(0,3) },
     name <<= (name, liftEdition) { (n, e) =>  n + "_" + e },
-    scalaVersion := "2.9.2",
+    scalaVersion := "2.10.0",
     crossScalaVersions := Seq("2.9.2", "2.9.1-1", "2.9.1", "2.10.0"),
     scalacOptions <<= scalaVersion map { sv: String =>
       if (sv.startsWith("2.10."))
@@ -102,11 +108,13 @@ object BuildSettings {
       gruntInit <<= gruntInitTask,
       gruntCompile <<= gruntCompileTask,
       gruntCompress <<= gruntCompressTask,
+      gruntTest <<= gruntTestTask,
 
       // dependencies
       compile <<= (compile in Compile) dependsOn gruntCompile,
       // (start in container.Configuration) <<= (start in container.Configuration) dependsOn gruntCompile,
       Keys.`package` <<= (Keys.`package` in Compile) dependsOn gruntCompress,
+      test <<= (test in Test) dependsOn gruntTest,
 
       // add directory where grunt publishes to, to the webapp
       (webappResources in Compile) <+= (baseDirectory) { _ / "grunt-build" / "out" },

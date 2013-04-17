@@ -27,6 +27,14 @@ object Site {
       Menu.i("Knockout  Example Module") / "knockout-example-mod",
       Menu.i("Knockout  Chat") / "chat-knockoutjs"
     ),
+    Menu.i("Angular") / "angular" >> TopBarGroup submenus(
+      Menu.i("Angular Example") / "angular-example",
+      Menu.i("Angular App Demo") / "angdemo" / "index",
+      // Menu(Loc("AngDemoPartials", Link(List("angdemo", "partials"), true, "/angdemo/partials/form"), "Angular App Demo Partials", Hidden))
+      Menu.i("Angular App Demo - form") / "angdemo" / "partials" / "form" >> Hidden,
+      Menu.i("Angular App Demo - success") / "angdemo" / "partials" / "success" >> Hidden,
+      Menu.i("Angular App Demo - warning") / "angdemo" / "partials" / "warning" >> Hidden
+    ),
     // Menu.i("About") / "about" >> TopBarGroup,
     // Menu.i("Contact") / "contact" >> TopBarGroup,
     Menu.i("Error") / "error" >> Hidden,

@@ -1,0 +1,23 @@
+<div data-lift="surround?with=default;at=content">
+  <div class="row">
+    <div class="span12">
+      <p>
+        This version uses AngularJS, but splits it up into 3 controllers and partial html files. It also adds routing.
+      </p>
+      <p>
+        It uses jquery.bsAlerts.js to display notices, which is bound
+        via a div tag. They are set to fade out after 3 seconds.
+      </p>
+      <hr />
+      <div data-alerts="alerts" data-fade="3000"></div>
+    </div>
+  </div>
+  <div ng-app="AngDemo" id="angular-demo" data-lift="AngAppDemo">
+    <ul class="nav nav-pills" data-ng-controller="NavbarController">
+        <li data-ng-class="{'active':getClass('/form')}"><a href="#/from">Form</a></li>
+        <li data-ng-class="{'active':getClass('/success')}"><a href="#/success">Success</a></li>
+        <li data-ng-class="{'active':getClass('/warning')}"><a href="#/warning">Warning</a></li>
+    </ul>
+    <div ng-view></div>
+  </div>
+</div>

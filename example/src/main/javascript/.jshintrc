@@ -15,6 +15,7 @@
     "jQuery": false,
     "$": false,
     "ko": false,
+    "angular": false,
     "App": true
   }
 }

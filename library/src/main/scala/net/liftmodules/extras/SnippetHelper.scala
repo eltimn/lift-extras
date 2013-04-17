@@ -132,4 +132,5 @@ trait SnippetHelper {
   def checked(in: Boolean) = if (in) new UnprefixedAttribute("checked", "checked", Null) else Null
   def selected(in: Boolean) = if (in) new UnprefixedAttribute("selected", "selected", Null) else Null
   def disabled(in: Boolean) = if (in) new UnprefixedAttribute("disabled", "disabled", Null) else Null
+  def autofocus(in: Boolean) = if (in) new UnprefixedAttribute("autofocus", "true", Null) else Null
 }

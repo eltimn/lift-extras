@@ -1,0 +1,21 @@
+<html>
+  <div class="row">
+    <div class="span6">
+      <p>
+        This example demonstrates the use of JsonCallbackAnonFunc to pass an anonymous function
+        to a JavaScript module that calls a JValue => JsCmd function on the server. The returned
+        JsCmd is then executed on the client.
+      </p>
+      <p>
+        Submit the form and see in the logs the data sent via ajax to the server and sent
+        back to the client via a notice.
+      </p>
+      <form ng-submit="saveForm()" class="form-inline">
+        <input type="text" ng-model="textInput" />
+        <input type="submit" value="Submit" class="btn btn-primary" />
+      </form>
+    </div>
+    <div class="span6">
+    </div>
+  </div>
+</html>

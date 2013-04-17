@@ -1,4 +1,6 @@
 (function(window) {
+  "use strict";
+
   window.App.namespace("utils");
   window.App.utils.StringUtil = {
     test: function() {

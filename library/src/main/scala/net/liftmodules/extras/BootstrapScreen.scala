@@ -15,6 +15,8 @@ import util.Helpers._
   * A screen with some bootstrap settings.
   */
 trait BootstrapScreen extends LiftScreen {
+  def cssErrorClass = "error" // BS3 = has-error
+
   override def cancelButton = super.cancelButton % ("class" -> "btn") % ("tabindex" -> "1")
   override def finishButton = super.finishButton % ("class" -> "btn btn-primary") % ("tabindex" -> "1")
 
@@ -33,8 +35,8 @@ trait BootstrapScreen extends LiftScreen {
     }
 
   protected def afterScreenLoad: JsCmd = JsRaw("""
-    |$(".alert-block ul").each(function() {
-    |  $(this).closest("div.control-group").addClass("error");
+    |$(".form-alert").each(function() {
+    |  $(this).closest("div.control-group").addClass("%s");
     |});
-    """.stripMargin)
+    """.format(cssErrorClass).stripMargin)
 }
