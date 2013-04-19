@@ -114,6 +114,19 @@ trait SnippetHelper {
     LiftExtras.noticeConverter.vend.noticesAsJsCmd(Seq(in))
 
   /**
+    * Allows easier ways to add attributes to Elem
+    */
+  class RichElem(elem: Elem) {
+    def %(attrs: Map[String, String]) = attrs.foldLeft(elem) {
+      case (el, (key, value)) => el % new UnprefixedAttribute(key, value, Null)
+    }
+    def %(attrs: List[(String, String)]) = attrs.foldLeft(elem) {
+      case (el, (key, value)) => el % new UnprefixedAttribute(key, value, Null)
+    }
+  }
+  implicit def richElem(elem: Elem) = new RichElem(elem)
+
+  /**
     * For adding checked, selected, and disabled attributes to Elem.
     */
   def checked(in: Boolean) = if (in) new UnprefixedAttribute("checked", "checked", Null) else Null
