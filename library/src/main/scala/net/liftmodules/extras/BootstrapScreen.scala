@@ -15,8 +15,8 @@ import util.Helpers._
   * A screen with some bootstrap settings.
   */
 trait BootstrapScreen extends LiftScreen {
-  override val cancelButton = super.cancelButton % ("class" -> "btn") % ("tabindex" -> "1")
-  override val finishButton = super.finishButton % ("class" -> "btn btn-primary") % ("tabindex" -> "1")
+  override def cancelButton = super.cancelButton % ("class" -> "btn") % ("tabindex" -> "1")
+  override def finishButton = super.finishButton % ("class" -> "btn btn-primary") % ("tabindex" -> "1")
 
   override protected def renderHtml(): NodeSeq = {
     S.appendJs(afterScreenLoad)
