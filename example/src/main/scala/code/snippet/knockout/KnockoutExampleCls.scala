@@ -42,7 +42,8 @@ object KnockoutExampleCls extends SnippetHelper with Loggable {
     }
 
     val initData: JValue =
-      ("titles" -> LiftExtras.titlesAsJValue)
+      ("titles" -> LiftExtras.titlesAsJValue) ~
+      ("fade" -> "3000")
 
     /**
       * Initialize the knockout view model, passing it the anonymous functions
