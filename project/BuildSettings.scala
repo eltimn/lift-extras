@@ -9,7 +9,6 @@ import cloudbees.Plugin._
 object BuildSettings {
 
   val liftVersion = SettingKey[String]("liftVersion", "Full version number of the Lift Web Framework")
-
   val liftEdition = SettingKey[String]("liftEdition", "Lift Edition (short version number to append to artifact name)")
 
   // call grunt init - requires npm be installed
@@ -34,7 +33,7 @@ object BuildSettings {
     name := "extras",
     organization := "net.liftmodules",
     version := "0.2-SNAPSHOT",
-    liftVersion <<= liftVersion ?? "2.5-RC4",
+    liftVersion <<= liftVersion ?? "2.5",
     liftEdition <<= liftVersion apply { _.substring(0,3) },
     name <<= (name, liftEdition) { (n, e) =>  n + "_" + e },
     scalaVersion := "2.9.2",
