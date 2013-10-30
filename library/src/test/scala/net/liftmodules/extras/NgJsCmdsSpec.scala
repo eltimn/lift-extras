@@ -44,7 +44,6 @@ class NgJsCmdsSpec extends WithSessionSpec {
       val mod2 = NgModule("MyApp2", Nil)
       mod.toJsCmd should equal("""angular.module('MyApp', ['ui.bootstrap', 'myco.modules']).constant('gretzky', 99).value('beaupre', 33).factory('MyFactory', function() {return {"x": 12}}).service('MyService', function() {this.x = 12;})""")
       mod2.toJsCmd should equal("angular.module('MyApp2', [])")
-      println(mod.toJsCmd)
     }
   }
 }
