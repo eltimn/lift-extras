@@ -89,6 +89,10 @@ It allows you to write your snippet functions using a for comprehension to gathe
 
 See [Dealing with Boxed values in Lift snippets](http://www.eltimn.com/blog/001-dealing-with-boxed-values-in-snippets) for more details.
 
+## NgJE and NgJsCmds
+
+Angular JavaScript expressions and commands.
+
 # License
 
 Apache 2.0 http://www.apache.org/licenses/LICENSE-2.0.html
