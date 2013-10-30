@@ -38,7 +38,7 @@ object BuildSettings {
   val basicSettings = Defaults.defaultSettings ++ Seq(
     name := "extras",
     organization := "net.liftmodules",
-    version := "0.2",
+    version := "0.3-SNAPSHOT",
     liftVersion <<= liftVersion ?? "2.6-M1",
     liftEdition <<= liftVersion apply { _.substring(0,3) },
     name <<= (name, liftEdition) { (n, e) =>  n + "_" + e },
