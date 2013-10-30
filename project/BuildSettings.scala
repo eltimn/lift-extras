@@ -38,12 +38,12 @@ object BuildSettings {
   val basicSettings = Defaults.defaultSettings ++ Seq(
     name := "extras",
     organization := "net.liftmodules",
-    version := "0.2-SNAPSHOT",
-    liftVersion <<= liftVersion ?? "2.5",
+    version := "0.2",
+    liftVersion <<= liftVersion ?? "2.6-M1",
     liftEdition <<= liftVersion apply { _.substring(0,3) },
     name <<= (name, liftEdition) { (n, e) =>  n + "_" + e },
-    scalaVersion := "2.10.0",
-    crossScalaVersions := Seq("2.9.2", "2.9.1-1", "2.9.1", "2.10.0"),
+    scalaVersion := "2.10.3",
+    crossScalaVersions := Seq("2.9.2", "2.9.1-1", "2.9.1", "2.10.3"),
     scalacOptions <<= scalaVersion map { sv: String =>
       if (sv.startsWith("2.10."))
         Seq("-deprecation", "-unchecked", "-feature", "-language:postfixOps", "-language:implicitConversions")
