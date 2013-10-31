@@ -10,6 +10,10 @@ For *Lift 2.5.x* (Scala 2.9 and 2.10):
 
     libraryDependencies += "net.liftmodules" %% "extras_2.5" % "0.3"
 
+For *Lift 2.5.x* (Scala 2.10):
+
+    libraryDependencies += "net.liftmodules" %% "extras_2.5" % "0.4-SNAPSHOT"
+
 For *Lift <= 2.6-M3* (Scala 2.9 and Scala 2.10):
 
     libraryDependencies += "net.liftmodules" %% "extras_2.6" % "0.3"

@@ -67,4 +67,32 @@
     };
   }]);
 
+  app.provider("GameService", function() {
+    var type;
+
+    return {
+      setType: function(value) {
+        type = value;
+      },
+      $get: function() {
+        return {
+          title: type + "Craft"
+        };
+      }
+    };
+  });
+
+  app.factory("GameFService", function(GameData) {
+    return {
+      title: GameData.type + "Craft"
+    };
+  });
+
+  app.controller('AppController', ['$scope', 'GameService', 'GameFService', function($scope, GameService, GameFService) {
+    $scope.gameTitle = GameService.title;
+    $scope.gameFTitle = GameFService.title;
+  }]);
+
+  window.angAppDemo = app;
+
 })(this, angular);

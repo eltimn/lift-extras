@@ -8,6 +8,10 @@ import sbtbuildinfo.Plugin._
 
 object BuildSettings {
 
+  val resolutionRepos = Seq(
+    "Sonatype Snapshot" at "http://oss.sonatype.org/content/repositories/snapshots"
+  )
+
   val liftVersion = SettingKey[String]("liftVersion", "Full version number of the Lift Web Framework")
   val liftEdition = SettingKey[String]("liftEdition", "Lift Edition (short version number to append to artifact name)")
 

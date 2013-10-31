@@ -46,10 +46,14 @@ object AngAppDemo extends SnippetHelper with Loggable {
       "sendSuccess" -> JsExtras.AjaxCallbackAnonFunc(sendSuccess),
       "saveForm" -> JsExtras.JsonCallbackAnonFunc(saveForm)
     )
-    val onload =
+
+    val onload: JsCmd =
       NgModule("AngDemoServer", Nil) ~>
         NgConstant("ServerParams", JsObj("x" -> Num(10))) ~>
-        NgFactory("ServerFuncs", AnonFunc(JsReturn(funcs)))
+        NgFactory("ServerFuncs", AnonFunc(JsReturn(funcs))) ~>
+        NgConstant("GameData", JsObj("type" -> "Puzzle")) &
+      JsVar("window.angAppDemo") ~>
+        NgConfig(AnonFunc("GameServiceProvider", Call("GameServiceProvider.setType", Str("Star"))))
 
     S.appendGlobalJs(JsExtras.IIFE(onload))
 
