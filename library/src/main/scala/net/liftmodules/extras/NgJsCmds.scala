@@ -20,6 +20,23 @@ import JsExtras.IIFE
   *
   */
 object NgJE {
+  /**
+    * Calls angular.element function with the parameter in query.
+    *
+    * Used to get a set of elements to apply the other NgJE expressions to.
+    *
+    */
+  case class NgElement(query: JsExp) extends JsExp {
+    override def toJsCmd = "angular.element(" + query.toJsCmd + ")"
+  }
+
+  /**
+    * An Angular query for an element based on the id of the element
+    */
+  case class NgId(id: JsExp) extends JsExp {
+    override def toJsCmd = "angular.element('#'+" + id.toJsCmd + ")"
+  }
+
   case class NgModule(name: String, dependencies: Seq[String]) extends JsExp {
     def toJsCmd = {
       "angular.module('%s', [%s])".format(name, dependencies.map(s => "'%s'".format(s)).mkString(", "))
@@ -38,6 +55,12 @@ object NgJE {
     }
   }
 
+  case class NgProvider(name: String, func: AnonFunc) extends JsExp with JsMember {
+    def toJsCmd = {
+      "provider('%s', %s)".format(name, func.toJsCmd)
+    }
+  }
+
   case class NgConstant(name: String, value: JsExp) extends JsExp with JsMember {
     def toJsCmd = {
       "constant('%s', %s)".format(name, value.toJsCmd)
@@ -47,6 +70,12 @@ object NgJE {
   case class NgValue(name: String, value: JsExp) extends JsExp with JsMember {
     def toJsCmd = {
       "value('%s', %s)".format(name, value.toJsCmd)
+    }
+  }
+
+  case class NgConfig(func: AnonFunc) extends JsExp with JsMember {
+    def toJsCmd = {
+      "config(%s)".format(func.toJsCmd)
     }
   }
 }

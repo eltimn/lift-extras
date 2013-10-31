@@ -12,12 +12,14 @@
       <div data-alerts="alerts" data-fade="3000"></div>
     </div>
   </div>
-  <div ng-app="AngDemo" id="angular-demo" data-lift="AngAppDemo">
+  <div ng-app="AngDemo" id="angular-demo" data-lift="AngAppDemo" ng-controller="AppController">
     <ul class="nav nav-pills" data-ng-controller="NavbarController">
-        <li data-ng-class="{'active':getClass('/form')}"><a href="#/from">Form</a></li>
-        <li data-ng-class="{'active':getClass('/success')}"><a href="#/success">Success</a></li>
-        <li data-ng-class="{'active':getClass('/warning')}"><a href="#/warning">Warning</a></li>
+      <li data-ng-class="{'active':getClass('/form')}"><a href="#/from">Form</a></li>
+      <li data-ng-class="{'active':getClass('/success')}"><a href="#/success">Success</a></li>
+      <li data-ng-class="{'active':getClass('/warning')}"><a href="#/warning">Warning</a></li>
     </ul>
+    <h2 ng-bind="gameTitle"></h2>
+    <h2 ng-bind="gameFTitle"></h2>
     <div ng-view></div>
   </div>
 </div>

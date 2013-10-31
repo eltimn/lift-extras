@@ -8,6 +8,10 @@ import cloudbees.Plugin._
 
 object BuildSettings {
 
+  val resolutionRepos = Seq(
+    "Sonatype Snapshot" at "http://oss.sonatype.org/content/repositories/snapshots"
+  )
+
   val liftVersion = SettingKey[String]("liftVersion", "Full version number of the Lift Web Framework")
   val liftEdition = SettingKey[String]("liftEdition", "Lift Edition (short version number to append to artifact name)")
 
@@ -38,8 +42,8 @@ object BuildSettings {
   val basicSettings = Defaults.defaultSettings ++ Seq(
     name := "extras",
     organization := "net.liftmodules",
-    version := "0.3-SNAPSHOT",
-    liftVersion <<= liftVersion ?? "2.6-M1",
+    version := "0.3-LOCAL",
+    liftVersion <<= liftVersion ?? "2.5",
     liftEdition <<= liftVersion apply { _.substring(0,3) },
     name <<= (name, liftEdition) { (n, e) =>  n + "_" + e },
     scalaVersion := "2.10.3",
@@ -49,7 +53,8 @@ object BuildSettings {
         Seq("-deprecation", "-unchecked", "-feature", "-language:postfixOps", "-language:implicitConversions")
       else
         Seq("-deprecation", "-unchecked")
-    }
+    },
+    resolvers ++= resolutionRepos
   )
 
   val publishSettings = seq(
