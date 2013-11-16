@@ -1,10 +1,10 @@
 import sbt._
 import sbt.Keys._
 
-import com.github.siasia.WebPlugin.{container, webSettings}
-import com.github.siasia.PluginKeys._
+import com.earldouglas.xsbtwebplugin.WebPlugin.{container, webSettings}
+import com.earldouglas.xsbtwebplugin.PluginKeys._
 import sbtbuildinfo.Plugin._
-import cloudbees.Plugin._
+// import cloudbees.Plugin._
 
 object BuildSettings {
 
@@ -17,16 +17,21 @@ object BuildSettings {
     Process(Seq("npm", "install"), dir) !
   }
 
-  // call grunt compile
-  val gruntCompile = TaskKey[Int]("grunt-compile", "Call the grunt compile command")
-  def gruntCompileTask = (baseDirectory in Compile) map { dir =>
-    Process(Seq("grunt", "compile"), dir) !
+  // call grunt default
+  val gruntDefault = TaskKey[Int]("grunt-default", "Call the grunt default command")
+  def gruntDefaultTask = (baseDirectory in Compile, streams) map { (dir, s) =>
+    val code: Int = Process(Seq("grunt", "default"), dir) ! s.log
+    s.log.info("grunt-init: "+code.toString)
+    if (code != 0) {
+      sys.error("grunt-init failed.")
+    }
+    code
   }
 
-  // call grunt compress
-  val gruntCompress = TaskKey[Int]("grunt-compress", "Call the grunt compress command")
-  def gruntCompressTask = (baseDirectory in Compile) map { dir =>
-    Process(Seq("grunt", "compress"), dir) !
+  // call grunt build
+  val gruntBuild = TaskKey[Int]("grunt-build", "Call the grunt build command")
+  def gruntBuildTask = (baseDirectory in Compile) map { dir =>
+    Process(Seq("grunt", "build"), dir) !
   }
 
   // call grunt test
@@ -35,11 +40,17 @@ object BuildSettings {
     Process(Seq("grunt", "test"), dir) !
   }
 
+  val beesDeploy = TaskKey[Int]("bees-deploy", "Call bees-deploy")
+  def beesDeployTask = (baseDirectory in Compile, artifactPath in (Compile, packageWar)) map { (dir, art) =>
+    Process(Seq("bees", "app:deploy", "-a", "eltimn/lift-extras-example", art.toString), dir) !
+  }
+
   val basicSettings = Defaults.defaultSettings ++ Seq(
     name := "extras",
     organization := "net.liftmodules",
-    version := "0.3-SNAPSHOT",
-    liftVersion <<= liftVersion ?? "2.6-M1",
+    version := "0.3",
+    // resolvers += "Sonatype Snapshot" at "http://oss.sonatype.org/content/repositories/snapshots",
+    liftVersion <<= liftVersion ?? "2.6-M2",
     liftEdition <<= liftVersion apply { _.substring(0,3) },
     name <<= (name, liftEdition) { (n, e) =>  n + "_" + e },
     scalaVersion := "2.10.3",
@@ -50,6 +61,61 @@ object BuildSettings {
       else
         Seq("-deprecation", "-unchecked")
     }
+  )
+
+  val gruntSettings = Seq(
+    gruntInit <<= gruntInitTask,
+    gruntDefault <<= gruntDefaultTask,
+    gruntBuild <<= gruntBuildTask,
+    gruntTest <<= gruntTestTask
+  )
+
+  val exampleSettings =
+    basicSettings ++
+    gruntSettings ++
+    webSettings ++
+    buildInfoSettings ++
+    noPublishing ++
+    // cloudBeesSettings ++
+    Seq(
+      name := "extras-example",
+      beesDeploy <<= beesDeployTask,
+      // CloudBees.applicationId := Some("lift-extras-example"),
+
+      // build-info
+      buildInfoPackage := "code",
+      sourceGenerators in Compile <+= buildInfo,
+
+      // dependencies
+      //compile in Compile <<= (compile in Compile) dependsOn gruntBuild,
+      // (start in container.Configuration) <<= (start in container.Configuration) dependsOn gruntBuild,
+      Keys.`package` <<= (Keys.`package` in Compile) dependsOn gruntDefault,
+      test in Test <<= (test in Test) dependsOn gruntTest,
+
+      // add javascript and css source files to the webapp, for development
+      (webappResources in Compile) <+= (target in Compile) { _ / "grunt" / "build" / "css" },
+
+      // add grunt generated resources to the classpath
+      (unmanagedResourceDirectories in Compile) <+=
+        (target in Compile) { _ / "grunt" / "resources" },
+
+      // massage the war
+      (warPostProcess in Compile) <<= (target in Compile) map { tgt =>
+        val webapp = tgt / "webapp"
+        val gdist = tgt / "grunt" / "dist"
+        () => {
+          // remove the frontend sources
+          val files = Seq(webapp / "app", webapp / "assets", webapp / "less", webapp / "vendor")
+          IO.delete(files)
+          // copy the minified assets
+          IO.copyDirectory(gdist, webapp)
+        }
+      }
+    )
+
+  lazy val noPublishing = seq(
+    publish := (),
+    publishLocal := ()
   )
 
   val publishSettings = seq(
@@ -88,43 +154,6 @@ object BuildSettings {
         </developer>
        </developers>
      )
-  )
-
-  val exampleSettings =
-    basicSettings ++
-    webSettings ++
-    buildInfoSettings ++
-    noPublishing ++
-    cloudBeesSettings ++
-    seq(
-      name := "extras-example",
-      CloudBees.applicationId := Some("lift-extras-example"),
-
-      // build-info
-      buildInfoPackage := "code",
-      sourceGenerators in Compile <+= buildInfo,
-
-      // grunt tasks
-      gruntInit <<= gruntInitTask,
-      gruntCompile <<= gruntCompileTask,
-      gruntCompress <<= gruntCompressTask,
-      gruntTest <<= gruntTestTask,
-
-      // dependencies
-      compile <<= (compile in Compile) dependsOn gruntCompile,
-      // (start in container.Configuration) <<= (start in container.Configuration) dependsOn gruntCompile,
-      Keys.`package` <<= (Keys.`package` in Compile) dependsOn gruntCompress,
-      test <<= (test in Test) dependsOn gruntTest,
-
-      // add directory where grunt publishes to, to the webapp
-      (webappResources in Compile) <+= (baseDirectory) { _ / "grunt-build" / "out" },
-      // add assets.json to classpath
-      (unmanagedResourceDirectories in Compile) <+= (baseDirectory) { _ / "grunt-build" / "hash" }
-    )
-
-  lazy val noPublishing = seq(
-    publish := (),
-    publishLocal := ()
   )
 }
 

@@ -1,60 +1,47 @@
 <div data-lift="surround?with=default;at=content">
   <div class="row">
-    <div class="span12">
-      <p>This version uses AngularJS in a similar fasion to the knockout example.</p>
-      <p>It uses jquery.bsAlerts.js to display notices, which is bound
-        via a div tag. They are set to fade out after 3 seconds.
-      </p>
-      <hr />
-      <div data-alerts="alerts" data-fade="3000"></div>
-    </div>
+    <p>This version uses AngularJS in a similar fasion to the knockout example.</p>
+    <p>It uses jquery.bsAlerts.js to display notices, which is bound
+      via a div tag. They are set to fade out after 3 seconds.
+    </p>
+    <hr />
+    <div data-alerts="alerts" data-fade="3000"></div>
   </div>
   <div data-lift="AngularExample" id="angular-example" ng-app="views.angular.AngularExample" ng-controller="PageCtrl">
     <div class="row">
-      <div class="span6">
-        <p>
-          This example demonstrates the use of JsonCallbackAnonFunc to pass an anonymous function
-          to a JavaScript module that calls a JValue => JsCmd function on the server. The returned
-          JsCmd is then executed on the client.
-        </p>
-        <p>
-          Submit the form and see in the logs the data sent via ajax to the server and sent
-          back to the client via a notice.
-        </p>
-        <form ng-submit="saveForm()" class="form-inline">
-          <input type="text" ng-model="textInput" />
-          <input type="submit" value="Submit" class="btn btn-primary" />
-        </form>
-      </div>
-      <div class="span6">
-      </div>
+      <p>
+        This example demonstrates the use of JsonCallbackAnonFunc to pass an anonymous function
+        to a JavaScript module that calls a JValue => JsCmd function on the server. The returned
+        JsCmd is then executed on the client.
+      </p>
+      <p>
+        Submit the form and see in the logs the data sent via ajax to the server and sent
+        back to the client via a notice.
+      </p>
+      <form ng-submit="saveForm()" class="form-inline">
+        <input type="text" ng-model="textInput" />
+        <input type="submit" value="Submit" class="btn btn-primary" />
+      </form>
     </div>
     <hr />
     <div class="row">
-      <div class="span6">
-        <p>
-          This demonstrates the use of AjaxCallbackAnonFunc to pass an anonymous function
-          to a JavaScript module that calls a () => JsCmd function on the server. The returned
-          JsCmd is then executed on the client.
-        </p>
-        <p>
-          This just sends a success notice back to the client.
-        </p>
-        <button ng-click="sendSuccess()" class="btn">Call server function</button>
-      </div>
-      <div class="span6"></div>
+      <p>
+        This demonstrates the use of AjaxCallbackAnonFunc to pass an anonymous function
+        to a JavaScript module that calls a () => JsCmd function on the server. The returned
+        JsCmd is then executed on the client.
+      </p>
+      <p>
+        This just sends a success notice back to the client.
+      </p>
+      <button ng-click="sendSuccess()" class="btn btn-default">Call server function</button>
     </div>
     <hr />
     <div class="row">
-      <div class="span8">
-        <p>
-          This demonstrates triggering the "add-alerts" event to send a warning directly to the client.
-          No server calls are made.
-        </p>
-        <button ng-click="showWarning()" class="btn">Show a warning</button>
-      </div>
-      <div class="span4">
-      </div>
+      <p>
+        This demonstrates triggering the "add-alerts" event to send a warning directly to the client.
+        No server calls are made.
+      </p>
+      <button ng-click="showWarning()" class="btn btn-default">Show a warning</button>
     </div>
   </div>
 </div>

@@ -28,6 +28,11 @@ object KnockoutExampleCls extends SnippetHelper with Loggable {
     def sendSuccess(): JsCmd = LiftNotice.success(<em>You have success</em>).asJsCmd
 
     /**
+      * A test function that sends an error notice back to the client.
+      */
+    def sendError(): JsCmd = LiftNotice.error(<em>You have error</em>).asJsCmd
+
+    /**
       * The function to call when submitting the form.
       */
     def saveForm(json: JValue): JsCmd = {
@@ -50,6 +55,7 @@ object KnockoutExampleCls extends SnippetHelper with Loggable {
       */
     val onload: JsCmd = koClass.init(
       JsExtras.AjaxCallbackAnonFunc(sendSuccess),
+      JsExtras.AjaxCallbackAnonFunc(sendError),
       JsExtras.JsonCallbackAnonFunc(saveForm)
     ) & Call("""$("#notice-alerts").bsAlerts""", initData)
 

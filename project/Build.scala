@@ -20,7 +20,7 @@ object LiftModuleBuild extends Build {
       )
     })
 
-  lazy val example = Project("lift-extras-example", file("example"))
+  lazy val example = Project("example", file("example"))
     .dependsOn(library)
     .settings(exampleSettings: _*)
     .settings(libraryDependencies <++= (liftVersion) { liftVersion =>

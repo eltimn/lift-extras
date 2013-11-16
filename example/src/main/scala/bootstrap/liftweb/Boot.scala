@@ -46,7 +46,7 @@ class Boot {
     LiftExtras.warningTitle.default.set(Full(Text("Warning!")))
     LiftExtras.noticeTitle.default.set(Full(Text("Info!")))
     LiftExtras.successTitle.default.set(Full(Text("Success!")))
-    LiftExtras.artifactName.default.set("extras-example-0.2.0")
+    LiftExtras.artifactName.default.set("extras-example-0.4.0")
 
     Gravatar.defaultImage.default.set("wavatar")
 

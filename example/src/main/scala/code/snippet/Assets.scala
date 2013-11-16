@@ -1,6 +1,6 @@
 package code
 package snippet
 
-import net.liftmodules.extras.snippet.HashedAssets
+import net.liftmodules.extras.snippet.AssetLoader
 
-object Assets extends HashedAssets
+object Assets extends AssetLoader
