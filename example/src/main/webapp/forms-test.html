@@ -1,113 +1,131 @@
 <div lift="surround?with=default;at=content">
 
   <div class="row">
-    <div class="span12">
-      <p>
-        This page uses KoAlerts to display the group notices and jquery.bsFormAlerts.js to
-        display the notices with ids.
-      </p>
-      <hr />
-      <div data-lift="embed?what=/templates-hidden/alerts"></div>
+    <p>
+      This page uses KoAlerts to display the group notices and jquery.bsFormAlerts.js to
+      display the notices with ids.
+    </p>
+    <hr />
+    <div data-lift="embed?what=/templates-hidden/alerts"></div>
 
-      <ul class="nav nav-tabs">
-        <li class="active"><a href="#standard" data-toggle="tab">Standard Form</a></li>
-        <li><a href="#forms-test-ajax" data-toggle="tab">Ajax Form</a></li>
-      </ul>
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#standard" data-toggle="tab">Standard Form</a></li>
+      <li><a href="#forms-test-ajax" data-toggle="tab">Ajax Form</a></li>
+    </ul>
 
-      <div class="tab-content">
-        <div id="standard" class="tab-pane active">
-          <form data-lift="notice.FormsTest.render?form=post" class="form-horizontal">
-            <fieldset>
-              <legend>Standard Form</legend>
-              <div class="control-group">
-                <label class="control-label" for="error">Error</label>
-                <div class="controls">
-                  <input name="error" class="xlarge" /> &times;
-                  <input name="error_count" class="small" />
-                  <span class="help-inline">Inline style help</span>
-                  <span data-alertid="err" class="alert-block"></span>
+    <div class="tab-content">
+      <div id="standard" class="tab-pane active">
+        <form data-lift="notice.FormsTest.render?form=post" class="form-horizontal">
+          <fieldset>
+            <legend>Standard Form</legend>
+            <div class="form-group">
+              <label class="control-label" for="error">Error</label>
+              <div class="controls">
+                <div class="col-xs-6">
+                  <input name="error" class="form-control" />
+                  <span data-alertid="err" form-alert=""></span>
                   <span class="help-block">Block style help</span>
                 </div>
+                 &times; <input name="error_count" class="small" />
+                <span class="help-inline">Inline style help</span>
               </div>
-              <div class="control-group">
-                <label class="control-label" for="warning">Warning</label>
+            </div>
+            <div class="form-group">
+              <label class="control-label" for="warning">Warning</label>
+              <div class="controls">
+                <div class="col-xs-6">
+                  <input name="warning" class="form-control" />
+                </div>
+                &times; <input name="warning_count" class="small" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label" for="info">Info</label>
+              <div class="controls">
+                <div class="col-xs-6">
+                  <input name="info" class="form-control" />
+                </div>
+                &times; <input name="info_count" class="small" />
+              </div>
+            </div>
+          </fieldset>
+          <div class="form-actions">
+            <div class="actions">
+              <input type="submit" value="submit" class="btn btn-primary"></input>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div id="forms-test-ajax" class="tab-pane">
+        <form data-lift="Form.ajax?class=form-horizontal">
+          <span data-lift="notice.FormsTestAjax.render">
+            <fieldset>
+              <legend>Ajax Form</legend>
+              <div class="form-group">
+                <label class="control-label" for="ajaxerr">Error</label>
                 <div class="controls">
-                  <input name="warning" class="xlarge" /> &times;
-                  <input name="warning_count" class="small" />
+                  <div class="col-xs-6">
+                    <input name="error" class="form-control" id="ajaxerr" />
+                    <span data-alertid="ajaxerr" form-alert=""></span>
+                    <span class="help-block">Block style help</span>
+                  </div>
+                  &times; <input name="error_count" class="small" />
+                  <span class="help-inline">Inline style help</span>
                 </div>
               </div>
-              <div class="control-group">
+              <div class="form-group">
+                <label class="control-label" for="warning">Warning</label>
+                <div class="controls">
+                  <div class="col-xs-6">
+                    <input name="warning" class="form-control" />
+                     <span data-alertid="ajaxwarn" form-alert=""></span>
+                    <span class="help-block">Block style help</span>
+                  </div>
+                  &times; <input name="warning_count" class="small" />
+                </div>
+              </div>
+              <div class="form-group">
                 <label class="control-label" for="info">Info</label>
                 <div class="controls">
-                  <input name="info" class="xlarge" /> &times;
-                  <input name="info_count" class="small" />
+                  <div class="col-xs-6">
+                    <input name="info" class="form-control" />
+                    <span data-alertid="ajaxinfo" form-alert=""></span>
+                  </div>
+                  &times; <input name="info_count" class="small" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label" for="title">Title</label>
+                <div class="controls">
+                  <div class="col-xs-6">
+                    <input name="title" class="form-control" />
+                    <span data-alertid="title_id" form-alert=""></span>
+                  </div>
+                  <span class="help-inline">This is created by calling toForm on a Record Field.</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label" for="text">Text</label>
+                <div class="controls">
+                  <div class="col-xs-6">
+                    <input name="text" class="form-control" />
+                    <span id="text_id_err" form-alert=""></span>
+                  </div>
+                  <span class="help-inline">This one has the help div initialized via JavaScript.</span>
                 </div>
               </div>
             </fieldset>
             <div class="form-actions">
-              <input type="submit" value="submit" class="btn btn-primary"></input>
-            </div>
-          </form>
-        </div>
-
-        <div id="forms-test-ajax" class="tab-pane">
-          <form data-lift="Form.ajax?class=form-horizontal">
-            <span data-lift="notice.FormsTestAjax.render">
-              <fieldset>
-                <legend>Ajax Form</legend>
-                <div class="control-group">
-                  <label class="control-label" for="ajaxerr">Error</label>
-                  <div class="controls">
-                    <input name="error" class="xlarge" id="ajaxerr" /> &times;
-                    <input name="error_count" class="small" />
-                    <span class="help-inline">Inline style help</span>
-                    <span data-alertid="ajaxerr" class="alert-block"></span>
-                    <span class="help-block">Block style help</span>
-                  </div>
-                </div>
-                <div class="control-group">
-                  <label class="control-label" for="warning">Warning</label>
-                  <div class="controls">
-                    <input name="warning" class="xlarge" /> &times;
-                    <input name="warning_count" class="small" />
-                    <span data-alertid="ajaxwarn" class="alert-block"></span>
-                    <span class="help-block">Block style help</span>
-                  </div>
-                </div>
-                <div class="control-group">
-                  <label class="control-label" for="info">Info</label>
-                  <div class="controls">
-                    <input name="info" class="xlarge" /> &times;
-                    <input name="info_count" class="small" />
-                    <span data-alertid="ajaxinfo" class="alert-block"></span>
-                  </div>
-                </div>
-                <div class="control-group">
-                  <label class="control-label" for="title">Title</label>
-                  <div class="controls">
-                    <input name="title" class="xlarge" />
-                    <span class="help-inline">This is created by calling toForm on a Record Field.</span>
-                    <span data-alertid="title_id" class="alert-block"></span>
-                  </div>
-                </div>
-                <div class="control-group">
-                  <label class="control-label" for="text">Text</label>
-                  <div class="controls">
-                    <input name="text" class="xlarge" />
-                    <span class="help-inline">This one has the help div initialized via JavaScript.</span>
-                    <span id="text_id_err" class="alert-block"></span>
-                  </div>
-                </div>
-              </fieldset>
-              <div class="form-actions">
+              <div class="actions">
                 <input type="submit" value="Submit" class="btn btn-primary"></input>
                 <input name="sub" />
               </div>
-            </span>
-          </form>
-        </div>
-
+            </div>
+          </span>
+        </form>
       </div>
+
     </div>
   </div>
 </div>

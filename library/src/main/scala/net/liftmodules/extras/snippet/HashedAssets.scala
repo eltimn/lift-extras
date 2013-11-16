@@ -39,7 +39,7 @@ trait HashedAssets {
         assetsMap.getOrElse(art, art)
       }
 
-    "/%s".format((LiftExtras.artifactPath.vend :+ artifact).mkString("/"))
+    "%s/%s".format(LiftExtras.artifactServer.vend, (LiftExtras.artifactPath.vend :+ artifact).mkString("/"))
   }
 
   protected lazy val cssPath: String = artifactPath("css")

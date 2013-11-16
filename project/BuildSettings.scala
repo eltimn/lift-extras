@@ -21,10 +21,21 @@ object BuildSettings {
     Process(Seq("npm", "install"), dir) !
   }
 
-  // call grunt compile
-  val gruntCompile = TaskKey[Int]("grunt-compile", "Call the grunt compile command")
-  def gruntCompileTask = (baseDirectory in Compile) map { dir =>
-    Process(Seq("grunt", "compile"), dir) !
+  // call grunt
+  val gruntDefault = TaskKey[Int]("grunt-default", "Call the grunt default command")
+  def gruntDefaultTask = (baseDirectory in Compile, streams) map { (dir, s) =>
+    val code: Int = Process(Seq("grunt", "default"), dir) ! s.log
+    s.log.info("grunt-init: "+code.toString)
+    if (code != 0) {
+      sys.error("grunt-init failed.")
+    }
+    code
+  }
+
+  // call grunt build
+  val gruntBuild = TaskKey[Int]("grunt-build", "Call the grunt build command")
+  def gruntBuildTask = (baseDirectory in Compile) map { dir =>
+    Process(Seq("grunt", "build"), dir) !
   }
 
   // call grunt compress
@@ -39,11 +50,17 @@ object BuildSettings {
     Process(Seq("grunt", "test"), dir) !
   }
 
+  // call grunt clean
+  val gruntClean = TaskKey[Int]("grunt-clean", "Call the grunt clean command")
+  def gruntCleanTask = (baseDirectory in Compile) map { dir =>
+    Process(Seq("grunt", "clean"), dir) !
+  }
+
   val basicSettings = Defaults.defaultSettings ++ Seq(
     name := "extras",
     organization := "net.liftmodules",
-    version := "0.3-LOCAL",
-    liftVersion <<= liftVersion ?? "2.5",
+    version := "0.4-LOCAL",
+    liftVersion <<= liftVersion ?? "2.6-M1",
     liftEdition <<= liftVersion apply { _.substring(0,3) },
     name <<= (name, liftEdition) { (n, e) =>  n + "_" + e },
     scalaVersion := "2.10.3",
@@ -55,6 +72,22 @@ object BuildSettings {
         Seq("-deprecation", "-unchecked")
     },
     resolvers ++= resolutionRepos
+  )
+
+  val gruntSettings = Seq(
+    gruntInit <<= gruntInitTask,
+    gruntDefault <<= gruntDefaultTask,
+    gruntBuild <<= gruntBuildTask,
+    gruntCompress <<= gruntCompressTask,
+    gruntTest <<= gruntTestTask,
+    gruntClean <<= gruntCleanTask
+
+    // dependencies
+    // compile <<= (compile in Compile) dependsOn gruntBuild,
+    // (start in container.Configuration) <<= (start in container.Configuration) dependsOn gruntBuild,
+    // clean <<= clean dependsOn gruntClean,
+    // Keys.`package` <<= (Keys.`package` in Compile) dependsOn gruntCompress,
+    // test <<= (test in Test) dependsOn gruntTest
   )
 
   val publishSettings = seq(
@@ -97,6 +130,7 @@ object BuildSettings {
 
   val exampleSettings =
     basicSettings ++
+    gruntSettings ++
     webSettings ++
     buildInfoSettings ++
     noPublishing ++
@@ -109,22 +143,29 @@ object BuildSettings {
       buildInfoPackage := "code",
       sourceGenerators in Compile <+= buildInfo,
 
-      // grunt tasks
-      gruntInit <<= gruntInitTask,
-      gruntCompile <<= gruntCompileTask,
-      gruntCompress <<= gruntCompressTask,
-      gruntTest <<= gruntTestTask,
-
       // dependencies
-      compile <<= (compile in Compile) dependsOn gruntCompile,
-      // (start in container.Configuration) <<= (start in container.Configuration) dependsOn gruntCompile,
+      compile <<= (compile in Compile) dependsOn gruntBuild,
       Keys.`package` <<= (Keys.`package` in Compile) dependsOn gruntCompress,
       test <<= (test in Test) dependsOn gruntTest,
 
-      // add directory where grunt publishes to, to the webapp
-      (webappResources in Compile) <+= (baseDirectory) { _ / "grunt-build" / "out" },
-      // add assets.json to classpath
-      (unmanagedResourceDirectories in Compile) <+= (baseDirectory) { _ / "grunt-build" / "hash" }
+      // add javascript and css source files to the webapp, for development
+      (webappResources in Compile) <+= (baseDirectory) { _ / "src" / "frontend" },
+      (webappResources in Compile) <+= (target) { _ / "grunt" / "build" },
+
+      // add grunt generated resources to the classpath
+      (unmanagedResourceDirectories in Compile) <+=
+        (target) { _ / "grunt" / "resources" },
+
+      // include assets in the packaged jar
+      resourceGenerators in Compile <+= (resourceManaged, target) map { (managedBase, t) =>
+        val gruntDist = t / "grunt" / "dist"
+        for {
+          (from, to) <- gruntDist ** "*" x rebase(gruntDist, managedBase / "main" / "webapp")
+        } yield {
+          Sync.copy(from, to)
+          to
+        }
+      }
     )
 
   lazy val noPublishing = seq(

@@ -1,5 +1,5 @@
 App.namespace("views.knockout");
-App.views.knockout.KnockoutExampleCls = function(sendSuccess, saveFunc) {
+App.views.knockout.KnockoutExampleCls = function(sendSuccess, sendError, saveFunc) {
   "use strict";
 
   var self = this;
@@ -13,6 +13,7 @@ App.views.knockout.KnockoutExampleCls = function(sendSuccess, saveFunc) {
   };
 
   self.sendSuccess = sendSuccess;
+  self.sendError = sendError;
 
   self.showWarning = function() {
     // sends a notice to the client

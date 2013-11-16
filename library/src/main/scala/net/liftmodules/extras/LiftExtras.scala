@@ -30,10 +30,14 @@ object LiftExtras extends Factory {
   val noticeTitle = new FactoryMaker[Box[NodeSeq]](Empty){}
   val successTitle = new FactoryMaker[Box[NodeSeq]](Empty){}
 
-  // HashedAssets
+  // HashedAssets/AssetLoader
   val artifactName = new FactoryMaker[String]("lift-app-0.1.0") {}
   val artifactPath = new FactoryMaker[Seq[String]](Seq("assets")) {}
+  val artifactServer = new FactoryMaker[String]("") {}
   val mappingsUri = new FactoryMaker[String]("/assets.json") {}
+  val assetServer = new Inject("") {}
+  val jsSources = new Inject[Seq[String]](Seq("/vendor_scripts.txt", "/source_scripts.txt")) {}
+  val cssSources = new Inject[Seq[String]](Seq("/vendor_styles.txt")) {}
 
   def init(): Unit = {
     LiftRules.noticesToJsCmd = noticeConverter.vend.noticesToJsCmd _

@@ -40,3 +40,17 @@ trait BootstrapScreen extends LiftScreen {
     |});
     """.format(cssErrorClass).stripMargin)
 }
+
+/**
+  * For use with Bootstrap3. Requires bsFormAlerts.less.
+  */
+trait Bootstrap3Screen extends BootstrapScreen {
+
+  override def cancelButton = super.cancelButton % ("class" -> "btn btn-default") % ("tabindex" -> "1")
+
+  override protected def afterScreenLoad: JsCmd = JsRaw("""
+    |$(".form-alert").each(function() {
+    |  $(this).closest("div.form-group").addClass("has-error");
+    |});
+    """.stripMargin)
+}
