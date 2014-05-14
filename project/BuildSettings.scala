@@ -48,19 +48,20 @@ object BuildSettings {
   val basicSettings = Defaults.defaultSettings ++ Seq(
     name := "extras",
     organization := "net.liftmodules",
-    version := "0.3",
+    version := "0.4-SNAPSHOT",
     // resolvers += "Sonatype Snapshot" at "http://oss.sonatype.org/content/repositories/snapshots",
-    liftVersion <<= liftVersion ?? "2.6-M2",
+    liftVersion <<= liftVersion ?? "2.6-SNAPSHOT",
     liftEdition <<= liftVersion apply { _.substring(0,3) },
     name <<= (name, liftEdition) { (n, e) =>  n + "_" + e },
-    scalaVersion := "2.10.3",
-    crossScalaVersions := Seq("2.9.2", "2.9.1-1", "2.9.1", "2.10.3"),
+    scalaVersion := "2.10.4",
+    crossScalaVersions := Seq("2.9.2", "2.9.1", "2.9.1-1", "2.10.4"),
     scalacOptions <<= scalaVersion map { sv: String =>
       if (sv.startsWith("2.10."))
         Seq("-deprecation", "-unchecked", "-feature", "-language:postfixOps", "-language:implicitConversions")
       else
         Seq("-deprecation", "-unchecked")
-    }
+    },
+    resolvers += "Sonatype Snapshot" at "http://oss.sonatype.org/content/repositories/snapshots"
   )
 
   val gruntSettings = Seq(

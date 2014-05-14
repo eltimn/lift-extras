@@ -4,11 +4,23 @@ Some utils for developing Lift webapps.
 
 # Installation
 
-This module is available from the Sonatype repo. It uses the Lift "edition" in the name. For example, of you use any of 2.5-SNAPSHOT, 2.5-RC4, or 2.5 the Lift edition is 2.5.
+This module is available from the Sonatype repo. It uses the Lift "edition" in the name. For example, if you use any of 2.5-SNAPSHOT, 2.5-RC4, or 2.5 the Lift edition is 2.5.
 
-SBT:
+For *Lift 2.5.x* (Scala 2.9 and 2.10):
 
-    "net.liftmodules" %% "extras_2.5" % "0.1" % "compile"
+    libraryDependencies += "net.liftmodules" %% "extras_2.5" % "0.3"
+
+For *Lift <= 2.6-M3* (Scala 2.9 and Scala 2.10):
+
+    libraryDependencies += "net.liftmodules" %% "extras_2.6" % "0.3"
+
+For *Lift 2.6-SNAPSHOT* (Scala 2.10):
+
+    libraryDependencies += "net.liftmodules" %% "extras_2.6" % "0.4-SNAPSHOT"
+
+For *Lift 3.0.x* (Scala 2.10):
+
+    libraryDependencies += "net.liftmodules" %% "extras_3.0" % "0.4-SNAPSHOT"
 
 # Live Demo
 
