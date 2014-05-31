@@ -53,7 +53,6 @@ object BuildSettings {
     name := "extras",
     organization := "net.liftmodules",
     version := "0.4-SNAPSHOT",
-    // resolvers += "Sonatype Snapshot" at "http://oss.sonatype.org/content/repositories/snapshots",
     liftVersion <<= liftVersion ?? "2.6-SNAPSHOT",
     liftEdition <<= liftVersion apply { _.substring(0,3) },
     name <<= (name, liftEdition) { (n, e) =>  n + "_" + e },
@@ -65,7 +64,7 @@ object BuildSettings {
       else
         Seq("-deprecation", "-unchecked")
     },
-    resolvers += "Sonatype Snapshot" at "http://oss.sonatype.org/content/repositories/snapshots"
+    resolvers ++= resolutionRepos
   )
 
   val gruntSettings = Seq(
