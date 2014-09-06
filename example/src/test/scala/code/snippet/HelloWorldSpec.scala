@@ -9,11 +9,13 @@ import http._
 import util._
 import Helpers._
 
+import org.scalatest._
+
 class HelloWorldSpec extends BaseSpec {
   val session = new LiftSession("", randomString(20), Empty)
   val stableTime = now
 
-  override def withFixture(test: NoArgTest) {
+  override def withFixture(test: NoArgTest) = {
     S.initIfUninitted(session) {
       DependencyFactory.time.doWith(stableTime) {
         test()

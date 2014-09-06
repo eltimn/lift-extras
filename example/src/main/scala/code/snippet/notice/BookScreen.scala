@@ -9,6 +9,8 @@ import http._
 
 object BookScreen extends BaseScreen with Loggable {
 
+  val formName = "book_screen"
+
   object bookVar extends ScreenVar(Book.createRecord)
 
   addFields(() => bookVar.is)

@@ -13,22 +13,30 @@ object LiftModuleBuild extends Build {
   lazy val library = Project("lift-extras", file("library"))
     .settings(basicSettings:_*)
     .settings(publishSettings:_*)
-    .settings(libraryDependencies <++= (liftVersion) { liftVersion =>
+    .settings(libraryDependencies <++= (scalaVersion, liftVersion) { (scalaVersion, liftVersion) =>
+      val scalaTestVer = scalaVersion match {
+        case v if (v.startsWith("2.10") || v.startsWith("2.11")) => "2.2.1"
+        case _ => "1.9.2"
+      }
       Seq(
         "net.liftweb" %% "lift-webkit" % liftVersion % "provided",
-        "org.scalatest" %% "scalatest" % "1.9.1" % "test"
+        "org.scalatest" %% "scalatest" % scalaTestVer % "test"
       )
     })
 
   lazy val example = Project("example", file("example"))
     .dependsOn(library)
     .settings(exampleSettings: _*)
-    .settings(libraryDependencies <++= (liftVersion) { liftVersion =>
+    .settings(libraryDependencies <++= (scalaVersion, liftVersion) { (scalaVersion, liftVersion) =>
+      val scalaTestVer = scalaVersion match {
+        case v if (v.startsWith("2.10") || v.startsWith("2.11")) => "2.2.1"
+        case _ => "1.9.2"
+      }
       Seq(
         "net.liftweb" %% "lift-record" % liftVersion % "compile",
-        "org.eclipse.jetty" % "jetty-webapp" % "8.1.8.v20121106" % "container",
-        "ch.qos.logback" % "logback-classic" % "1.0.3",
-        "org.scalatest" %% "scalatest" % "1.9.1" % "test"
+        "org.eclipse.jetty" % "jetty-webapp" % "9.2.2.v20140723" % "container",
+        "ch.qos.logback" % "logback-classic" % "1.1.2",
+        "org.scalatest" %% "scalatest" % scalaTestVer % "test"
       )
     })
 }

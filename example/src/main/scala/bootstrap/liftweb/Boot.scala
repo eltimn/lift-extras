@@ -51,6 +51,6 @@ class Boot {
     Gravatar.defaultImage.default.set("wavatar")
 
     // don't include the liftAjax.js code. It's served statically.
-    LiftRules.autoIncludeAjaxCalc.default.set(() => (session: LiftSession) => false)
+    LiftRules.autoIncludeAjaxCalc.default.set(() => () => (session: LiftSession) => false)
   }
 }
