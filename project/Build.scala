@@ -23,6 +23,11 @@ object LiftModuleBuild extends Build {
         "org.scalatest" %% "scalatest" % scalaTestVer % "test"
       )
     })
+    .settings(Seq(
+      // Necessary beginning with sbt 0.13, otherwise Lift editions get messed up.
+      // E.g. "2.5" gets converted to "2-5"
+      moduleName := name.value
+    ))
 
   lazy val example = Project("example", file("example"))
     .dependsOn(library)

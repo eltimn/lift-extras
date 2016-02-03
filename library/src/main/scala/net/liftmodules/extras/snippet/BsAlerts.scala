@@ -22,7 +22,7 @@ trait BsAlerts {
     // Needed for displaying notices when the page is loaded.
     S.appendJs(LiftExtras.noticeConverter.vend.noticesToJsCmd)
     val ids = S.attr("ids").openOr("")
-    val titles: String = compact(JsonAST.render(LiftExtras.titlesAsJValue))
+    val titles: String = compactRender(LiftExtras.titlesAsJValue)
     val fade: String = S.attr("fade").openOr("0")
 
     <div data-alerts="alerts" data-titles={titles} data-ids={ids} fade={fade}></div>

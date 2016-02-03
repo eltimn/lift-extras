@@ -15,7 +15,7 @@ import util.Helpers._
   * A screen with some bootstrap settings.
   */
 trait BootstrapScreen extends LiftScreen {
-  def cssErrorClass = "error" // BS3 = has-error
+  def cssErrorClass = "error"
 
   override def cancelButton = super.cancelButton % ("class" -> "btn") % ("tabindex" -> "1")
   override def finishButton = super.finishButton % ("class" -> "btn btn-primary") % ("tabindex" -> "1")
@@ -45,6 +45,7 @@ trait BootstrapScreen extends LiftScreen {
   * For use with Bootstrap3. Requires bsFormAlerts.less.
   */
 trait Bootstrap3Screen extends BootstrapScreen {
+  override def cssErrorClass = "has-error"
 
   override def cancelButton = super.cancelButton % ("class" -> "btn btn-default") % ("tabindex" -> "1")
 

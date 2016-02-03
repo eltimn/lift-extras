@@ -83,7 +83,7 @@ object NgJE {
 object NgJsCmds {
 
   private implicit def boxedJValueToJsExp(in: Box[JValue]): JsExp = in.map(jv => new JsExp {
-    def toJsCmd = compact(render(jv))
+    def toJsCmd = compactRender(jv)
   }).openOr(JsNull)
 
   /**
