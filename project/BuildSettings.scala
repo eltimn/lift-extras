@@ -6,6 +6,8 @@ import com.earldouglas.xsbtwebplugin.PluginKeys._
 import sbtbuildinfo.Plugin._
 // import cloudbees.Plugin._
 
+import com.typesafe.sbt.SbtGit
+
 object BuildSettings {
 
   val resolutionRepos = Seq(
@@ -52,8 +54,6 @@ object BuildSettings {
 
   val basicSettings = Defaults.defaultSettings ++ Seq(
     name := "extras",
-    organization := "net.liftmodules",
-    version := "0.5",
     scalaVersion := "2.11.5",
     liftVersion <<= liftVersion ?? "3.0-M8",
     liftEdition <<= liftVersion apply { _.substring(0,3) },
@@ -66,7 +66,9 @@ object BuildSettings {
       case "2.9.2" => Seq("-deprecation", "-unchecked")
       case _ => Seq("-deprecation", "-unchecked", "-feature", "-language:postfixOps", "-language:implicitConversions")
     }},
-    resolvers ++= resolutionRepos
+    resolvers ++= resolutionRepos,
+    SbtGit.git.baseVersion in ThisBuild := "0.6",
+    organization in ThisBuild := "net.liftmodules"
   )
 
   val gruntSettings = Seq(

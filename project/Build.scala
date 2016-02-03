@@ -1,6 +1,8 @@
 import sbt._
 import sbt.Keys._
 
+import com.typesafe.sbt.GitVersioning
+
 object LiftModuleBuild extends Build {
 
   import BuildSettings._
@@ -28,6 +30,7 @@ object LiftModuleBuild extends Build {
       // E.g. "2.5" gets converted to "2-5"
       moduleName := name.value
     ))
+    .enablePlugins(GitVersioning)
 
   lazy val example = Project("example", file("example"))
     .dependsOn(library)
