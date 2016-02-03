@@ -142,8 +142,6 @@ object BuildSettings {
     },
     publishArtifact in Test := false,
     homepage := Some(url("https://github.com/eltimn/lift-extras")),
-    // publishMavenStyle := false,
-    // resolvers += Resolver.url("supler ivy resolver", url("http://dl.bintray.com/eltimn/maven"))(Resolver.ivyStylePatterns),
     licenses := Seq(("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0.txt"))),
     publishTo := Some("eltimn-maven" at "https://api.bintray.com/maven/eltimn/maven/lift-extras/;publish=1")
     // resolvers += "CB Central Mirror" at "http://repo.cloudbees.com/content/groups/public",

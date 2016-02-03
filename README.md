@@ -12,7 +12,7 @@ Prior versions were published to sonatype and should be available from maven cen
 
 It uses the Lift "edition" in the name. For example, if you use any of 2.5-SNAPSHOT, 2.5-RC4, or 2.5 the Lift edition is 2.5.
 
-*Note:* some of the versions published had a '-' in the edition instead of a '.'. I.e *extras_3-0* instead of *extras_3.0*.
+**Note:** some of the versions published had a '-' in the edition instead of a '.'. I.e *extras_3-0* instead of *extras_3.0*.
 
 For *Lift 2.5.x* (Scala 2.9 and 2.10):
 
@@ -36,7 +36,7 @@ For *Lift 3.0.x* (Scala 2.10):
 
 For *Lift 3.0-M8+* (Scala 2.11):
 
-    libraryDependencies += "net.liftmodules" %% "extras_3.0" % "0.5-SNAPSHOT"
+    libraryDependencies += "net.liftmodules" %% "extras_3.0" % "0.5"
 
 
 # Documentation
