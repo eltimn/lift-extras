@@ -1,18 +1,17 @@
-# Lift Extras Module
+Extras Lift Module
+==================
 
-Some utils for developing Lift webapps.
+Some extras for developing Lift webapps.
 
 # Installation
 
-As of v0.5 this module is published to bintray. This may or may not require sbt 0.13.6+ and may or may not require the following line in your build:
+Releases uses the Lift "edition" in the name. For example, if you use any of 2.5-SNAPSHOT, 2.5-RC4, or 2.5 the Lift edition is 2.5.
 
-    resolvers += Resolver.jcenterRepo
+**Note:** some of the older versions published had a '-' in the edition instead of a '.'. I.e *extras_3-0* instead of *extras_3.0*.
 
-Prior versions were published to sonatype and should be available from maven central.
+For *Lift 3.0* (Scala 2.11, 2.12):
 
-It uses the Lift "edition" in the name. For example, if you use any of 2.5-SNAPSHOT, 2.5-RC4, or 2.5 the Lift edition is 2.5.
-
-**Note:** some of the versions published had a '-' in the edition instead of a '.'. I.e *extras_3-0* instead of *extras_3.0*.
+    libraryDependencies += "net.liftmodules" %% "extras_3.0" % "0.7"
 
 For *Lift 2.5.x* (Scala 2.9 and 2.10):
 
@@ -29,14 +28,6 @@ For *Lift <= 2.6-M3* (Scala 2.9 and Scala 2.10):
 For *Lift => 2.6-M4* (Scala 2.10, 2.11):
 
     libraryDependencies += "net.liftmodules" %% "extras_2.6" % "0.4"
-
-For *Lift 3.0.x* (Scala 2.10):
-
-    libraryDependencies += "net.liftmodules" %% "extras_3.0" % "0.4-SNAPSHOT"
-
-For *Lift 3.0-M8+* (Scala 2.11):
-
-    libraryDependencies += "net.liftmodules" %% "extras_3.0" % "0.5"
 
 
 # Documentation
