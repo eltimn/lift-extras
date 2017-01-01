@@ -13,7 +13,7 @@ Releases uses the Lift "edition" in the name. For example, if you use any of 2.5
 
 For *Lift 3.0* (Scala 2.11, 2.12):
 
-    libraryDependencies += "net.liftmodules" %% "extras_3.0" % "0.7"
+    libraryDependencies += "net.liftmodules" %% "extras_3.0" % "0.6"
 
 For *Lift 2.5.x* (Scala 2.9 and 2.10):
 
