@@ -56,18 +56,6 @@ A jQuery plugin for displaying Bootstrap alerts via jQuery events. See also the 
 
 A jQuery plugin for displaying Bootstrap form alerts via jQuery events.
 
-### KoAlerts
-
-A snippet that uses a Knockout.js `View Model` to display notices. Does not rely on Bootstrap. Allows for any html that complies with the `View Model`. See [KoAlerts.scala](https://github.com/eltimn/lift-extras/blob/master/library/src/main/scala/net/liftmodules/extras/snippet/KoAlerts.scala) and [alerts.html](https://github.com/eltimn/lift-extras/blob/master/example/src/main/webapp/templates-hidden/alerts.html) for details.
-
-[Download JavaScript](https://raw.github.com/eltimn/lift-extras/master/example/src/main/javascript/KoAlerts.js)
-
-### BsNotify
-
-This is a JavaScript module that is a wrapper around [bootstrap-notify](http://nijikokun.github.com/bootstrap-notify/ "bootstrap-notify") that provides an interface to the events mentioned above. Requires added a div tag to your pages. See [base-wrap.html](https://github.com/eltimn/lift-extras/blob/master/example/src/main/webapp/templates-hidden/base-wrap.html#L41) for an example.
-
-[Download JavaScript](https://raw.github.com/eltimn/lift-extras/master/example/src/main/javascript/BsNotify.js)
-
 ## BsMenu
 
 A snippet for rendering a Bootstrap menu using Groups.

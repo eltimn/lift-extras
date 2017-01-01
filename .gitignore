@@ -6,4 +6,5 @@ target/
 
 console.devmode.log
 node_modules/
-grunt-build/
+bower_components/
+.frontend/
