@@ -1,6 +1,8 @@
 Extras Lift Module
 ==================
 
+[![Build Status](https://travis-ci.org/eltimn/lift-extras.svg?branch=master)](https://travis-ci.org/eltimn/lift-extras)
+
 Some extras for developing Lift webapps.
 
 # Installation
