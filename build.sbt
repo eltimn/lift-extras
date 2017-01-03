@@ -9,7 +9,6 @@ moduleName := name.value + "_" + liftEdition.value
 scalaVersion := "2.12.1"
 crossScalaVersions := Seq("2.12.1", "2.11.8")
 scalacOptions ++= Seq("-unchecked", "-deprecation")
-// parallelExecution in Test := false
 
 libraryDependencies ++=
   "net.liftweb" %% "lift-webkit" % liftVersion.value % "provided" ::

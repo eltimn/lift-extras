@@ -35,10 +35,13 @@ trait JsClassLike {
 }
 
 /**
-  * A knockout.js JavaScript class
+  * A JavaScript class
   */
 case class JsClass(name: String, varName: String) extends JsClassLike
 
+/**
+  * A knockout.js JavaScript class
+  */
 case class KoClass(name: String, varName: String, elementId: String) extends JsClassLike {
   /**
     * Call to bind a knockout view model
