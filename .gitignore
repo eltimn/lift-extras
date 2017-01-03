@@ -5,6 +5,3 @@ target/
 *.sublime-*
 
 console.devmode.log
-node_modules/
-bower_components/
-.frontend/

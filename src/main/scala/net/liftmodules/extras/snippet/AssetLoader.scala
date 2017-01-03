@@ -18,6 +18,7 @@ import NgJE._
 /**
   * To be used with grunt-hash. See gruntfile.js.
   */
+@deprecated("No longer supported. Copy to your project if still using.", "0.7")
 trait AssetLoader extends DispatchSnippet with Loggable {
   import Props.RunModes._
 
@@ -77,6 +78,7 @@ trait AssetLoader extends DispatchSnippet with Loggable {
   }
 }
 
+@deprecated("No longer supported. Copy to your project if still using.", "0.7")
 object AssetLoader extends AssetLoader with SimpleInjector with Loggable {
 
   def sourcesListFromResource(uri: String): List[String] = {

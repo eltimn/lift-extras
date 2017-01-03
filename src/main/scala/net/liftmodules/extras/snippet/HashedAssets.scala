@@ -15,6 +15,7 @@ import util.Helpers._
 /**
   * To be used with grunt-hash.
   */
+@deprecated("No longer supported. Copy to your project if still using.", "0.7")
 trait HashedAssets {
   import Props.RunModes._
 
@@ -49,4 +50,5 @@ trait HashedAssets {
   def js = "* [src]" #> jsPath
 }
 
+@deprecated("No longer supported. Copy to your project if still using.", "0.7")
 object HashedAssets extends HashedAssets
