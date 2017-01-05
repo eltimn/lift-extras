@@ -1,4 +1,4 @@
-// bintrayReleaseOnPublish in ThisBuild := false
+bintrayReleaseOnPublish in ThisBuild := false
 
 pomExtra := {
   <scm>
