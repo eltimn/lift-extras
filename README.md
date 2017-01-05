@@ -48,11 +48,11 @@ The main motivation for writing this was to have a way to display alerts directl
 
 See the documentation for the two jQuery plugins for more details on the events.
 
-### [jQuery-bsAlerts](http://eltimn.github.com/jquery-bs-alerts/index.html "jQuery-bsAlerts")
+### [jQuery-bsAlerts](https://eltimn.github.com/jquery-bs-alerts/index.html "jQuery-bsAlerts")
 
 A jQuery plugin for displaying Bootstrap alerts via jQuery events. See also the companion BsAlerts snippet.
 
-### [jQuery-bsFormAlerts](http://eltimn.github.com/jquery-bs-formalerts/index.html "jQuery-bsFormAlerts")
+### [jQuery-bsFormAlerts](https://eltimn.github.com/jquery-bs-formalerts/index.html "jQuery-bsFormAlerts")
 
 A jQuery plugin for displaying Bootstrap form alerts via jQuery events.
 
@@ -70,7 +70,7 @@ An object for displaying Gravatar images.
 
 ## JsExtras
 
-A few classes for passing callback functions to client-side JavaScript. See [JavaScript Apps With Lift: Callback Functions](http://www.eltimn.com/blog/004-javascript-apps-with-lift-callback-functions) for more information.
+A few classes for passing callback functions to client-side JavaScript. See [JavaScript Apps With Lift: Callback Functions](http://eltimn.com/post/004-javascript-apps-with-lift-callback-functions) for more information.
 
 ### AjaxCallbackAnonFunc
 
@@ -92,7 +92,7 @@ It allows you to write your snippet functions using a for comprehension to gathe
     ...
     }): NodeSeq
 
-See [Dealing with Boxed values in Lift snippets](http://www.eltimn.com/blog/001-dealing-with-boxed-values-in-snippets) for more details.
+See [Dealing with Boxed values in Lift snippets](http://eltimn.com/post/001-dealing-with-boxed-values-in-snippets) for more details.
 
 ## NgJE and NgJsCmds
 
