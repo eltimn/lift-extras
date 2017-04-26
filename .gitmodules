@@ -1,6 +1,6 @@
 [submodule "jquery-bs-alerts"]
 	path = jquery-bs-alerts
-	url = git@github.com:eltimn/jquery-bs-alerts.git
+	url = https://github.com/eltimn/jquery-bs-alerts.git
 [submodule "jquery-bs-formalerts"]
 	path = jquery-bs-formalerts
-	url = git@github.com:eltimn/jquery-bs-formalerts.git
+	url = https://github.com/eltimn/jquery-bs-formalerts.git
