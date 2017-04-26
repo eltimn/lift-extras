@@ -37,7 +37,7 @@ object BrowserSync extends SnippetHelper {
   def render(in: NodeSeq): NodeSeq = {
     if (Props.devMode) {
       (findVersion.map { ver =>
-        <script async="" src={s"/browser-sync/browser-sync-client.${ver}.js"}></script>
+        <script async="" src={s"/browser-sync/browser-sync-client.js?v=${ver}"}></script>
       }): NodeSeq
     } else {
       NodeSeq.Empty
