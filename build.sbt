@@ -19,9 +19,6 @@ enablePlugins(GitVersioning)
 
 // Add the alerts js files to jar
 resourceGenerators in Compile += Def.task {
-  val jsDir = (sourceDirectory in Compile).value /
-    "assets" /
-    "js"
 
   val webjarDir = (resourceManaged in Compile).value /
     "META-INF" /
@@ -30,11 +27,17 @@ resourceGenerators in Compile += Def.task {
     s"lift-${name.value}" /
     s"${version.value}"
 
-  Seq("bsAlerts", "bsFormAlerts").flatMap { f =>
-    val destFile = s"jquery.${f}.js"
-    val destMinFile = s"jquery.${f}.min.js"
-    IO.copyFile(jsDir / destFile, webjarDir / destFile)
-    IO.copyFile(jsDir / destMinFile, webjarDir / destMinFile)
-    Seq(webjarDir / destFile, webjarDir / destMinFile)
+  def copyFile(file: File): File = {
+    val destFile = webjarDir / file.getName
+    IO.copyFile(file, destFile)
+    destFile
   }
+
+  Seq(
+    copyFile(baseDirectory.value / "jquery-bs-alerts/docs/js/jquery.bsAlerts.js"),
+    copyFile(baseDirectory.value / "jquery-bs-alerts/dist/jquery.bsAlerts.min.js"),
+    copyFile(baseDirectory.value / "jquery-bs-formalerts/docs/js/jquery.bsFormAlerts.js"),
+    copyFile(baseDirectory.value / "jquery-bs-formalerts/dist/jquery.bsFormAlerts.min.js")
+  )
+
 }.taskValue
