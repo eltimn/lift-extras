@@ -3,7 +3,7 @@ Extras Lift Module
 
 [![Build Status](https://travis-ci.org/eltimn/lift-extras.svg?branch=master)](https://travis-ci.org/eltimn/lift-extras)
 
-[![Bintray](https://img.shields.io/bintray/v/eltimn/maven/lift-extras.svg)](https://bintray.com/eltimn/maven/lift-extras)
+<!-- [![Bintray](https://img.shields.io/bintray/v/eltimn/maven/lift-extras.svg)](https://bintray.com/eltimn/maven/lift-extras) -->
 
 Some extras for developing Lift webapps.
 
@@ -13,25 +13,19 @@ Releases uses the Lift "edition" in the name. For example, if you use any of 2.5
 
 **Note:** some of the older versions published had a '-' in the edition instead of a '.'. I.e *extras_3-0* instead of *extras_3.0*.
 
-For *Lift 3.0* (Scala 2.11, 2.12):
+To include this module in your Lift project change `build.sbt` to include:
 
-    libraryDependencies += "net.liftmodules" %% "extras_3.0" % "1.0.1"
+    libraryDependencies += "net.liftmodules" %% "extras_3.1" % "1.1.0"
 
-For *Lift 2.5.x* (Scala 2.9 and 2.10):
+Previous releases
+-----------------
 
-    libraryDependencies += "net.liftmodules" %% "extras_2.5" % "0.3"
-
-For *Lift 2.5.x* (Scala 2.10):
-
-    libraryDependencies += "net.liftmodules" %% "extras_2.5" % "0.4-SNAPSHOT"
-
-For *Lift <= 2.6-M3* (Scala 2.9 and Scala 2.10):
-
-    libraryDependencies += "net.liftmodules" %% "extras_2.6" % "0.3"
-
-For *Lift => 2.6-M4* (Scala 2.10, 2.11):
-
-    libraryDependencies += "net.liftmodules" %% "extras_2.6" % "0.4"
+| Lift Version | Scala Version | Module Version |
+|--------------|---------------|----------------|
+| 3.1          |  2.12, 2.11   | 1.1.0          |
+| 3.0          |  2.12, 2.11   | 1.0.1          |
+| 2.6          |  2.10, 2.9    | 0.4            |
+| 2.5          |  2.10, 2.9    | 0.3            |
 
 
 # Documentation

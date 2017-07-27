@@ -3,7 +3,7 @@ val liftEdition = settingKey[String]("Lift Edition (such as 2.6 or 3.0)")
 
 name := "extras"
 organization := "net.liftmodules"
-liftVersion := "3.0.1"
+liftVersion := "3.1.0"
 liftEdition := liftVersion.value.split('.').take(2).mkString(".")
 moduleName := name.value + "_" + liftEdition.value
 
