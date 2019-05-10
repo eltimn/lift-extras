@@ -3,12 +3,12 @@ val liftEdition = settingKey[String]("Lift Edition (such as 2.6 or 3.0)")
 
 name := "extras"
 organization := "net.liftmodules"
-liftVersion := "3.2.0"
+liftVersion := "3.3.0"
 liftEdition := liftVersion.value.split('.').take(2).mkString(".")
 moduleName := name.value + "_" + liftEdition.value
 
 scalaVersion := crossScalaVersions.value.head
-crossScalaVersions := Seq("2.12.4", "2.11.12")
+crossScalaVersions := Seq("2.12.8", "2.11.12")
 scalacOptions ++= Seq("-unchecked", "-deprecation")
 
 libraryDependencies ++=
