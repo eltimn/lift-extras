@@ -1,10 +1,6 @@
 bintrayReleaseOnPublish in ThisBuild := false
 
 pomExtra := {
-  <scm>
-    <url>git@github.com:eltimn/lift-extras.git</url>
-    <connection>scm:git:git@github.com:eltimn/lift-extras.git</connection>
-  </scm>
   <developers>
     <developer>
       <id>eltimn</id>
