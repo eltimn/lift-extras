@@ -15,16 +15,16 @@ Releases uses the Lift "edition" in the name. For example, if you use any of 2.5
 
 To include this module in your Lift project change `build.sbt` to include:
 
-    libraryDependencies += "net.liftmodules" %% "extras_3.3" % "1.1.2"
+    libraryDependencies += "net.liftmodules" %% "extras_3.3" % "1.1.3"
 
 Previous releases
 -----------------
 
 | Lift Version | Scala Version | Module Version |
 |--------------|---------------|----------------|
-| 3.3          |  2.12, 2.11   | 1.1.2          |
-| 3.2          |  2.12, 2.11   | 1.1.2          |
-| 3.1          |  2.12, 2.11   | 1.1.2          |
+| 3.3          |  2.12, 2.11   | 1.1.3          |
+| 3.2          |  2.12, 2.11   | 1.1.3          |
+| 3.1          |  2.12, 2.11   | 1.1.3          |
 | 3.0          |  2.12, 2.11   | 1.0.1          |
 | 2.6          |  2.10, 2.9    | 0.4            |
 | 2.5          |  2.10, 2.9    | 0.3            |
