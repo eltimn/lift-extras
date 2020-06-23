@@ -3,17 +3,17 @@ val liftEdition = settingKey[String]("Lift Edition (such as 2.6 or 3.0)")
 
 name := "extras"
 organization := "net.liftmodules"
-liftVersion := "3.3.0"
+liftVersion := "3.4.1"
 liftEdition := liftVersion.value.split('.').take(2).mkString(".")
 moduleName := name.value + "_" + liftEdition.value
 
 scalaVersion := crossScalaVersions.value.head
-crossScalaVersions := Seq("2.12.8", "2.11.12")
+crossScalaVersions := Seq("2.13.2", "2.12.11")
 scalacOptions ++= Seq("-unchecked", "-deprecation")
 
 libraryDependencies ++=
   "net.liftweb" %% "lift-webkit" % liftVersion.value % "provided" ::
-  "org.scalatest" %% "scalatest" % "3.0.1" % "test" ::
+  "org.scalatest" %% "scalatest" % "3.2.0" % "test" ::
   Nil
 
 enablePlugins(GitVersioning)

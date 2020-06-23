@@ -40,7 +40,7 @@ object LiftExtras extends Factory {
   val cssSources = new Inject[Seq[String]](Seq("/vendor_styles.txt")) {}
 
   def init(): Unit = {
-    LiftRules.noticesToJsCmd = noticeConverter.vend.noticesToJsCmd _
+    LiftRules.noticesToJsCmd = () => noticeConverter.vend.noticesToJsCmd
 
     /**
       * LiftScreen overwrites the class on form labels and bootstrap
