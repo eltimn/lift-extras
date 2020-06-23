@@ -9,7 +9,7 @@ Some extras for developing Lift webapps.
 
 # Installation
 
-Releases uses the Lift "edition" in the name. For example, if you use any of 2.5-SNAPSHOT, 2.5-RC4, or 2.5 the Lift edition is 2.5.
+Releases use the Lift "edition" in the name. For example, if you use any of 2.5-SNAPSHOT, 2.5-RC4, or 2.5 the Lift edition is 2.5.
 
 **Note:** some of the older versions published had a '-' in the edition instead of a '.'. I.e *extras_3-0* instead of *extras_3.0*.
 
