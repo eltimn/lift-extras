@@ -8,7 +8,7 @@ liftEdition := liftVersion.value.split('.').take(2).mkString(".")
 moduleName := name.value + "_" + liftEdition.value
 
 scalaVersion := crossScalaVersions.value.head
-crossScalaVersions := Seq("2.13.2", "2.12.11")
+crossScalaVersions := Seq("2.12.12", "2.13.4")
 scalacOptions ++= Seq("-unchecked", "-deprecation")
 
 libraryDependencies ++=
